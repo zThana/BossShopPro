@@ -17,6 +17,7 @@ Main:
   PrintedItemInfo: '&6All item information has successfully been saved here: &7''/plugins/BossShopPro/ItemDataStorage.yml''&6.'
   ListAndSeparator: ' & '
   ListOrSeparator: ' or '
+  WorldNotExisting: "&cThat world is not existing..."
 Economy:
   NoAccount: '&cYou don''t have an economy account!'
 NotEnough:
@@ -49,6 +50,7 @@ Display:
   Shop: 'Open shop %shop%'
   Page: 'Open shop page %page%'
   Teleport: 'Teleport to world:%world% x:%x% y:%y% z:%z%'
+  TeleportWorld: 'Teleport to world:%world%'
 Time:
   Seconds: '%time% seconds'
   Minutes: '%time% minutes'

@@ -21,8 +21,8 @@ public class BSShops {
     /////////////////////////////// <- Variables
     private int id = 0;
     public BSShops(BossShop plugin, Settings settings) {
-        shops = new HashMap<Integer, BSShop>();
-        shopsIds = new HashMap<String, Integer>();
+        shops = new HashMap<>();
+        shopsIds = new HashMap<>();
 
         File folder = new File(plugin.getDataFolder().getAbsolutePath() + File.separator + "shops" + File.separator);
         new FileHandler().exportShops(plugin);

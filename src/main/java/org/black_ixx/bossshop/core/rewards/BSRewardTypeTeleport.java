@@ -63,7 +63,7 @@ public class BSRewardTypeTeleport extends BSRewardType{
 
     @Override
     public String[] createNames() {
-        return new String[]{"Teleport","teleport","tp"};
+        return new String[]{"teleport","tp"};
     }
 
     @Override
