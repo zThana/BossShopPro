@@ -23,7 +23,7 @@ public class PointsManager {
 
         if (p != PointsPlugin.NONE) {
             if (Bukkit.getPluginManager().getPlugin(p.getPluginName()) == null) {
-                ClassManager.manager.getBugFinder().severe("You defined " + p.getPluginName() + " as Points Plugin... BUT IT WAS NOT FOUND?! Please install it or use an alternative like PlayerPoints (http://dev.bukkit.org/server-mods/playerpoints/). If you want " + BossShop.NAME + " to auto-detect your Points plugin simply set 'PointsPlugin: auto-detect'.");
+                ClassManager.manager.getBugFinder().severe("You defined " + p.getPluginName() + " as Points Plugin... BUT IT WAS NOT FOUND?! Please install it or use an alternative like PlayerPoints (https://www.spigotmc.org/resources/playerpoints.80745/). If you want " + BossShop.NAME + " to auto-detect your Points plugin simply set 'PointsPlugin: auto-detect'.");
                 this.pa = new BSPointsPluginFailed();
                 return;
             }
@@ -44,10 +44,6 @@ public class PointsManager {
 
             case TOKENENCHANT:
                 this.pa = new BSPointsPluginTokenEnchant();
-                break;
-
-            case TOKENMANAGER:
-                this.pa = new BSPointsPluginTokenManager();
                 break;
 
             case Jobs:
@@ -83,7 +79,7 @@ public class PointsManager {
         }
 
         if (this.pa == null) {
-            ClassManager.manager.getBugFinder().warn("No PointsPlugin was found... You need one if you want BossShopPro to work with Points! Get PlayerPoints here: http://dev.bukkit.org/server-mods/playerpoints/");
+            ClassManager.manager.getBugFinder().warn("No PointsPlugin was found... You need one if you want BossShopPro to work with Points! Get PlayerPoints here: https://www.spigotmc.org/resources/playerpoints.80745/");
             this.pa = new BSPointsPluginFailed();
         } else {
             BossShop.log("Successfully hooked into Points plugin " + this.pa.getName() + ".");
@@ -124,7 +120,7 @@ public class PointsManager {
         VotingPlugin(new String[]{"VotingPlugin","VP"}),
         CUSTOM(new String[0]);
 
-        private String[] nicknames;
+        private final String[] nicknames;
         private String custom_name;
 
         PointsPlugin(String[] nicknames) {

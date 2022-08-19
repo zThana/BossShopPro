@@ -136,14 +136,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Adds token manager support -->
-		<dependency>
-			<groupId>com.github.Realizedd</groupId>
-			<artifactId>TokenManager</artifactId>
-			<version>3.2.3</version>
-			<scope>provided</scope>
-		</dependency>
-
 		<!-- Adds tokens support -->
 		<dependency>
 			<groupId>com.masterderpydoge.tokens</groupId>
