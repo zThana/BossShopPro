@@ -112,6 +112,14 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<!-- Adds VotingPlugin support -->
+		<dependency>
+			<groupId>com.github.BenCodez</groupId>
+			<artifactId>VotingPlugin</artifactId>
+			<version>6.9.2</version>
+			<scope>provided</scope>
+		</dependency>
+
 		<!-- Used for placeholders -->
 		<dependency>
 			<groupId>me.clip</groupId>

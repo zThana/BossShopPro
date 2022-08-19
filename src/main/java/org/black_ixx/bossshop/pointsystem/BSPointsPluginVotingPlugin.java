@@ -1,6 +1,5 @@
 package org.black_ixx.bossshop.pointsystem;
 
-
 import com.bencodez.votingplugin.user.UserManager;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
