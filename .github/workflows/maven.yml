@@ -11,9 +11,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 11
@@ -24,5 +22,10 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn --batch-mode package
-    - name: Download Artifact
-      uses: actions/download-artifact@v3.0.0  
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.1.0
+    - name: Download a Build Artifact
+      uses: actions/download-artifact@v3.0.0
+      with:
+         # Artifact name
+         name: Artifact #optional  
