@@ -41,6 +41,7 @@
 			<id>repo</id>
 			<url>https://repo.glaremasters.me/repository/public/</url>
 		</repository>
+		<!-- Bundabrg's Repo -->
 		<repository>
 			<id>bundabrg-repo</id>
 			<url>https://repo.worldguard.com.au/repository/maven-public</url>
@@ -50,6 +51,11 @@
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
+		</repository>
+		<!-- Jitpack -->
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
 		</repository>
 		<repository>
 			<id>spigot-repo</id>
@@ -119,14 +125,6 @@
 			<groupId>org.black_ixx</groupId>
 			<artifactId>PlayerPoints</artifactId>
 			<version>2.1.4</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<!-- Adds VotingPlugin support -->
-		<dependency>
-			<groupId>com.github.BenCodez</groupId>
-			<artifactId>VotingPlugin</artifactId>
-			<version>6.9.2</version>
 			<scope>provided</scope>
 		</dependency>
 
