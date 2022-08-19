@@ -9,7 +9,8 @@ It can not only be used to create shops but for every kind of menu. Here are jus
 * Warp menu
 
 ## About This Project
-This project is an improved version of bosshoppro.This plugin only supports versions 1.16 and above.And fixed some bugs of the original project, see "Changes to the original project".Of course, you can also open issues and submit pull requests.(if the plugin you adapt stops upgrade, the pull request will be rejected.)
+This project is an improved version of bosshoppro.This plugin only supports versions 1.16 and above.And fixed some bugs of the original project, see "Changes to the original project".Of course, you can also open issues and submit pull requests.(if the plugin you adapt stops upgrade, the pull request will be rejected.)  
+You can download the development version from actions.
 
 ## Building BossShopPro
 
