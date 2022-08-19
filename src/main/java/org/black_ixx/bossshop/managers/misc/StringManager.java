@@ -35,8 +35,6 @@ public class StringManager {
             return null;
         }
 
-        s = colorize(s);
-
         s = s.replace("[<3]", "❤");
         s = s.replace("[*]", "★");
         s = s.replace("[**]", "✹");
@@ -62,12 +60,11 @@ public class StringManager {
         s = s.replace("[up]", "↑");
         s = s.replace("[down]", "↓");
 
-        s = ChatColor.translateAlternateColorCodes('&', s);
-
         if (ClassManager.manager.getSettings().getServerPingingEnabled(true)) {
             s = ClassManager.manager.getServerPingingManager().transform(s);
         }
 
+        s = colorize(s);
         s = MathTools.transform(s);
 
         s = s.replace("[and]", "&");

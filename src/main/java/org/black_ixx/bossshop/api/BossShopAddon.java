@@ -1,7 +1,6 @@
 package org.black_ixx.bossshop.api;
 
 import org.black_ixx.bossshop.BossShop;
-import org.black_ixx.bossshop.misc.ClassTools;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;

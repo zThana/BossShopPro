@@ -47,7 +47,7 @@ public class BSMultiplier {
         }
 
 
-        if (parts.length >= 4) {
+        if (parts.length == 4) {
             String rs = parts[3].trim();
             if (rs.equalsIgnoreCase("price")) {
                 range = RANGE_PRICE_ONLY;
@@ -97,7 +97,6 @@ public class BSMultiplier {
                 case RANGE_ALL: //Multiplier supports both types -> buy price is multiplied and sell reward is divided
                     switch (range) {
                         case RANGE_ALL:
-                            return d * this.multiplier;
                         case RANGE_PRICE_ONLY:
                             return d * this.multiplier;
                         case RANGE_REWARD_ONLY:
@@ -127,9 +126,7 @@ public class BSMultiplier {
     public boolean isMultiplierActive(Player p, BSPriceType type, int range) {
         if (this.type == type) {
             if (hasPermission(p)) {
-                if (isInRange(range)) {
-                    return true;
-                }
+                return isInRange(range);
             }
         }
         return false;

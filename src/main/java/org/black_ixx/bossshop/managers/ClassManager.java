@@ -133,7 +133,7 @@ public class ClassManager {
         if (settings.getVaultEnabled()) {
             Plugin VaultPlugin = Bukkit.getServer().getPluginManager().getPlugin("Vault");
             if (VaultPlugin == null) {
-                ClassManager.manager.getBugFinder().warn("Vault was not found... You need it if you want to work with Permissions, Permission Groups or Money! Get it there: http://dev.bukkit.org/server-mods/vault/");
+                ClassManager.manager.getBugFinder().warn("Vault was not found... You need it if you want to work with Permissions, Permission Groups or Money! Get it there: https://www.spigotmc.org/resources/vault.34315/");
             } else {
                 vaulthandler = new VaultHandler(settings.getMoneyEnabled(), settings.getPermissionsEnabled());
             }
@@ -291,5 +291,12 @@ public class ClassManager {
         return itemdataStorage;
     }
 
-
+    public boolean classExists(String className) {
+        try {
+            Class.forName(className);
+            return true;
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
+    }
 }

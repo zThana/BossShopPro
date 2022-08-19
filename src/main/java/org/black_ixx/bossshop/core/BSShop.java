@@ -46,7 +46,7 @@ public abstract class BSShop {
 
     //////////////////////////// <- Constructor
 
-    public BSShop(int shop_id, String shop_name, String sign_text, boolean needPermToCreateSign, BossShop plugin, String displayname, int manual_inventory_rows, String[] commands) {
+    public BSShop(int shop_id, String shop_name, String sign_text, boolean needPermToCreateSign, String displayname, int manual_inventory_rows, String[] commands) {
         this.shop_id = shop_id;
         this.shop_name = shop_name;
         this.sign_text = sign_text;
@@ -231,11 +231,10 @@ public abstract class BSShop {
         int different_slots_amount = 0;
         for (BSBuy b : items) {
             if (b != null) {
+                //if choosing specific slot -> store all different slots and add them in the end
                 if (b.getInventoryLocation() == -1) { //If picking the next slot -> increasing slot number
                     different_slots_amount++;
-                } else if (!used_slots.contains(b.getInventoryLocation())) { //if choosing specific slot -> store all different slots and add them in the end
-                    used_slots.add(b.getInventoryLocation());
-                }
+                } else used_slots.add(b.getInventoryLocation());
                 if (b.getInventoryLocation() > highest) {
                     highest = b.getInventoryLocation();
                 }
@@ -277,10 +276,8 @@ public abstract class BSShop {
 
         if (remember_current_shop) {
             InventoryView openinventory = p.getOpenInventory();
-            if (openinventory != null) {
-                if (openinventory.getTopInventory().getHolder() instanceof BSShopHolder) {
-                    oldshopholder = (BSShopHolder) openinventory.getTopInventory().getHolder();
-                }
+            if (openinventory.getTopInventory().getHolder() instanceof BSShopHolder) {
+                oldshopholder = (BSShopHolder) openinventory.getTopInventory().getHolder();
             }
         }
 

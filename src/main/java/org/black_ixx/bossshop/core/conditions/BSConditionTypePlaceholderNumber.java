@@ -11,7 +11,7 @@ public class BSConditionTypePlaceholderNumber extends BSConditionType {
 
     @Override
     public boolean meetsCondition(BSShopHolder holder, BSBuy shopitem, Player p, String conditiontype, String condition) {
-        String realparts[] = condition.split(":", 2);
+        String[] realparts = condition.split(":", 2);
         if (realparts.length < 2) {
             ClassManager.manager.getBugFinder().warn("Unable to read placeholdernumber condition " + condition + ":" + condition + " of shopitem " + shopitem.getName() + ". It should look like following: '<Placeholder text>:<conditiontype>:<condition>'.");
             return false;
@@ -23,7 +23,7 @@ public class BSConditionTypePlaceholderNumber extends BSConditionType {
         condition = realparts[1];
 
         if (condition.contains("#") && condition.contains("%")) {
-            String parts[] = condition.split("#", 2);
+            String[] parts = condition.split("#", 2);
             condition = parts[0];
             int divisor = InputReader.getInt(parts[1].replace("%", ""), 1);
             n %= divisor;

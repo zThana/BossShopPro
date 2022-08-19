@@ -13,7 +13,7 @@ public abstract class BSConditionTypeNumber extends BSConditionType {
         double n = getNumber(shopitem, holder, p);
 
         if (condition.contains("#") && condition.contains("%")) {
-            String parts[] = condition.split("#", 2);
+            String[] parts = condition.split("#", 2);
             condition = parts[0];
             int divisor = InputReader.getInt(parts[1].replace("%", ""), 1);
             n %= divisor;

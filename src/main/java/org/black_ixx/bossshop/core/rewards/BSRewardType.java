@@ -31,6 +31,7 @@ public abstract class BSRewardType {
     public static BSRewardType ShopPage;
     public static BSRewardType Teleport;
     public static BSRewardType TeleportWorld;
+    public static BSRewardType Health;
 
     private static List<BSRewardType> types;
     private String[] names = createNames();
@@ -57,6 +58,7 @@ public abstract class BSRewardType {
         ShopPage = registerType(new BSRewardTypeShopPage());
         Teleport = registerType(new BSRewardTypeTeleport());
         TeleportWorld = registerType(new BSRewardTypeTeleportWorld());
+        Health = registerType(new BSRewardTypeHealth());
     }
 
     public static BSRewardType registerType(BSRewardType type) {

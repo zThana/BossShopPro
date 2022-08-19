@@ -51,7 +51,8 @@ public class BSRewardTypePlayerCommand extends BSRewardType {
             }
         }
 
-        if (p.getOpenInventory() != null & !ClassManager.manager.getPlugin().getAPI().isValidShop(p.getOpenInventory())) {
+        p.getOpenInventory();
+        if (!ClassManager.manager.getPlugin().getAPI().isValidShop(p.getOpenInventory())) {
             p.updateInventory();
         }
 
