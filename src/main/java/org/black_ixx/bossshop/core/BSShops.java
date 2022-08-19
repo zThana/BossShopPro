@@ -106,21 +106,19 @@ public class BSShops {
         boolean remember_current_shop = true;
 
         InventoryView view = p.getOpenInventory();
-        if (view != null) {
-            if (view.getTopInventory().getHolder() instanceof BSShopHolder) {
-                BSShopHolder holder = (BSShopHolder) view.getTopInventory().getHolder();
-                BSShopHolder old_shopholder = holder.getPreviousShopHolder();
-                if (old_shopholder != null) {
-                    //Going back to previous shop
-                    if (old_shopholder.getShop() == shop) {
-                        page = old_shopholder.getPage();
+        if (view.getTopInventory().getHolder() instanceof BSShopHolder) {
+            BSShopHolder holder = (BSShopHolder) view.getTopInventory().getHolder();
+            BSShopHolder old_shopholder = holder.getPreviousShopHolder();
+            if (old_shopholder != null) {
+                //Going back to previous shop
+                if (old_shopholder.getShop() == shop) {
+                    page = old_shopholder.getPage();
 
-                        /* If going back to parent shop, children shop should not be remembered
-                         *  That way it can be prevented that all previous shops are kept in memory when players keep switching between shops
-                         *  Note: This might cause confusion in some causes because some pages are restored and some are not.
-                         */
-                        remember_current_shop = false;
-                    }
+                    /* If going back to parent shop, children shop should not be remembered
+                     *  That way it can be prevented that all previous shops are kept in memory when players keep switching between shops
+                     *  Note: This might cause confusion in some causes because some pages are restored and some are not.
+                     */
+                    remember_current_shop = false;
                 }
             }
         }
@@ -154,7 +152,7 @@ public class BSShops {
     }
 
     public BSShop getShop(int id) {
-        return shops.containsKey(id) ? shops.get(id) : null;
+        return shops.getOrDefault(id, null);
     }
 
     public BSShop getShopFast(int id) {
@@ -195,23 +193,24 @@ public class BSShops {
     ////////////////////////////////////////////////////////////////////////////
 
     public void refreshShops(boolean mode_serverpinging) {
-        for (Player p : Bukkit.getOnlinePlayers()) { //If players have a customizable inventory open it needs an update
-            if (ClassManager.manager.getPlugin().getAPI().isValidShop(p.getOpenInventory())) {
-                Inventory open_inventory = p.getOpenInventory().getTopInventory();
-                BSShopHolder h = (BSShopHolder) open_inventory.getHolder();
+        Bukkit.getScheduler().runTask(ClassManager.manager.getPlugin(), () -> {
+            for (Player p : Bukkit.getOnlinePlayers()) { //If players have a customizable inventory open it needs an update
+                if (ClassManager.manager.getPlugin().getAPI().isValidShop(p.getOpenInventory())) {
+                    Inventory open_inventory = p.getOpenInventory().getTopInventory();
+                    BSShopHolder h = (BSShopHolder) open_inventory.getHolder();
 
-                if (h.getShop().isCustomizable()) {
-                    if (!mode_serverpinging) {
-                        if (ClassManager.manager.getSettings().getServerPingingEnabled(true)) {
-                            if (ClassManager.manager.getServerPingingManager().containsServerpinging(h.getShop())) {
-                                continue;
+                    if (h.getShop().isCustomizable()) {
+                        if (!mode_serverpinging) {
+                            if (ClassManager.manager.getSettings().getServerPingingEnabled(true)) {
+                                if (ClassManager.manager.getServerPingingManager().containsServerpinging(h.getShop())) {
+                                    continue;
+                                }
                             }
+                            h.getShop().updateInventory(open_inventory, h, p, ClassManager.manager, h.getPage(), h.getHighestPage(), true);
                         }
-                        h.getShop().updateInventory(open_inventory, h, p, ClassManager.manager, h.getPage(), h.getHighestPage(), true);
                     }
                 }
             }
-        }
+        });
     }
-
 }

@@ -66,6 +66,10 @@ public class PointsManager {
                 this.pa = new BSPointsPluginGadgetsMenu();
                 break;
 
+            case VotingPlugin:
+                this.pa = new BSPointsPluginVotingPlugin();
+                break;
+
             case NONE:
                 this.pa = new BSPointsPluginNone();
                 break;
@@ -117,7 +121,7 @@ public class PointsManager {
         MYSQL_TOKENS(new String[]{"MySQL-Tokens", "MySQL-Token"}),
         MYSQLTOKENS(new String[]{"MySQLTokens", "MySQLToken"}),
         GadetsMenu(new String[]{"GadgetsMenu"}),
-        //COINS(new String[] { "Coins"}),
+        VotingPlugin(new String[]{"VotingPlugin","VP"}),
         CUSTOM(new String[0]);
 
         private String[] nicknames;
