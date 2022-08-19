@@ -1,5 +1,5 @@
 # BossShopPro
-![i1](https://img.shields.io/badge/Minecraft-1.16+-blue.svg) ![i2](https://img.shields.io/badge/Java-11+-blue.svg) ![i3](https://badgen.net/github/release/lijinhong11/BossShopPro) ![i4](https://badgen.net/github/license/lijinhong11/BossShopPro) ![i5](https://badgen.net/github/assets-dl/lijinhong11/BossShopPro)  
+![i1](https://img.shields.io/badge/minecraft-1.16+-blue.svg) ![i2](https://img.shields.io/badge/java-8+-blue.svg) ![i3](https://badgen.net/github/release/lijinhong11/BossShopPro) ![i4](https://badgen.net/badge/license/MIT/blue) ![i5](https://badgen.net/github/assets-dl/lijinhong11/BossShopPro) ![i6](https://badgen.net/github/open-issues/lijinhong11/BossShopPro)  
 BossShopPro is one of the most player-friendly and multifunctional GUI plugins ever! Say goodbye to all the annoying command- or signshops!
 It can not only be used to create shops but for every kind of menu. Here are just a few examples:
 * Shop (Buy or sell items)
