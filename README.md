@@ -18,7 +18,7 @@ A few notes regarding building BSP: the current state of the code, unfortunately
 
 ## Changes to the original project
 * Fixed the problem of putting minecraft color together when looking for hex color.  
-* Remove TokenManager, VotingPlugin, LilyPad, CommandPoints, Kingdoms, EpicSpawners support.  
+* Remove TokenManager, LilyPad, CommandPoints, Kingdoms, EpicSpawners support.  
 * Update dependency and change some prompt. 
 * Something may be added in the future.
 * The plugin usage remains unchanged.
