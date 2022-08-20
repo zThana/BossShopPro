@@ -35,6 +35,16 @@ public abstract class BSConditionTypeNumber extends BSConditionType {
         if (conditiontype.equalsIgnoreCase("equals") || conditiontype.equalsIgnoreCase("=")) {
             return equals(n, condition.split(","));
         }
+        if (conditiontype.equalsIgnoreCase("overorequals") || conditiontype.equalsIgnoreCase("ooe")|| conditiontype.equalsIgnoreCase(">=")) {
+            double d = InputReader.getDouble(condition, -1);
+            return n >= d;
+        }
+        if (conditiontype.equalsIgnoreCase("underorequals") || conditiontype.equalsIgnoreCase("<=")
+                || conditiontype.equalsIgnoreCase("beloworequals") || conditiontype.equalsIgnoreCase("uoe")
+                || conditiontype.equalsIgnoreCase("boe")) {
+            double d = InputReader.getDouble(condition, -1);
+            return n <= d;
+        }
 
         if (conditiontype.equalsIgnoreCase("between") || conditiontype.equalsIgnoreCase("inbetween")) {
             String separator = condition.contains(":") ? ":" : "-";

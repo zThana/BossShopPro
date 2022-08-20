@@ -31,7 +31,15 @@ public class BSPriceTypeExp extends BSPriceTypeNumber {
     @Override
     public boolean hasPrice(Player p, BSBuy buy, Object price, ClickType clickType, int multiplier, boolean messageOnFailure) {
         int exp = (int) ClassManager.manager.getMultiplierHandler().calculatePriceWithMultiplier(p, buy, clickType, (Integer) price) * multiplier;
-        if ((p.getLevel() < (Integer) exp)) {
+        if (ClassManager.manager.getSettings().getExpUseLevel()) {
+            if ((p.getLevel() < exp)) {
+                if (messageOnFailure) {
+                    ClassManager.manager.getMessageHandler().sendMessage("NotEnough.Exp", p);
+                }
+                return false;
+            }
+        }
+        else if (getTotalExperience(p) < exp) {
             if (messageOnFailure) {
                 ClassManager.manager.getMessageHandler().sendMessage("NotEnough.Exp", p);
             }
@@ -43,8 +51,11 @@ public class BSPriceTypeExp extends BSPriceTypeNumber {
     @Override
     public String takePrice(Player p, BSBuy buy, Object price, ClickType clickType, int multiplier) {
         int exp = (int) ClassManager.manager.getMultiplierHandler().calculatePriceWithMultiplier(p, buy, clickType, (Integer) price) * multiplier;
-        p.setLevel(p.getLevel() - exp);
-
+        if (ClassManager.manager.getSettings().getExpUseLevel()) {
+            p.setLevel(p.getLevel() - exp);
+        } else {
+            p.giveExp(-exp);
+        }
         return getDisplayBalance(p, buy, price, clickType);
     }
 
@@ -76,5 +87,30 @@ public class BSPriceTypeExp extends BSPriceTypeNumber {
         return true;
     }
 
+    private int getExperienceAtLevel(Player player) {
+        return this.getExperienceAtLevel(player.getLevel());
+    }
 
+    private int getExperienceAtLevel(int level) {
+        if (level <= 15) {
+            return (level << 1) + 7;
+        }
+        if (level <= 30) {
+            return (level * 5) - 38;
+        }
+        return (level * 9) - 158;
+    }
+
+    private int getTotalExperience(Player player) {
+        int experience = Math.round(this.getExperienceAtLevel(player) * player.getExp());
+        int currentLevel = player.getLevel();
+        while (currentLevel > 0) {
+            currentLevel--;
+            experience += this.getExperienceAtLevel(currentLevel);
+        }
+        if (experience < 0) {
+            experience = Integer.MAX_VALUE;
+        }
+        return experience;
+    }
 }
