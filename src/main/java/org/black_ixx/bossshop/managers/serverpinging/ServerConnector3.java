@@ -5,6 +5,7 @@ import org.black_ixx.bossshop.managers.ClassManager;
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 
 public class ServerConnector3 implements ServerConnector {
@@ -30,7 +31,7 @@ public class ServerConnector3 implements ServerConnector {
             DataOutputStream dos = new DataOutputStream(os);
             InputStream is = socket.getInputStream();
 
-            InputStreamReader isr = new InputStreamReader(is, Charset.forName("UTF-16BE"));
+            InputStreamReader isr = new InputStreamReader(is, StandardCharsets.UTF_16BE);
             dos.write(new byte[]{(byte) 0xFE, (byte) 0x01});
             int packetId = is.read();
 

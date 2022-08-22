@@ -76,7 +76,7 @@ public abstract class BSConditionTypeNumber extends BSConditionType {
 
     @Override
     public String[] showStructure() {
-        return new String[]{"over:[double]", "under:[double]", "equals:[double]", "between:[double]:[double]"};
+        return new String[]{"over:[double]", "overorequals:[double]","under:[double]", "underorequals:[double]","equals:[double]", "between:[double]:[double]"};
     }
 
     public abstract double getNumber(BSBuy shopitem, BSShopHolder holder, Player p);

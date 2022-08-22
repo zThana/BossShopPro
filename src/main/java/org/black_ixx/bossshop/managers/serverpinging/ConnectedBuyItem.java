@@ -10,7 +10,7 @@ public class ConnectedBuyItem {
 
     private List<String> original_lore;
     private String original_name;
-    private BSBuy buy;
+    private final BSBuy buy;
 
     public ConnectedBuyItem(BSBuy original_buy, ItemStack menu_item) {
         this.buy = original_buy;

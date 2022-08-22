@@ -50,10 +50,9 @@ public class ShopCustomizer {
      * @param m the class manager
      * @param inventory the inventory being opened
      * @param page the page of the shop
-     * @param highest_page the amount of pages for shop
      * @return inventory
      */
-    public Inventory createInventory(BSShop shop, Set<BSBuy> items, Player p, ClassManager m, Inventory inventory, int page, int highest_page) {
+    public Inventory createInventory(BSShop shop, Set<BSBuy> items, Player p, ClassManager m, Inventory inventory, int page) {
         if (inventory.getHolder() instanceof BSShopHolder) {
             BSShopHolder holder = (BSShopHolder) inventory.getHolder();
             return createInventory(shop, items, p, m, inventory, holder, page);
@@ -99,7 +98,7 @@ public class ShopCustomizer {
                     continue;
                 }
 
-                int slot = getSlot(inventory, everything, buy);
+                int slot = getSlot(everything, buy);
                 everything.put(slot, buy);
             }
 
@@ -230,9 +229,7 @@ public class ShopCustomizer {
 
             BSDisplayItemEvent event = new BSDisplayItemEvent(p, shop, buy, inventory);
             Bukkit.getPluginManager().callEvent(event);
-            if (event.isCancelled()) {
-                return false;
-            }
+            return !event.isCancelled();
         }
 
         return true;
@@ -240,25 +237,23 @@ public class ShopCustomizer {
 
     /**
      * Get a slot position
-     * @param inventory the inventory of the shop
      * @param everything all items loaded in the inventory
      * @param buy the item being checked
      * @return slot of item
      */
-    public int getSlot(Inventory inventory, HashMap<Integer, BSBuy> everything, BSBuy buy) {
+    public int getSlot(HashMap<Integer, BSBuy> everything, BSBuy buy) {
         if (buy.getInventoryLocation() == -1) {
-            return getFirstFreeSlot(inventory, everything);
+            return getFirstFreeSlot(everything);
         }
         return buy.getInventoryLocation();
     }
 
     /**
      * Get the first free slot in an inventory
-     * @param inventory the inventory to check
      * @param everything the items loaded in the inventory
      * @return first free slot
      */
-    public int getFirstFreeSlot(Inventory inventory, HashMap<Integer, BSBuy> everything) {
+    public int getFirstFreeSlot(HashMap<Integer, BSBuy> everything) {
         for (int i = 0; i < 5000; i++) {
             if (!everything.containsKey(i)) {
                 return i;

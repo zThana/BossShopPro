@@ -36,7 +36,7 @@ public class Settings {
 
     private boolean debug;
 
-    private Map<Integer, SettingsProperty> properties = new LinkedHashMap<Integer, SettingsProperty>();
+    private Map<Integer, SettingsProperty> properties = new LinkedHashMap<>();
 
 
     /**

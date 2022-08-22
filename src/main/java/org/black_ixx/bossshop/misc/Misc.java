@@ -32,7 +32,7 @@ public class Misc {
                         int i = Integer.parseInt(start.replace("lore", "")) - 1;
 
                         if (lore == null) {
-                            lore = new HashMap<Integer, String>();
+                            lore = new HashMap<>();
                             new_list = new ArrayList<>();
                         }
 
@@ -109,7 +109,7 @@ public class Misc {
      */
     @SuppressWarnings("deprecation")
     public static ItemStack getItemInMainHand(Player p) {
-        ItemStack item = null;
+        ItemStack item;
         try {
             item = p.getInventory().getItemInMainHand();
         } catch (NoSuchMethodError e) {

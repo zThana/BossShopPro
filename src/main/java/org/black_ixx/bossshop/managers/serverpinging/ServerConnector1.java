@@ -12,7 +12,7 @@ public class ServerConnector1 implements ServerConnector {
 
     //Seems to support some 1.8/1.9/1.10 servers
 
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
 
 
     @Override
@@ -35,7 +35,6 @@ public class ServerConnector1 implements ServerConnector {
     }
 
 
-    @SuppressWarnings("resource")
     public StatusResponse fetchData(ServerInfo info) throws IOException, IllegalStateException {
         Socket socket = new Socket();
         OutputStream outputStream;

@@ -19,7 +19,7 @@ public class MessageHandler {
     private final BossShop plugin;
     private final String fileName = "messages.yml";
     private final File file;
-    private FileConfiguration config = null;
+    private FileConfiguration config;
 
     public MessageHandler(final BossShop plugin) {
         this.plugin = plugin;
@@ -103,13 +103,13 @@ public class MessageHandler {
     public void sendMessage(String node, CommandSender sender, String offline_target, Player target, BSShop shop, BSShopHolder holder, BSBuy item) {
         if (sender != null) {
 
-            if (node == null || node == "") {
+            if (node == null || node.equals("")) {
                 return;
             }
 
             String message = get(node, target, shop, holder, item);
 
-            if (message == null || message.isEmpty() || message.length() < 2) {
+            if (message == null || message.length() < 2) {
                 return;
             }
 
@@ -129,7 +129,7 @@ public class MessageHandler {
     public void sendMessageDirect(String message, CommandSender sender) {
         if (sender != null) {
 
-            if (message == null || message.isEmpty() || message.length() < 2) {
+            if (message == null || message.length() < 2) {
                 return;
             }
 

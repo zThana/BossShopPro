@@ -36,12 +36,12 @@ public class CurrencyTools {
                 if (ClassManager.manager.getVaultHandler().getEconomy() == null) {
                     return false;
                 }
-                if (!ClassManager.manager.getVaultHandler().getEconomy().hasAccount(p.getName())) {
+                if (!ClassManager.manager.getVaultHandler().getEconomy().hasAccount(p)) {
                     if (fail_message)
                         ClassManager.manager.getMessageHandler().sendMessage("Economy.NoAccount", p);
                     return false;
                 }
-                if (ClassManager.manager.getVaultHandler().getEconomy().getBalance(p.getName()) < value) {
+                if (ClassManager.manager.getVaultHandler().getEconomy().getBalance(p) < value) {
                     if (fail_message)
                         ClassManager.manager.getMessageHandler().sendMessage("NotEnough.Money", p);
                     return false;
@@ -74,12 +74,12 @@ public class CurrencyTools {
                 return ClassManager.manager.getMessageHandler().get("Display.Exp").replace("%levels%", MathTools.displayNumber(balance_exp, BSPriceType.Exp));
 
             case MONEY:
-                if (!ClassManager.manager.getVaultHandler().getEconomy().hasAccount(p.getName())) {
+                if (!ClassManager.manager.getVaultHandler().getEconomy().hasAccount(p)) {
                     ClassManager.manager.getBugFinder().severe("Unable to take money! No economy account existing! (" + p.getName() + ", " + cost + ")");
                     return "";
                 }
-                ClassManager.manager.getVaultHandler().getEconomy().withdrawPlayer(p.getName(), cost);
-                double balance = ClassManager.manager.getVaultHandler().getEconomy().getBalance(p.getName());
+                ClassManager.manager.getVaultHandler().getEconomy().withdrawPlayer(p, cost);
+                double balance = ClassManager.manager.getVaultHandler().getEconomy().getBalance(p);
                 return ClassManager.manager.getMessageHandler().get("Display.Money").replace("%money%", MathTools.displayNumber(balance, BSPriceType.Money));
 
             case POINTS:
@@ -111,12 +111,12 @@ public class CurrencyTools {
                     ClassManager.manager.getBugFinder().severe("Unable to give " + p.getName() + " his/her money: Economy manager not loaded. Property: " + ClassManager.manager.getSettings().getMoneyEnabled());
                     return;
                 }
-                if (!ClassManager.manager.getVaultHandler().getEconomy().hasAccount(p.getName())) {
+                if (!ClassManager.manager.getVaultHandler().getEconomy().hasAccount(p)) {
                     ClassManager.manager.getMessageHandler().sendMessage("Economy.NoAccount", p);
                     ClassManager.manager.getBugFinder().severe("Unable to give " + p.getName() + " his/her money: He/She does not have an economy account.");
                     return;
                 }
-                ClassManager.manager.getVaultHandler().getEconomy().depositPlayer(p.getName(), reward);
+                ClassManager.manager.getVaultHandler().getEconomy().depositPlayer(p, reward);
                 return;
 
             case POINTS:
@@ -160,11 +160,11 @@ public class CurrencyTools {
 
             @Override
             public double getBalance(Player p) {
-                if (!ClassManager.manager.getVaultHandler().getEconomy().hasAccount(p.getName())) {
+                if (!ClassManager.manager.getVaultHandler().getEconomy().hasAccount(p)) {
                     ClassManager.manager.getBugFinder().severe("Unable to read balance! No economy account existing! (" + p.getName() + ")");
                     return -1;
                 }
-                return ClassManager.manager.getVaultHandler().getEconomy().getBalance(p.getName());
+                return ClassManager.manager.getVaultHandler().getEconomy().getBalance(p);
             }
         },
         EXP {

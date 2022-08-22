@@ -123,11 +123,6 @@ public class CommandManager implements CommandExecutor {
 
                 if (args.length >= 3 && args[0].equalsIgnoreCase("open")) {
 
-                    if (args.length < 2) {
-                        sendCommandList(sender);
-                        return false;
-                    }
-
                     String shopname = args[1].toLowerCase();
                     BSShop shop = ClassManager.manager.getShops().getShop(shopname);
                     String name = args[2];
@@ -144,7 +139,7 @@ public class CommandManager implements CommandExecutor {
                     }
 
                     if (shop == null) {
-                        ClassManager.manager.getMessageHandler().sendMessage("Main.ShopNotExisting", sender, null, p, shop, null, null);
+                        ClassManager.manager.getMessageHandler().sendMessage("Main.ShopNotExisting", sender, null, p, null, null, null);
                         return false;
                     }
 

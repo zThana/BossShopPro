@@ -25,7 +25,7 @@ public class ServerPingingManager {
         BossShop.log("[ServerPinging] Loading ServerPinging Package!");
 
         int connector_type = plugin.getClassManager().getStorageManager().getConfig().getInt("serverpinging.connector");
-        setup(plugin.getConfig().getStringList("ServerPinging.List"), connector_type);
+        setup(plugin.getConfig().getStringList("ServerPinging.List"));
     }
 
     public ServerPingingRunnableHandler getServerPingingRunnableHandler() {
@@ -42,7 +42,7 @@ public class ServerPingingManager {
     }
 
 
-    public void setup(List<String> pinging_list, int connector_type) {
+    public void setup(List<String> pinging_list) {
         List<ServerConnector> connectors = new ArrayList<>();
         try {
             connectors.add(new ServerConnector1());

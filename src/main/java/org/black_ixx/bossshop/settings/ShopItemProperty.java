@@ -27,17 +27,17 @@ public class ShopItemProperty extends ShopProperty {
     public void load(ConfigurationSection config) {
         super.load(config);
         if (ClassManager.manager.getShops() != null && ClassManager.manager.getShops().getShops() != null) {
-            readShopItems(type);
+            readShopItems();
         }
     }
 
-    public void readShopItems(Class<?> type) {
+    public void readShopItems() {
         for (BSShop shop : ClassManager.manager.getShops().getShops().values()) {
             if (shop instanceof BSConfigShop) {
                 BSConfigShop configshop = (BSConfigShop) shop;
 
                 for (BSBuy buy : shop.getItems()) {
-                    readShopItem(buy, configshop, type);
+                    readShopItem(buy, configshop);
                 }
 
             }
@@ -52,7 +52,7 @@ public class ShopItemProperty extends ShopProperty {
     public void update(Object o) {
         if (o instanceof BSBuy) {
             BSBuy buy = (BSBuy) o;
-            readShopItem(buy, type);
+            readShopItem(buy);
         }
         super.update(o);
     }
@@ -60,12 +60,11 @@ public class ShopItemProperty extends ShopProperty {
     /**
      * Read in a shop item
      * @param buy the item
-     * @param type the type
      */
-    public void readShopItem(BSBuy buy, Class<?> type) {
+    public void readShopItem(BSBuy buy) {
         if (buy.getShop() instanceof BSConfigShop) {
             BSConfigShop configshop = (BSConfigShop) buy.getShop();
-            readShopItem(buy, configshop, type);
+            readShopItem(buy, configshop);
         }
     }
 
@@ -73,9 +72,8 @@ public class ShopItemProperty extends ShopProperty {
      * REad in a shop item
      * @param buy the item
      * @param configshop the shop to read from
-     * @param type the type
      */
-    public void readShopItem(BSBuy buy, BSConfigShop configshop, Class<?> type) {
+    public void readShopItem(BSBuy buy, BSConfigShop configshop) {
         ConfigurationSection section = buy.getConfigurationSection(configshop);
         if (section != null && section.contains(path)) {
             if (shopitem_settings == null) {
@@ -94,7 +92,7 @@ public class ShopItemProperty extends ShopProperty {
     public void readShop(BSShop shop, Class<?> type) {
         super.readShop(shop, type);
         for (BSBuy buy : shop.getItems()) {
-            readShopItem(buy, type);
+            readShopItem(buy);
         }
     }
 
@@ -103,7 +101,6 @@ public class ShopItemProperty extends ShopProperty {
      * Check if an object contains a value
      * @param input where to check it
      * @param value what to check
-     * @return
      */
     public boolean containsValue(Object input, Object value) {
         if (input instanceof BSBuy) {
@@ -119,15 +116,11 @@ public class ShopItemProperty extends ShopProperty {
 
     /**
      * Check if a shop item contains a value
-     * @param buy
-     * @param value
      * @return contains or not
      */
     public boolean containsValueShopItem(BSBuy buy, Object value) {
         if (shopitem_settings != null && shopitem_settings.containsKey(buy)) {
-            if (isIdentical(shopitem_settings.get(buy), value)) {
-                return true;
-            }
+            return isIdentical(shopitem_settings.get(buy), value);
         }
         return false;
     }

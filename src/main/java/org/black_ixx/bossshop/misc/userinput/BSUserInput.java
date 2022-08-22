@@ -19,7 +19,7 @@ public abstract class BSUserInput {
             AnvilTools.openAnvilGui(anvil_text, anvil_item, new BSAnvilHolderUserInput(this), p); //Does not work atm
             return;
         }
-        ClassManager.manager.getPlayerDataHandler().requestInput(p, new BSChatUserInput(p, this, ClassManager.manager.getSettings().getInputTimeout() * 1000));
+        ClassManager.manager.getPlayerDataHandler().requestInput(p, new BSChatUserInput(p, this, ClassManager.manager.getSettings().getInputTimeout() * 1000L));
         ClassManager.manager.getMessageHandler().sendMessageDirect(ClassManager.manager.getStringManager().transform(chat_text, p), p);
         p.closeInventory();
     }

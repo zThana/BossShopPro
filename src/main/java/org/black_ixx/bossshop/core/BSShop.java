@@ -1,6 +1,5 @@
 package org.black_ixx.bossshop.core;
 
-import org.black_ixx.bossshop.BossShop;
 import org.black_ixx.bossshop.events.BSChoosePageLayoutEvent;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.managers.features.PageLayoutHandler;
@@ -19,7 +18,6 @@ import java.util.Set;
 public abstract class BSShop {
 
     public final static int ROWS_LIMIT_CURRENT = ClassManager.manager.getPageLayoutHandler().getMaxRows(); //By default 6
-    public final static int ROWS_LIMIT_TOTAL = 6;
     public final static int ROW_ITEMS = 9;
 
     //////////////////////////// <- Variables
@@ -42,7 +40,7 @@ public abstract class BSShop {
     private int highest_page; //Might not be correct but is used in case of a fix inventory having multiple pages
 
 
-    private Set<BSBuy> items = new LinkedHashSet<>();
+    private final Set<BSBuy> items = new LinkedHashSet<>();
 
     //////////////////////////// <- Constructor
 
@@ -210,7 +208,7 @@ public abstract class BSShop {
             p.openInventory(created);
             return;
         }
-        Inventory inventory = manager.getShopCustomizer().createInventory(this, items, p, manager, i, page, highest_page);
+        Inventory inventory = manager.getShopCustomizer().createInventory(this, items, p, manager, i, page);
         if (inventory != i) {
             p.openInventory(inventory);
         }

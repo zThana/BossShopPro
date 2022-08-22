@@ -29,7 +29,7 @@ public class ServerInfo {
     private boolean being_pinged;
 
 
-    private Set<ConnectedBuyItem> buyitems = new LinkedHashSet<ConnectedBuyItem>();
+    private Set<ConnectedBuyItem> buyitems = new LinkedHashSet<>();
 
 
     public ServerInfo(String host, int port, int timeout) {
@@ -45,7 +45,6 @@ public class ServerInfo {
         ClassManager.manager.getSettings().setBungeeCordServerEnabled(true);
         this.host = bungeecord_servername;
         this.port = -1;
-        this.timeout = -1;
         this.address = null;
         this.motd = "unknown";
         this.timeout = timeout;

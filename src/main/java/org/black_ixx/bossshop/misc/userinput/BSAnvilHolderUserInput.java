@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 public class BSAnvilHolderUserInput extends BSAnvilHolder {
 
 
-    private BSUserInput input;
+    private final BSUserInput input;
 
     public BSAnvilHolderUserInput(BSUserInput input) {
         this.input = input;

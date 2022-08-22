@@ -68,6 +68,6 @@ public class BSRewardTypeTeleport extends BSRewardType{
 
     @Override
     public boolean mightNeedShopUpdate() {
-        return false;
+        return true;
     }
 }

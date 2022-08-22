@@ -60,8 +60,8 @@ public class ServerConnector4 implements ServerConnector {
 
 
             info.setMotd(bits[3]);
-            info.setPlayers(Integer.valueOf(bits[4]));
-            info.setMaxPlayers(Integer.valueOf(bits[5]));
+            info.setPlayers(Integer.parseInt(bits[4]));
+            info.setMaxPlayers(Integer.parseInt(bits[5]));
             info.setOnline(true);
             return true;
         } catch (Exception e) {

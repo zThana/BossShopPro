@@ -291,12 +291,4 @@ public class ClassManager {
         return itemdataStorage;
     }
 
-    public boolean classExists(String className) {
-        try {
-            Class.forName(className);
-            return true;
-        } catch (ClassNotFoundException e) {
-            return false;
-        }
-    }
 }

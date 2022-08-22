@@ -8,7 +8,7 @@ import java.util.List;
 public class ServerConnectorSmart implements ServerConnector {
 
 
-    private List<ServerConnector> modules;
+    private final List<ServerConnector> modules;
     private ServerConnector current;
     private int current_id = -1;
     private boolean had_success;

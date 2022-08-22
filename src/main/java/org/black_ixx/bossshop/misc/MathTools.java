@@ -22,13 +22,13 @@ public class MathTools {
     public static void init(String loc, int grouping_size) {
         try {
             String[] parts = loc.split("_");
-            Locale l = Locale.forLanguageTag(loc);
+            Locale l;
             if (parts.length >= 2) {
                 l = new Locale(parts[0].trim(), parts[1].trim());
             } else {
                 l = new Locale(parts[0].trim());
             }
-            if (l != null && l.getCountry() != null) {
+            if (l.getCountry() != null) {
                 df = (DecimalFormat) NumberFormat.getInstance(l);
             }
         } catch (NullPointerException e) {
@@ -75,13 +75,11 @@ public class MathTools {
     }
 
     public static double cutNumber(double d, int to_cut, int decimal_place) {
-        if (to_cut == 0) {
-            return round(d, decimal_place);
-        } else {
+        if (to_cut != 0) {
             long a = (long) Math.pow(10, to_cut);
             d = d / a;
-            return round(d, decimal_place);
         }
+        return round(d, decimal_place);
     }
 
 
@@ -113,10 +111,7 @@ public class MathTools {
                 return true;
             }
         }
-        if (pricetype == BSPriceType.Exp) {
-            return true;
-        }
-        return false;
+        return pricetype == BSPriceType.Exp;
     }
 
     public static String displayNumber(double d, List<String> formatting, boolean integer_value) {
@@ -136,8 +131,7 @@ public class MathTools {
                         int decimal_place = InputReader.getInt(parts[2].trim(), -1);
                         double number = cutNumber(d, to_cut, decimal_place);
 
-                        String output = parts[3].trim().replace("%number%", MathTools.displayNumber(number, decimal_place));
-                        return output;
+                        return parts[3].trim().replace("%number%", MathTools.displayNumber(number, decimal_place));
                     }
                 }
             }

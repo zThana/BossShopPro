@@ -3,6 +3,7 @@ package org.black_ixx.bossshop.settings;
 import org.bukkit.configuration.ConfigurationSection;
 
 import java.util.List;
+import java.util.Objects;
 
 public class SettingsProperty {
 
@@ -50,7 +51,6 @@ public class SettingsProperty {
 
     /**
      * Update a settings property
-     * @param o
      */
     public void update(Object o) {
         //Can be overwritten
@@ -144,10 +144,6 @@ public class SettingsProperty {
      */
     //Can be extended
     public boolean isIdentical(Object a, Object b) {
-        if (a instanceof Boolean && b instanceof Boolean) {
-            return ((Boolean) a) == ((Boolean) b);
-        }
-        return a == b;
+        return Objects.equals(a,b);
     }
-
 }

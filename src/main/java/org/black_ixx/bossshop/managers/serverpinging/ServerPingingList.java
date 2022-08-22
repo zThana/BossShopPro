@@ -11,9 +11,9 @@ import java.util.Vector;
 public class ServerPingingList {
 
 
-    private Map<String, ServerInfo> to_add = new LinkedHashMap<>();
-    private Map<String, ServerInfo> infos = new LinkedHashMap<>();
-    private List<ServerInfo> to_ping = new Vector<ServerInfo>();
+    private final Map<String, ServerInfo> to_add = new LinkedHashMap<>();
+    private final Map<String, ServerInfo> infos = new LinkedHashMap<>();
+    private final List<ServerInfo> to_ping = new Vector<>();
 
 
     public void update(ServerConnector current_connector, boolean complete) {

@@ -64,7 +64,7 @@ public class ShopProperty extends SettingsProperty {
             ConfigurationSection config = configshop.getConfig();
             if (config.contains(path)) {
                 if (shop_settings == null) {
-                    shop_settings = new HashMap<BSShop, Object>();
+                    shop_settings = new HashMap<>();
                 }
                 shop_settings.put(shop, read(config));
             }
@@ -96,9 +96,7 @@ public class ShopProperty extends SettingsProperty {
      */
     public boolean containsValueShop(BSShop shop, Object value) {
         if (shop_settings != null && shop_settings.containsKey(shop)) {
-            if (isIdentical(shop_settings.get(shop), value)) {
-                return true;
-            }
+            return isIdentical(shop_settings.get(shop), value);
         }
         return false;
     }

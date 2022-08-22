@@ -76,7 +76,7 @@ public class BuyItemHandler {
             String rewardType = c.getString("RewardType");
             String message = c.getString("Message");
             String permission = c.getString("ExtraPermission");
-            if (permission == null || permission == "") {
+            if (permission == null || permission.equals("")) {
                 permission = null;
             }
             int inventoryLocation = c.getInt("InventoryLocation");
@@ -150,7 +150,7 @@ public class BuyItemHandler {
             BSConditionSet conditionsset = null;
 
             List<String> conditions = c.getStringList("Condition");
-            if (conditions != null) {
+            if (!conditions.isEmpty()) {
                 BSConditionSet set = new BSConditionSet();
                 BSConditionType type = null;
                 for (String s : conditions) {
@@ -189,7 +189,7 @@ public class BuyItemHandler {
 
 
             stage = "MenuItem creation";
-            if (c.getStringList("MenuItem") == null) {
+            if (c.getStringList("MenuItem").isEmpty()) {
                 ClassManager.manager.getBugFinder().severe("Error when trying to create shopitem " + name + "! MenuItem is not existing?! [Shop: " + shopname + "]");
                 return null;
             }
