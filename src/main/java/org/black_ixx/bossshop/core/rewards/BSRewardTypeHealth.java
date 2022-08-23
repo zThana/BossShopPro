@@ -17,7 +17,7 @@ public class BSRewardTypeHealth extends BSRewardTypeNumber{
 
     @Override
     public boolean validityCheck(String item_name, Object o) {
-        if ((Double) o != -1) {
+        if (o instanceof Double) {
             return true;
         }
         ClassManager.manager.getBugFinder().severe("Was not able to create ShopItem " + item_name + "! The reward object needs to be a valid Double number. Example: '7.14' or '12.00'.");
