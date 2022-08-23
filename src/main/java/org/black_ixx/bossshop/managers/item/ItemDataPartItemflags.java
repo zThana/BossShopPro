@@ -58,10 +58,9 @@ public class ItemDataPartItemflags extends ItemDataPart {
     @Override
     public List<String> read(ItemStack i, List<String> output) {
         ItemMeta meta = i.getItemMeta();
-        if (meta.getItemFlags() != null) {
-            for (ItemFlag flag : meta.getItemFlags()) {
-                output.add("itemflag:" + flag.name());
-            }
+        meta.getItemFlags();
+        for (ItemFlag flag : meta.getItemFlags()) {
+            output.add("itemflag:" + flag.name());
         }
         return output;
     }

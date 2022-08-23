@@ -43,10 +43,7 @@ public class ItemStackChecker {
 
 
     public boolean inventoryContainsItem(Player p, ItemStack i, BSBuy buy) {
-        if (getAmountOfSameItems(p, i, buy) >= i.getAmount()) {
-            return true;
-        }
-        return false;
+        return getAmountOfSameItems(p, i, buy) >= i.getAmount();
     }
 
     public void takeItem(ItemStack shop_item, Player p, BSBuy buy) {

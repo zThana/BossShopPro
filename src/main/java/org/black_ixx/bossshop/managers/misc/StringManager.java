@@ -125,7 +125,7 @@ public class StringManager {
 
             if (s.contains("%balance%") && ClassManager.manager.getVaultHandler() != null) {
                 if (ClassManager.manager.getVaultHandler().getEconomy() != null) {
-                    double balance = ClassManager.manager.getVaultHandler().getEconomy().getBalance(target.getName());
+                    double balance = ClassManager.manager.getVaultHandler().getEconomy().getBalance(target);
                     s = s.replace("%balance%", MathTools.displayNumber(balance, BSPriceType.Money));
                 }
             }

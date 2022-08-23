@@ -14,7 +14,7 @@ public class ItemDataPartMaterial extends ItemDataPart {
     @Override
     public ItemStack transform(ItemStack item, String used_name, String argument) {
         short durability = 0;
-        Material m = Material.STONE;
+        Material m;
 
         if (argument.contains(":")) { //Can be used for durability
             String[] parts = argument.split(":");

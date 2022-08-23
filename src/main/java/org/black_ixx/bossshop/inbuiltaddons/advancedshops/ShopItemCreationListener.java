@@ -36,7 +36,7 @@ public class ShopItemCreationListener implements Listener {
                 String rewardType = c.getString("RewardType_" + s);
                 String message = c.getString("Message_" + s);
                 String permission = c.getString("ExtraPermission_" + s);
-                if (permission == null || permission == "") {
+                if (permission == null || permission.equals("")) {
                     permission = null;
                 }
 

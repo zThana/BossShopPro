@@ -49,8 +49,8 @@ Display:
   PlayerCommandOp: 'Commands: %commands%'
   Shop: 'Open shop %shop%'
   Page: 'Open shop page %page%'
-  Teleport: 'Teleport to world:%world% x:%x% y:%y% z:%z%'
-  TeleportWorld: 'Teleport to world:%world%'
+  Teleport: 'Teleport to %world% x:%x% y:%y% z:%z%'
+  TeleportWorld: 'Teleport to %world%'
 Time:
   Seconds: '%time% seconds'
   Minutes: '%time% minutes'

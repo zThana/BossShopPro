@@ -14,7 +14,7 @@ public class BSRewardTypeAnd extends BSRewardType {
 
     @Override
     public Object createObject(Object o, boolean force_final_state) {
-        List<BSRewardPart> rewardparts = new ArrayList<BSRewardPart>();
+        List<BSRewardPart> rewardparts = new ArrayList<>();
 
         ConfigurationSection rewards = (ConfigurationSection) o;
         for (int i = 1; rewards.contains("RewardType" + i); i++) {
@@ -85,14 +85,14 @@ public class BSRewardTypeAnd extends BSRewardType {
     @Override
     public String getDisplayReward(Player p, BSBuy buy, Object reward, ClickType clickType) {
         String sep = ClassManager.manager.getMessageHandler().get("Main.ListAndSeparator");
-        String s = "";
+        StringBuilder s = new StringBuilder();
 
         List<BSRewardPart> rewardparts = (List<BSRewardPart>) reward;
         for (int i = 0; i < rewardparts.size(); i++) {
             BSRewardPart part = rewardparts.get(i);
-            s += part.getRewardType().getDisplayReward(p, buy, part.getReward(), clickType) + (i < rewardparts.size() - 1 ? sep : "");
+            s.append(part.getRewardType().getDisplayReward(p, buy, part.getReward(), clickType)).append(i < rewardparts.size() - 1 ? sep : "");
         }
-        return s;
+        return s.toString();
     }
 
     @Override

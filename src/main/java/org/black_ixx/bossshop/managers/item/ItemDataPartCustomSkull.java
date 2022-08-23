@@ -27,7 +27,7 @@ public class ItemDataPartCustomSkull extends ItemDataPart {
         ItemMeta skullMeta = i.getItemMeta();
         GameProfile profile = new GameProfile(UUID.randomUUID(), null);
 
-        Property property = input.contains("http://textures.minecraft.net/texture") ? getPropertyURL(input) : getProperty(input);
+        Property property = input.contains("https://textures.minecraft.net/texture") ? getPropertyURL(input) : getProperty(input);
         profile.getProperties().put("textures", property);
         Field profileField = null;
         try {
@@ -57,7 +57,7 @@ public class ItemDataPartCustomSkull extends ItemDataPart {
     public static String readSkullTexture(ItemStack i) {
         if (i.getType() == Material.PLAYER_HEAD) {
             SkullMeta meta = (SkullMeta) i.getItemMeta();
-            Field profileField = null;
+            Field profileField;
             try {
                 profileField = meta.getClass().getDeclaredField("profile");
                 profileField.setAccessible(true);

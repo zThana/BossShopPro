@@ -9,6 +9,7 @@ import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ItemDataPartDurability extends ItemDataPart {
 
@@ -78,9 +79,7 @@ public class ItemDataPartDurability extends ItemDataPart {
         if (shop_item.getItemMeta() instanceof Damageable) {
             Damageable a = (Damageable) shop_item.getItemMeta();
             Damageable b = (Damageable) player_item.getItemMeta();
-            if (a.getDamage() != b.getDamage()) {
-                return false;
-            }
+            return Objects.equals(a,b);
         }
         return true;
     }

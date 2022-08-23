@@ -36,8 +36,7 @@ public class StringManipulationLib {
         String start = symbol + placeholder_name + "_";
         String complete = getCompleteVariable(s, placeholder_name, fromIndex);
         if (complete != null) {
-            String variable = complete.substring(start.length(), complete.length() - symbol.length());
-            return variable;
+            return complete.substring(start.length(), complete.length() - symbol.length());
         }
         return null;
     }
@@ -50,8 +49,7 @@ public class StringManipulationLib {
             if (first_occurence_start != -1) {
                 int first_occurence_end = s.indexOf(symbol, first_occurence_start + 1);
                 if (first_occurence_end != -1) {
-                    String complete = s.substring(first_occurence_start, first_occurence_end + 1);
-                    return complete;
+                    return s.substring(first_occurence_start, first_occurence_end + 1);
                 }
             }
         }
@@ -63,8 +61,7 @@ public class StringManipulationLib {
         String start = symbol + placeholder_name + "_";
         if (s.contains(start)) {
             int first_occurence_start = s.indexOf(start, fromIndex);
-            int first_occurence_end = s.indexOf(symbol, first_occurence_start + 1);
-            return first_occurence_end;
+            return s.indexOf(symbol, first_occurence_start + 1);
         }
         return -1;
     }
@@ -73,15 +70,15 @@ public class StringManipulationLib {
         if (list == null || list.isEmpty()) {
             return "";
         }
-        String output = null;
+        StringBuilder output = null;
         for (String s : list) {
             if (output == null) {
-                output = s;
+                output = new StringBuilder(s);
             } else {
-                output += "\n" + s;
+                output.append("\n").append(s);
             }
         }
-        return output;
+        return output.toString();
     }
 
 
@@ -91,8 +88,7 @@ public class StringManipulationLib {
             if (first_occurence_start != -1) {
                 int first_occurence_end = s.indexOf(end, first_occurence_start + 1);
                 if (first_occurence_end != -1) {
-                    String complete = s.substring(first_occurence_start, first_occurence_end + 1);
-                    return complete;
+                    return s.substring(first_occurence_start, first_occurence_end + 1);
                 }
             }
         }
@@ -103,8 +99,7 @@ public class StringManipulationLib {
         if (s.contains(beginning) && s.contains(end)) {
             int first_occurence_start = s.indexOf(beginning, fromIndex);
             if (first_occurence_start != -1) {
-                int first_occurence_end = s.indexOf(end, first_occurence_start + 1);
-                return first_occurence_end;
+                return s.indexOf(end, first_occurence_start + 1);
             }
         }
         return -1;

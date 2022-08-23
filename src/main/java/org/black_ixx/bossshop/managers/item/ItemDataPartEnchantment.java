@@ -75,7 +75,7 @@ public class ItemDataPartEnchantment extends ItemDataPart {
 
     @Override
     public List<String> read(ItemStack i, List<String> output) {
-        if (i.getEnchantments() != null) {
+        if (!i.getEnchantments().isEmpty()) {
             Map<Enchantment, Integer> enchantments = i.getEnchantments();
             for (Enchantment enchantment : enchantments.keySet()) {
                 output.add("enchantment:" + enchantment.getKey().getKey() + "#" + enchantments.get(enchantment));
@@ -109,9 +109,7 @@ public class ItemDataPartEnchantment extends ItemDataPart {
 
             EnchantmentStorageMeta ms = (EnchantmentStorageMeta) shop_item.getItemMeta();
             EnchantmentStorageMeta mp = (EnchantmentStorageMeta) player_item.getItemMeta();
-            if (!containsEnchantments(ms.getStoredEnchants(), mp.getStoredEnchants(), buy)) {
-                return false;
-            }
+            return containsEnchantments(ms.getStoredEnchants(), mp.getStoredEnchants(), buy);
 
         }
 

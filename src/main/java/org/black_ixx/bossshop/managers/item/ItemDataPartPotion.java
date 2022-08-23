@@ -70,9 +70,8 @@ public class ItemDataPartPotion extends ItemDataPart {
     public List<String> read(ItemStack i, List<String> output) {
         if (i.getItemMeta() instanceof PotionMeta) {
             PotionMeta meta = (PotionMeta) i.getItemMeta();
-            if (meta.getBasePotionData() != null) {
-                output.add("potion:" + meta.getBasePotionData().getType().name() + "#" + meta.getBasePotionData().isExtended() + "#" + meta.getBasePotionData().isUpgraded());
-            }
+            meta.getBasePotionData();
+            output.add("potion:" + meta.getBasePotionData().getType().name() + "#" + meta.getBasePotionData().isExtended() + "#" + meta.getBasePotionData().isUpgraded());
         }
         return output;
     }
@@ -100,9 +99,7 @@ public class ItemDataPartPotion extends ItemDataPart {
             if (ms.getBasePotionData().isExtended() & !mp.getBasePotionData().isExtended()) {
                 return false;
             }
-            if (ms.getBasePotionData().isUpgraded() & !mp.getBasePotionData().isUpgraded()) {
-                return false;
-            }
+            return !(ms.getBasePotionData().isUpgraded() & !mp.getBasePotionData().isUpgraded());
 
         }
         return true;

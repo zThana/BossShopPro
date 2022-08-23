@@ -18,7 +18,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 public class PlayerListener implements Listener {
 
 
-    private BossShop plugin;
+    private final BossShop plugin;
 
     public PlayerListener(BossShop plugin) {
         this.plugin = plugin;
@@ -43,7 +43,6 @@ public class PlayerListener implements Listener {
                         //p.performCommand("bossshop "+shop.getShopName());
 
                         e.setCancelled(true);
-                        return;
                     }
                 }
             }

@@ -47,9 +47,8 @@ public class ItemDataPartMobEgg extends ItemDataPart {
         if (i.getType().name().endsWith("SPAWN_EGG")) {
             if (ClassManager.manager.getSpawnEggHandler() != null) {
                 output.add("monsteregg:" + ClassManager.manager.getSpawnEggHandler().readEgg(i));
-            } else {
-                //no custom output needed: Knowing the material type is enough
-            }
+            }  //no custom output needed: Knowing the material type is enough
+
         }
         return output;
     }

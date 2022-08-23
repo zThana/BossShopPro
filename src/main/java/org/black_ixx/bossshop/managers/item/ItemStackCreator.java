@@ -24,30 +24,22 @@ public class ItemStackCreator {
         if (shop instanceof BSConfigShop) {
             BSConfigShop cshop = (BSConfigShop) shop;
 
-            List<String> new_list = null;
+            List<String> new_list = cloneList(itemData);
             for (String line : itemData) {
 
                 String reward_line = StringManipulationLib.figureOutVariable(line, "rewarditem", 0);
                 if (reward_line != null) {
-                    if (new_list == null) {
-                        new_list = cloneList(itemData);
-                    }
                     int i = InputReader.getInt(reward_line, -1) - 1;
                     new_list = transform(line, i, new_list, buy, cshop, "Reward");
                 }
 
                 String price_line = StringManipulationLib.figureOutVariable(line, "priceitem", 0);
                 if (price_line != null) {
-                    if (new_list == null) {
-                        new_list = cloneList(itemData);
-                    }
                     int i = InputReader.getInt(reward_line, -1) - 1;
                     new_list = transform(line, i, new_list, buy, cshop, "Price");
                 }
 
-                if (new_list != null) {
-                    return createItemStack(new_list, final_version);
-                }
+                return createItemStack(new_list, final_version);
 
             }
 
@@ -64,9 +56,7 @@ public class ItemStackCreator {
             List<List<String>> list = InputReader.readStringListList(buy.getConfigurationSection(shop).get(path));
             if (list != null) {
                 if (list.size() > index) {
-                    for (String entry : list.get(index)) {
-                        new_list.add(entry);
-                    }
+                    new_list.addAll(list.get(index));
                 } else {
                     ClassManager.manager.getBugFinder().warn("Was trying to import the item look for MenuItem of shopitem '" + buy.getName() + "' in shop '" + shop.getShopName() + "' but your " + path + " does not contain a " + index + ". item!");
                 }
@@ -79,11 +69,7 @@ public class ItemStackCreator {
 
     private List<String> cloneList(List<String> list) {
         if (list != null & !list.isEmpty()) {
-            List<String> clone = new ArrayList<String>();
-            for (String line : list) {
-                clone.add(line);
-            }
-            return clone;
+            return new ArrayList<>(list);
         }
         return list;
     }
@@ -105,7 +91,7 @@ public class ItemStackCreator {
      * @param buy        Shopitem linked to the item.
      * @param i          Item to add to the player.
      * @param clone_item Whether the item selected can be modified or if a clone of the selected item should be used instead, keeping the original item unchanged.
-     * @post If clone_item = false the item is modified (placeholders adapted to player and amount changed).
+     * &#064;post  If clone_item = false the item is modified (placeholders adapted to player and amount changed).
      */
     public void giveItem(Player p, BSBuy buy, ItemStack i, boolean clone_item) {
         giveItem(p, buy, i, i.getAmount(), clone_item);
@@ -120,7 +106,7 @@ public class ItemStackCreator {
      * @param i          Item to add to the player.
      * @param amount     Amount of the item to add to the player.
      * @param clone_item Whether the item selected can be modified or if a clone of the selected item should be used instead, keeping the original item unchanged.
-     * @post If clone_item = false the item is modified (placeholders adapted to player and amount changed).
+     * &#064;post  If clone_item = false the item is modified (placeholders adapted to player and amount changed).
      */
     public void giveItem(Player p, BSBuy buy, ItemStack i, int amount, boolean clone_item) {
         if (clone_item) {
@@ -147,7 +133,7 @@ public class ItemStackCreator {
      * @param p         Player to give the item to.
      * @param i         ItemStack to give to the player.
      * @param stacksize Maximum stack size determined using {@link ItemStackChecker#getMaxStackSize(ItemStack)}.
-     * @pre The item needs to be translated and adapted to the player already.
+     * &#064;pre  The item needs to be translated and adapted to the player already.
      */
     private void giveItem(Player p, ItemStack i, int stacksize) {
         if (i.getAmount() > stacksize) {

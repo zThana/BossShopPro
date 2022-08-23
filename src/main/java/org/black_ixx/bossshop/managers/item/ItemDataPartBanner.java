@@ -27,21 +27,19 @@ public class ItemDataPartBanner extends ItemDataPart {
             BannerMeta meta = (BannerMeta) item.getItemMeta();
             String[] bdata = argument.split("\\+");
             DyeColor basecolor = DyeColor.valueOf(bdata[0]);
-            if (basecolor != null) {
-                List<Pattern> patterns = new ArrayList<>();
-                for (int y = 1; y < bdata.length; y++) {
-                    try {
-                        String[] bpattern = bdata[y].split("-");
-                        DyeColor patterncolor = DyeColor.valueOf(bpattern[0]);
-                        PatternType patterntype = PatternType.getByIdentifier(bpattern[1]);
-                        Pattern pattern = new Pattern(patterncolor, patterntype);
-                        patterns.add(pattern);
-                    } catch (Exception e) {
-                    }
+            List<Pattern> patterns = new ArrayList<>();
+            for (int y = 1; y < bdata.length; y++) {
+                try {
+                    String[] bpattern = bdata[y].split("-");
+                    DyeColor patterncolor = DyeColor.valueOf(bpattern[0]);
+                    PatternType patterntype = PatternType.getByIdentifier(bpattern[1]);
+                    Pattern pattern = new Pattern(patterncolor, patterntype);
+                    patterns.add(pattern);
+                } catch (Exception ignored) {
                 }
-                meta.setBaseColor(basecolor);
-                meta.setPatterns(patterns);
             }
+            meta.setBaseColor(basecolor);
+            meta.setPatterns(patterns);
             item.setItemMeta(meta);
             return item;
         }

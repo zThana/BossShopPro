@@ -6,18 +6,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public abstract class ItemDataPart {
 
     public static int
-            PRIORITY_MOST_EARLY = 0,
-            PRIORITY_EARLY = 10,
-            PRIORITY_NORMAL = 50,
-            PRIORITY_LATE = 80,
-            PRIORITY_VERY_LATE = 100;
+            PRIORITY_MOST_EARLY = 0;
+    public static int PRIORITY_EARLY = 10;
+    public static int PRIORITY_NORMAL = 50;
+    public static int PRIORITY_LATE = 80;
 
     public static ItemDataPart
             MATERIAL,
@@ -41,7 +38,7 @@ public abstract class ItemDataPart {
             BANNER; //UNSUPPORTED BY READITEM
 
     private static List<ItemDataPart> types;
-    private String[] names = createNames();
+    private final String[] names = createNames();
 
     public static void loadTypes() {
         types = new ArrayList<>();
@@ -91,16 +88,13 @@ public abstract class ItemDataPart {
     }
 
     public static ItemStack transformItem(ItemStack item, List<String> itemdata) {
-        Collections.sort(itemdata, new Comparator<String>() {
-            @Override
-            public int compare(String s1, String s2) {//TODO: test sorting out
-                ItemDataPart type1 = detectTypeSpecial(s1);
-                ItemDataPart type2 = detectTypeSpecial(s2);
-                if (type1 != null && type2 != null) {
-                    return Integer.compare(type1.getPriority(), type2.getPriority());
-                }
-                return 0;
+        itemdata.sort((s1, s2) -> {//TODO: test sorting out
+            ItemDataPart type1 = detectTypeSpecial(s1);
+            ItemDataPart type2 = detectTypeSpecial(s2);
+            if (type1 != null && type2 != null) {
+                return Integer.compare(type1.getPriority(), type2.getPriority());
             }
+            return 0;
         });
         for (String line : itemdata) {
             item = transformItem(item, line);
@@ -136,8 +130,7 @@ public abstract class ItemDataPart {
         for (ItemDataPart part : types) {
             try {
                 output = part.read(item, output);
-            } catch (Exception e) { //Seems like that ItemDataPart is not supported yet
-            } catch (NoSuchMethodError e) { //Seems like that ItemDataPart is not supported yet
+            } catch (Exception | NoSuchMethodError e) { //Seems like that ItemDataPart is not supported yet
             }
         }
         return output;
@@ -158,8 +151,7 @@ public abstract class ItemDataPart {
                 if (!part.isSimilar(shop_item, player_item, buy, p)) {
                     return false;
                 }
-            } catch (Exception e) { //Seems like that ItemDataPart is not supported yet
-            } catch (NoSuchMethodError e) { //Seems like that ItemDataPart is not supported yet
+            } catch (Exception | NoSuchMethodError e) { //Seems like that ItemDataPart is not supported yet
             }
         }
         return true;
@@ -211,10 +203,7 @@ public abstract class ItemDataPart {
 
         try {
             return transform(item, used_name.toLowerCase(), argument);
-        } catch (NoClassDefFoundError e) { //Seems like that ItemDataPart is not supported yet
-            ClassManager.manager.getBugFinder().severe("Unable to work with itemdata '" + used_name.toLowerCase() + ":" + argument + ". Seems like it is not supported by your server version yet.");
-            return item;
-        } catch (NoSuchMethodError e) { //Seems like that ItemDataPart is not supported yet
+        } catch (NoClassDefFoundError | NoSuchMethodError e) { //Seems like that ItemDataPart is not supported yet
             ClassManager.manager.getBugFinder().severe("Unable to work with itemdata '" + used_name.toLowerCase() + ":" + argument + ". Seems like it is not supported by your server version yet.");
             return item;
         }

@@ -51,7 +51,7 @@ public class ItemDataPartPotionEffect extends ItemDataPart {
 
 
         if (parts.length == 4) {
-            String colorparts[] = parts[3].split("#");
+            String[] colorparts = parts[3].split("#");
             if (colorparts.length == 3) {
                 Color c = Color.fromRGB(InputReader.getInt(colorparts[0], 1), InputReader.getInt(colorparts[1], 1), InputReader.getInt(colorparts[2], 1));
                 meta.setColor(c);

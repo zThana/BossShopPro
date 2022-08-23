@@ -21,12 +21,8 @@ public class ItemDataPartWrittenBookPage extends ItemDataPart {
             return item;
         }
         BookMeta meta = (BookMeta) item.getItemMeta();
-        List<String> pages = new ArrayList<>();
-        if (meta.getPages() != null) {
-            for (String page : meta.getPages()) {
-                pages.add(page);
-            }
-        }
+        meta.getPages();
+        List<String> pages = new ArrayList<>(meta.getPages());
 
         String[] parts = argument.split("#", 2);
         int page = InputReader.getInt(parts[0], -1);

@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class BSBuyAdvanced extends BSBuy {
 
-    private Map<ClickType, ActionSet> actions;
+    private final Map<ClickType, ActionSet> actions;
 
 
     public BSBuyAdvanced(BSRewardType rewardT, BSPriceType priceT, Object reward, Object price, String msg, int location, String permission, String name, BSCondition condition, BSInputType inputtype, String inputmessage, Map<ClickType, ActionSet> actions) {
@@ -147,7 +147,7 @@ public class BSBuyAdvanced extends BSBuy {
                         }
                     }
 
-                    boolean possibly_customizable = shop == null ? true : shop.isCustomizable();
+                    boolean possibly_customizable = shop == null || shop.isCustomizable();
                     if (possibly_customizable) {
                         if (p != null) { //When shop is customizable, the variables needs to be adapted to the player
                             rewardMessage = action.getRewardType().getDisplayReward(p, this, action.getReward(), clicktype);
@@ -156,10 +156,10 @@ public class BSBuyAdvanced extends BSBuy {
                     }
 
 
-                    if (priceMessage != null && priceMessage != "" && priceMessage.length() > 0) {
+                    if (priceMessage != null && priceMessage.length() > 0) {
                         msg = msg.replace(tp, priceMessage);
                     }
-                    if (rewardMessage != null && rewardMessage != "" && rewardMessage.length() > 0) {
+                    if (rewardMessage != null && rewardMessage.length() > 0) {
                         msg = msg.replace(tr, rewardMessage);
                     }
                 }

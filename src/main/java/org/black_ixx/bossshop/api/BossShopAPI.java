@@ -55,9 +55,7 @@ public class BossShopAPI {
     //For single shop
     public boolean isValidShop(InventoryView v) {
         if (v != null) {
-            if (v.getTopInventory() != null) {
-                return isValidShop(v.getTopInventory());
-            }
+            return isValidShop(v.getTopInventory());
         }
         return false;
     }

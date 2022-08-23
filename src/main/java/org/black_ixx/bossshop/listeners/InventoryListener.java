@@ -213,14 +213,10 @@ public class InventoryListener implements Listener {
 
     public void playerLeave(PlayerEvent event) {
         if (lastClicks != null) {
-            if (lastClicks.containsKey(event.getPlayer())) {
-                lastClicks.remove(event.getPlayer());
-            }
+            lastClicks.remove(event.getPlayer());
         }
         if (clickspamCounts != null) {
-            if (clickspamCounts.containsKey(event.getPlayer())) {
-                clickspamCounts.remove(event.getPlayer());
-            }
+            clickspamCounts.remove(event.getPlayer());
         }
     }
 

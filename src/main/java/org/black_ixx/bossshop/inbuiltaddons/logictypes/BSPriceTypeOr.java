@@ -14,7 +14,7 @@ public class BSPriceTypeOr extends BSPriceType {
 
     @Override
     public Object createObject(Object o, boolean force_final_state) {
-        List<BSPricePart> parts = new ArrayList<BSPricePart>();
+        List<BSPricePart> parts = new ArrayList<>();
 
         ConfigurationSection prices = (ConfigurationSection) o;
         for (int i = 1; prices.contains("PriceType" + i); i++) {
@@ -102,14 +102,14 @@ public class BSPriceTypeOr extends BSPriceType {
     @Override
     public String getDisplayPrice(Player p, BSBuy buy, Object price, ClickType clickType) {
         String sep = ClassManager.manager.getMessageHandler().get("Main.ListOrSeparator");
-        String s = "";
+        StringBuilder s = new StringBuilder();
 
         List<BSPricePart> priceparts = (List<BSPricePart>) price;
         for (int i = 0; i < priceparts.size(); i++) {
             BSPricePart part = priceparts.get(i);
-            s += part.getPriceType().getDisplayPrice(p, buy, part.getPrice(), clickType) + (i < priceparts.size() - 1 ? sep : "");
+            s.append(part.getPriceType().getDisplayPrice(p, buy, part.getPrice(), clickType)).append(i < priceparts.size() - 1 ? sep : "");
         }
-        return s;
+        return s.toString();
     }
 
 }

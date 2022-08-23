@@ -2,7 +2,6 @@ package org.black_ixx.bossshop.listeners;
 
 import org.black_ixx.bossshop.BossShop;
 import org.black_ixx.bossshop.core.BSShop;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.event.EventHandler;
@@ -12,11 +11,12 @@ import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class SignListener implements Listener {
 
     private boolean s;
-    private BossShop plugin;
+    private final BossShop plugin;
 
     public SignListener(boolean s, BossShop plugin) {
         this.s = s;
@@ -25,7 +25,7 @@ public class SignListener implements Listener {
 
     private BSShop getBossShopSign(String line) {
 
-        if (line == null || line == "") {
+        if (line == null || line.equals("")) {
             return null;
         }
         line = line.toLowerCase();
@@ -69,16 +69,16 @@ public class SignListener implements Listener {
                 }
             }
 
-            if (e.getLine(0) != "") {
+            if (!Objects.equals(e.getLine(0), "")) {
                 e.setLine(0, plugin.getClassManager().getStringManager().transform(e.getLine(0)));
             }
-            if (e.getLine(1) != "") {
+            if (!Objects.equals(e.getLine(1), "")) {
                 e.setLine(1, plugin.getClassManager().getStringManager().transform(e.getLine(1)));
             }
-            if (e.getLine(2) != "") {
+            if (!Objects.equals(e.getLine(2), "")) {
                 e.setLine(2, plugin.getClassManager().getStringManager().transform(e.getLine(2)));
             }
-            if (e.getLine(3) != "") {
+            if (!Objects.equals(e.getLine(3), "")) {
                 e.setLine(3, plugin.getClassManager().getStringManager().transform(e.getLine(3)));
             }
 
@@ -111,7 +111,6 @@ public class SignListener implements Listener {
                             }
 
                             plugin.getClassManager().getMessageHandler().sendMessage("Main.NoPermission", e.getPlayer());
-                            return;
                         }
 
                     }
