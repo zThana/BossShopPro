@@ -36,10 +36,10 @@ public class BSRewardTypeTeleportWorld extends BSRewardType{
     public void giveReward(Player p, BSBuy buy, Object reward, ClickType clickType) {
         String world = (String) reward;
         World w = Bukkit.getWorld(world);
-        if(w==null){
+        if(!w.getName().equals(world)){
             ClassManager.manager.getMessageHandler().sendMessage("Main.WorldNotExisting",p);
+            return;
         }
-        assert w != null;
         p.teleport(w.getSpawnLocation());
     }
 
