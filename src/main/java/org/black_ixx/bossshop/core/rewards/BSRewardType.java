@@ -58,7 +58,7 @@ public abstract class BSRewardType {
         ShopPage = registerType(new BSRewardTypeShopPage());
         Teleport = registerType(new BSRewardTypeTeleport());
         TeleportWorld = registerType(new BSRewardTypeTeleportWorld());
-        Health = registerType(new BSRewardTypeHealth());
+        Health = registerType(new BSRewardTypeHeal());
     }
 
     public static BSRewardType registerType(BSRewardType type) {

@@ -8,6 +8,8 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 
+import java.util.Objects;
+
 public class BSRewardTypeTeleportWorld extends BSRewardType{
     @Override
     public Object createObject(Object o, boolean force_final_state) {
@@ -36,7 +38,7 @@ public class BSRewardTypeTeleportWorld extends BSRewardType{
     public void giveReward(Player p, BSBuy buy, Object reward, ClickType clickType) {
         String world = (String) reward;
         World w = Bukkit.getWorld(world);
-        if(!w.getName().equals(world)){
+        if(Objects.equals(w,null)){
             ClassManager.manager.getMessageHandler().sendMessage("Main.WorldNotExisting",p);
             return;
         }

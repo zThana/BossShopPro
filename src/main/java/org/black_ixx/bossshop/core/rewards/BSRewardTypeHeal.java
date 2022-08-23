@@ -1,27 +1,19 @@
 package org.black_ixx.bossshop.core.rewards;
 
 import org.black_ixx.bossshop.core.BSBuy;
-import org.black_ixx.bossshop.managers.ClassManager;
-import org.black_ixx.bossshop.managers.misc.InputReader;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 
-import java.math.BigDecimal;
-
-public class BSRewardTypeHealth extends BSRewardTypeNumber{
+public class BSRewardTypeHeal extends BSRewardTypeNumber{
 
     @Override
     public Object createObject(Object o, boolean force_final_state) {
-        return InputReader.getDouble(o,-1);
+        return null;
     }
 
     @Override
     public boolean validityCheck(String item_name, Object o) {
-        if (o instanceof Double) {
-            return true;
-        }
-        ClassManager.manager.getBugFinder().severe("Was not able to create ShopItem " + item_name + "! The reward object needs to be a valid Double number. Example: '7.14' or '12.00'.");
-        return false;
+        return true;
     }
 
     @Override
@@ -41,7 +33,7 @@ public class BSRewardTypeHealth extends BSRewardTypeNumber{
 
     @Override
     public String[] createNames() {
-        return new String[]{"health","heal"};
+        return new String[]{"heal"};
     }
 
     @Override
@@ -56,8 +48,6 @@ public class BSRewardTypeHealth extends BSRewardTypeNumber{
 
     @Override
     public void giveReward(Player p, BSBuy buy, Object reward, ClickType clickType, int multiplier) {
-        BigDecimal bd = new BigDecimal((String) reward);
-        BigDecimal bd2 = bd.add(BigDecimal.valueOf(p.getHealth()));
-        p.setHealth(bd2.doubleValue());
+        p.setHealth(20);
     }
 }
