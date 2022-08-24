@@ -18,8 +18,19 @@ Main:
   ListAndSeparator: ' & '
   ListOrSeparator: ' 或 '
   WorldNotExisting: "&c那个世界不存在..."
+  StartReload: "&eBossShopPro正在开始重载..."
+  ReloadFinish: "&e完成！"
 Economy:
   NoAccount: '&c你没有经济账户！'
+Command:
+  Help1: "&c/BossShop - 打开主商店"
+  Help2: "&c/BossShop <商店名> [输入内容] - 打开指定的商店"
+  Help3: "&c/BossShop open <商店名> <玩家名> [输入内容] - 给一个指定的玩家打开一个指定的商店"
+  Help4: "&c/BossShop close [玩家名] - 给一个指定的玩家关闭商店"
+  Help5: "&c/BossShop simulate <玩家名> <商店名> <shopitem> - 模拟点击"
+  Help6: "&c/BossShop reload - 重载插件"
+  Help7: "&c/BossShop read - 打印出你主手拿着的物品的物品数据"
+  Help8: "&c/BossShop help - 打印这个"
 NotEnough:
   Money: '&c你没有足够的钱！'
   Item: '&c你没有足够的物品!'
@@ -27,7 +38,7 @@ NotEnough:
   Exp: '&c你没有足够的经验！'
   Or: '&c你没有足够的资源！'
 Enchantment:
-  Invalid: '&cYou can''t enchant the item in your main hand with this enchantment!'
+  Invalid: '&c你不能附魔拿在主手的物品!'
   EmptyHand: '&c你的手上必须要拿着一个东西！'
 Display:
   Exp: '%levels% 经验等级'

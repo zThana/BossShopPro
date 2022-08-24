@@ -26,8 +26,8 @@ public class BSShops {
 
         File folder = new File(plugin.getDataFolder().getAbsolutePath() + File.separator + "shops" + File.separator);
         FileHandler fileHandler = new FileHandler();
+        fileHandler.exportConfigs(plugin);
         fileHandler.exportShops(plugin);
-        fileHandler.exportLanguages(plugin);
 
         boolean enable_shop_commands = loadShops(folder, settings, "");
         ClassManager.manager.getSettings().setShopCommandsEnabled(enable_shop_commands);

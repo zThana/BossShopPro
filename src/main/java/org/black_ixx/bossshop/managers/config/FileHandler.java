@@ -1,5 +1,6 @@
 package org.black_ixx.bossshop.managers.config;
 
+import org.apache.commons.io.FileUtils;
 import org.black_ixx.bossshop.BossShop;
 import org.black_ixx.bossshop.api.BSAddonConfig;
 import org.black_ixx.bossshop.api.BossShopAddon;
@@ -7,9 +8,11 @@ import org.black_ixx.bossshop.managers.ClassManager;
 import org.bukkit.plugin.Plugin;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
+import java.util.Objects;
 
 public class FileHandler {
 
@@ -18,9 +21,15 @@ public class FileHandler {
                 , "config.yml");
 
         if (!new File(plugin.getDataFolder().getAbsolutePath() + File.separator + "pagelayout.yml").exists()) {
-            copyFromJar(plugin, plugin, false, "pagelayout.yml");
+            copyFromJar(plugin, plugin, false, "pagelayout.yml","pagelayout.yml");
         }
 
+        if (!new File(plugin.getDataFolder().getAbsolutePath() + File.separator + "lang/en_us.yml").exists()) {
+            copyFromJar(plugin, plugin, false, "en_us.yml","lang/en_us.yml");
+        }
+        if (!new File(plugin.getDataFolder().getAbsolutePath() + File.separator + "lang/zh_cn.yml").exists()) {
+            copyFromJar(plugin, plugin, false, "zh_cn.yml","lang/zh_cn.yml");
+        }
     }
 
 
@@ -28,7 +37,7 @@ public class FileHandler {
         File folder = new File(plugin.getDataFolder() + File.separator + "shops" + File.separator);
         if (!folder.isFile() & !folder.isDirectory()) {
 
-            copyFromJar(plugin, plugin, true
+            copiesFromJar(plugin, plugin, true
                     , "BungeeCordServers.yml"
                     , "BuyShop.yml"
                     , "Menu.yml"
@@ -40,13 +49,6 @@ public class FileHandler {
                     , "PlayerCommands.yml"
                     , "Commands.yml");
 
-        }
-    }
-
-    public void exportLanguages(BossShop plugin) {
-        File folder = new File(plugin.getDataFolder() + File.separator + "lang" + File.separator);
-        if (!folder.isFile() & !folder.isDirectory()) {
-            copyFromJarCustoms(plugin, plugin, "lang", "en_us.yml", "zh_cn.yml");
         }
     }
 
@@ -100,7 +102,7 @@ public class FileHandler {
         }
     }
 
-    public void copyFromJar(Plugin resourceHolder, Plugin folderHolder, boolean shop, String... files) {
+    public void copiesFromJar(Plugin resourceHolder, Plugin folderHolder, boolean shop, String... files) {
         for (String filename : files) {
             if (filename != null) {
                 copyFromJar(resourceHolder, folderHolder, shop, filename, filename);
@@ -108,37 +110,9 @@ public class FileHandler {
         }
     }
 
-    public void copyFromJarCustoms(Plugin resourceHolder, Plugin folderHolder, String additional, String... files) {
-        for (String filename : files) {
-            if (filename != null) {
-                copyFromJarCustom(resourceHolder, folderHolder, additional, filename, filename);
-            }
-        }
-    }
-
     public void copyFromJar(Plugin resourceHolder, Plugin folderHolder, boolean shop, String filename, String outputfilename) {
         String additional = shop ? "shops" + File.separator : "";
         File file = new File(folderHolder.getDataFolder() + File.separator + additional + outputfilename);
-        if (!file.exists()) {
-            file.getParentFile().mkdirs();
-        }
-        InputStream in = resourceHolder.getResource(filename);
-        try {
-            OutputStream out = Files.newOutputStream(file.toPath());
-            byte[] buf = new byte[1024];
-            int len;
-            while ((len = in.read(buf)) > 0) {
-                out.write(buf, 0, len);
-            }
-            out.close();
-            in.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void copyFromJarCustom(Plugin resourceHolder, Plugin folderHolder, String additional, String filename, String outputfilename) {
-        File file = new File(folderHolder.getDataFolder() + File.separator + additional + File.separator + outputfilename);
         if (!file.exists()) {
             file.getParentFile().mkdirs();
         }

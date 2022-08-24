@@ -148,17 +148,13 @@ public class MessageHandler {
     }
     private void setupLocate(){
         String LangCode = plugin.getConfig().getString("Language");
-        File parent = new File(plugin.getDataFolder(),"lang");
-        if(!parent.exists()){
-            parent.mkdir();
-        }
         if(Objects.equals(LangCode,null)||LangCode.isEmpty()){
             LangCode = "en_us";
             plugin.getConfig().set("Language","en_us");
-            ClassManager.manager.getBugFinder().warn("The corresponding message file cannot be found and has been automatically changed back to en_us. (maybe you didn't put the message file in the 'lang' folder, or didn't have the message file)");
+            ClassManager.manager.getBugFinder().warn("The corresponding message file cannot be found and has been automatically changed back to en_us. (maybe you didn't put the message file in the plugin folder, or didn't have the message file)");
         }
         fileName = LangCode+".yml";
-        file = new File(parent,LangCode+".yml");
+        file = new File(plugin.getDataFolder(),"lang"+File.separator+LangCode+".yml");
         config = YamlConfiguration.loadConfiguration(file);
     }
 }

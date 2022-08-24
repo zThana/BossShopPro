@@ -28,9 +28,9 @@ public class CommandManager implements CommandExecutor {
 
                     if (sender.hasPermission("BossShop.reload")) {
 
-                        sender.sendMessage(ChatColor.YELLOW + "Starting BossShop reload...");
+                        sender.sendMessage(ClassManager.manager.getMessageHandler().get("Main.StartReload"));
                         ClassManager.manager.getPlugin().reloadPlugin(sender);
-                        sender.sendMessage(ChatColor.YELLOW + "Done!");
+                        sender.sendMessage(ClassManager.manager.getMessageHandler().get("Main.ReloadFinish"));
 
                     } else {
                         ClassManager.manager.getMessageHandler().sendMessage("Main.NoPermission", sender);
@@ -121,6 +121,10 @@ public class CommandManager implements CommandExecutor {
                     return true;
                 }
 
+                if(args[0].equalsIgnoreCase("help")){
+                    sendCommandList(sender);
+                }
+
                 if (args.length >= 3 && args[0].equalsIgnoreCase("open")) {
 
                     String shopname = args[1].toLowerCase();
@@ -197,15 +201,16 @@ public class CommandManager implements CommandExecutor {
     }
 
     private void sendCommandList(CommandSender s) {
-        s.sendMessage(ChatColor.RED + "/BossShop - Opens  main shop");
-        s.sendMessage(ChatColor.RED + "/BossShop <shop> [input] - Opens named shop");
-        s.sendMessage(ChatColor.RED + "/BossShop open <Shop> <Player> [input] - Opens named shop for the named player");
-        s.sendMessage(ChatColor.RED + "/BossShop close [Player] - Closes inventory of the named player");
-        s.sendMessage(ChatColor.RED + "/BossShop simulate <player> <shop> <shopitem> - Simulates click");
-        s.sendMessage(ChatColor.RED + "/BossShop reload - Reloads the Plugin");
+        MessageHandler mh = ClassManager.manager.getMessageHandler();
+        s.sendMessage(mh.get("Command.Help1"));
+        s.sendMessage(mh.get("Command.Help2"));
+        s.sendMessage(mh.get("Command.Help3"));
+        s.sendMessage(mh.get("Command.Help4"));
+        s.sendMessage(mh.get("Command.Help5"));
+        s.sendMessage(mh.get("Command.help6"));
         if (s instanceof Player) {
-            s.sendMessage(ChatColor.RED + "/BossShop read - Prints out itemdata of item in main hand");
+            s.sendMessage(mh.get("Command.Help7"));
         }
+        s.sendMessage(mh.get("Command.Help8"));
     }
-
 }
