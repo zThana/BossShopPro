@@ -14,17 +14,17 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Objects;
 
 public class MessageHandler {
     private final BossShop plugin;
-    private final String fileName = "messages.yml";
-    private final File file;
+    private String fileName = "en_us.yml";
+    private File file;
     private FileConfiguration config;
 
     public MessageHandler(final BossShop plugin) {
         this.plugin = plugin;
-        this.file = new File(plugin.getDataFolder().getAbsolutePath(), fileName);
-        config = YamlConfiguration.loadConfiguration(this.file);
+        setupLocate();
     }
 
     /**
@@ -34,7 +34,6 @@ public class MessageHandler {
     public FileConfiguration getConfig() {
         if (config == null)
             reloadConfig();
-
         return config;
     }
 
@@ -42,22 +41,12 @@ public class MessageHandler {
      * Reload the config file
      */
     public void reloadConfig() {
+        setupLocate();
         config = YamlConfiguration.loadConfiguration(file);
-        InputStream defConfigStream = plugin.getResource(fileName);
+        InputStream defConfigStream = plugin.getResource("lang/"+fileName);
         if (defConfigStream != null) {
             YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(new InputStreamReader(defConfigStream));
             config.setDefaults(defConfig);
-        }
-    }
-
-    /**
-     * Save the config
-     */
-    public void saveConfig() {
-        try {
-            getConfig().save(file);
-        } catch (IOException e) {
-            ClassManager.manager.getBugFinder().warn("Could not save message config to " + file);
         }
     }
 
@@ -151,15 +140,6 @@ public class MessageHandler {
         return get(node, null, null, null, null);
     }
 
-    /**
-     * Get a raw string from config
-     * @param node path of node
-     * @return raw string
-     */
-    public String getRaw(String node) {
-        return config.getString(node, node);
-    }
-
     private String get(String node, Player target, BSShop shop, BSShopHolder holder, BSBuy item) {
         return replace(config.getString(node, node), target, shop, holder, item);
     }
@@ -167,6 +147,20 @@ public class MessageHandler {
     private String replace(String message, Player target, BSShop shop, BSShopHolder holder, BSBuy item) {
         return ClassManager.manager.getStringManager().transform(message, item, shop, holder, target);
     }
-
-
+    private void setupLocate(){
+        String LangCode = plugin.getConfig().getString("Language");
+        File parent = new File(plugin.getDataFolder(),"lang");
+        file = new File(parent,LangCode+".yml");
+        if(!parent.exists()){
+            parent.mkdir();
+        }
+        if(Objects.equals(LangCode,null)||LangCode.isEmpty()||!file.exists()){
+            LangCode = "en_us";
+            fileName = "en_us.yml";
+            file = new File(parent,fileName);
+            ClassManager.manager.getBugFinder().warn("The corresponding message file cannot be found and has been automatically changed back to en_us. (maybe you didn't put the message file in the 'lang' folder, or didn't have the message file)");
+        }
+        fileName = LangCode+".yml";
+        config = YamlConfiguration.loadConfiguration(file);
+    }
 }

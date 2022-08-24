@@ -122,7 +122,7 @@ public class ShopCustomizer {
 
 
         //4. Adding all actual items only
-        HashMap<Integer, BSBuy> locs = new LinkedHashMap<Integer, BSBuy>();
+        HashMap<Integer, BSBuy> locs = new LinkedHashMap<>();
 
         for (int slot : everything.keySet()) {
             if (slot < page_slot_start || slot > page_slot_end) { //Do not show items of other pages
@@ -197,8 +197,6 @@ public class ShopCustomizer {
         }
         inventory.setItem(slot, item);
     }
-
-
     /**
      * Show the item in an inventory
      * @param shop the shop to get from

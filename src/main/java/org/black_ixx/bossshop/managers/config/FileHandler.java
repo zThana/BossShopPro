@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 
 public class FileHandler {
 
@@ -26,7 +27,7 @@ public class FileHandler {
 
 
     public void exportShops(BossShop plugin) {
-        File folder = new File(plugin.getDataFolder().getAbsolutePath() + File.separator + "shops" + File.separator);
+        File folder = new File(plugin.getDataFolder() + File.separator + "shops" + File.separator);
         if (!folder.isFile() & !folder.isDirectory()) {
 
             copyFromJar(plugin, plugin, true
@@ -41,6 +42,16 @@ public class FileHandler {
                     , "PlayerCommands.yml"
                     , "Commands.yml");
 
+        }
+    }
+
+    public void exportLanguages(BossShop plugin) {
+        File folder = new File(plugin.getDataFolder() + File.separator + "lang" + File.separator);
+        if (!folder.isFile() & !folder.isDirectory()) {
+
+            copyFromJarCustom(plugin, plugin, "lang"
+                    , "en_us.yml"
+                    , "zh_cn.yml");
         }
     }
 
@@ -102,6 +113,14 @@ public class FileHandler {
         }
     }
 
+    public void copyFromJarCustom(Plugin resourceHolder, Plugin folderHolder, String additional, String... files) {
+        for (String filename : files) {
+            if (filename != null) {
+                copyFromJar(resourceHolder, folderHolder, additional, filename, filename);
+            }
+        }
+    }
+
     public void copyFromJar(Plugin resourceHolder, Plugin folderHolder, boolean shop, String filename, String outputfilename) {
         String additional = shop ? "shops" + File.separator : "";
         File file = new File(folderHolder.getDataFolder() + File.separator + additional + outputfilename);
@@ -110,7 +129,7 @@ public class FileHandler {
         }
         InputStream in = resourceHolder.getResource(filename);
         try {
-            OutputStream out = new FileOutputStream(file);
+            OutputStream out = Files.newOutputStream(file.toPath());
             byte[] buf = new byte[1024];
             int len;
             while ((len = in.read(buf)) > 0) {
@@ -123,6 +142,25 @@ public class FileHandler {
         }
     }
 
+    public void copyFromJar(Plugin resourceHolder, Plugin folderHolder, String additional, String filename, String outputfilename) {
+        File file = new File(folderHolder.getDataFolder() + File.separator + additional + outputfilename);
+        if (!file.exists()) {
+            file.getParentFile().mkdirs();
+        }
+        InputStream in = resourceHolder.getResource(filename);
+        try {
+            OutputStream out = Files.newOutputStream(file.toPath());
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len = in.read(buf)) > 0) {
+                out.write(buf, 0, len);
+            }
+            out.close();
+            in.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public void copyFromJar(BossShopAddon addon, String filename) {
         copyFromJar(addon, addon.getBossShop(), false, filename, "/addons/" + addon.getAddonName() + "/" + filename);

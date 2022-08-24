@@ -10,7 +10,6 @@ import org.black_ixx.bossshop.events.BSRegisterTypesEvent;
 import org.black_ixx.bossshop.managers.config.ConfigHandler;
 import org.black_ixx.bossshop.managers.config.FileHandler;
 import org.black_ixx.bossshop.managers.external.BungeeCordManager;
-import org.black_ixx.bossshop.managers.external.LanguageManager;
 import org.black_ixx.bossshop.managers.external.PlaceholderAPIHandler;
 import org.black_ixx.bossshop.managers.external.VaultHandler;
 import org.black_ixx.bossshop.managers.external.spawners.ISpawnEggHandler;
@@ -40,14 +39,14 @@ public class ClassManager {
     private PointsManager pointsmanager;
     private VaultHandler vaulthandler;
     private PlaceholderAPIHandler placeholderhandler;
-    private MessageHandler messagehandler;
-    private ItemStackCreator itemstackCreator;
-    private ItemStackTranslator itemstackTranslator;
-    private BuyItemHandler buyItemHandler;
-    private ConfigHandler configHandler;
-    private BugFinder bugfinder;
-    private BossShop plugin;
-    private Settings settings;
+    private final MessageHandler messagehandler;
+    private final ItemStackCreator itemstackCreator;
+    private final ItemStackTranslator itemstackTranslator;
+    private final BuyItemHandler buyItemHandler;
+    private final ConfigHandler configHandler;
+    private final BugFinder bugfinder;
+    private final BossShop plugin;
+    private final Settings settings;
     private BSShops shops;
     private PageLayoutHandler pagelayoutHandler;
     private BungeeCordManager bungeeCordManager;
@@ -59,7 +58,6 @@ public class ClassManager {
     private StorageManager storageManager;
     private ISpawnEggHandler spawnEggHandler;
     private ISpawnerHandler spawnerHandler;
-    private LanguageManager languageManager;
     private ItemDataStorage itemdataStorage;
     private PlayerDataHandler playerdataHandler;
     public ClassManager(BossShop plugin) {
@@ -92,10 +90,6 @@ public class ClassManager {
 
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             placeholderhandler = new PlaceholderAPIHandler();
-        }
-
-        if (Bukkit.getPluginManager().isPluginEnabled("LangUtils")) {
-            languageManager = new LanguageManager();
         }
 
         if (Bukkit.getPluginManager().isPluginEnabled("SilkSpawners")) {
@@ -217,10 +211,6 @@ public class ClassManager {
         return buyItemHandler;
     }
 
-    public ConfigHandler getConfigHandler() {
-        return configHandler;
-    }
-
     public BugFinder getBugFinder() {
         return bugfinder;
     }
@@ -281,10 +271,6 @@ public class ClassManager {
 
     public ISpawnEggHandler getSpawnEggHandler() {
         return spawnEggHandler;
-    }
-
-    public LanguageManager getLanguageManager() {
-        return languageManager;
     }
 
     public ItemDataStorage getItemDataStorage() {

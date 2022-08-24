@@ -172,29 +172,28 @@ public class CommandManager implements CommandExecutor {
     }
 
 
-    private boolean playerCommandOpenShop(CommandSender sender, Player target, String shop, String argument) {
+    private void playerCommandOpenShop(CommandSender sender, Player target, String shop, String argument) {
         if (sender == target) {
             if (!(sender.hasPermission("BossShop.open") || sender.hasPermission("BossShop.open.command") || sender.hasPermission("BossShop.open.command." + shop))) {
                 ClassManager.manager.getMessageHandler().sendMessage("Main.NoPermission", sender);
-                return false;
+                return;
             }
         } else {
             if (!sender.hasPermission("BossShop.open.other")) {
                 ClassManager.manager.getMessageHandler().sendMessage("Main.NoPermission", sender);
-                return false;
+                return;
             }
         }
         if (argument != null) {
             ClassManager.manager.getPlayerDataHandler().enteredInput(target, argument);
         }
         if (ClassManager.manager == null) {
-            return false;
+            return;
         }
         if (ClassManager.manager.getShops() == null) {
-            return false;
+            return;
         }
         ClassManager.manager.getShops().openShop(target, shop);
-        return true;
     }
 
     private void sendCommandList(CommandSender s) {

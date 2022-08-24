@@ -80,7 +80,6 @@ public class BuyItemHandler {
                 permission = null;
             }
             int inventoryLocation = c.getInt("InventoryLocation");
-
             if (inventoryLocation < 0) {
                 ClassManager.manager.getBugFinder().warn("The InventoryLocation of the shopitem '" + name + "' is '" + inventoryLocation + "'. It has to be either higher than '0' or it has to be '0' if you want to it to automatically pick the next empty slot. [Shop: " + shopname + "]");
             }

@@ -21,6 +21,8 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
 
 
 public class BSBuy {
@@ -43,6 +45,7 @@ public class BSBuy {
     private boolean perm_is_group = false;
     private String msg;
     private int location;
+    private List<Integer> locations;
 
     public BSBuy(BSRewardType rewardT, BSPriceType priceT, Object reward, Object price, String msg, int location, String permission, String name, BSCondition condition, BSInputType inputtype, String inputtext) {
         this(rewardT, priceT, reward, price, msg, location, permission, name);
@@ -54,16 +57,14 @@ public class BSBuy {
         this.priceT = priceT;
         this.rewardT = rewardT;
 
-        if (permission != null && permission != "") {
+        if (permission != null && !permission.equals("")) {
             this.permission = permission;
             if (permission.startsWith("[") && permission.endsWith("]")) {
                 if (permission.length() > 2) {
                     String group = permission.substring(1, permission.length() - 1);
-                    if (group != null) {
-                        ClassManager.manager.getSettings().setVaultEnabled(true);
-                        this.permission = group;
-                        perm_is_group = true;
-                    }
+                    ClassManager.manager.getSettings().setVaultEnabled(true);
+                    this.permission = group;
+                    perm_is_group = true;
                 }
             }
         }
@@ -75,7 +76,28 @@ public class BSBuy {
         this.location = location;
     }
 
+    public BSBuy(BSRewardType rewardT, BSPriceType priceT, Object reward, Object price, String msg, List<Integer> locations, String permission, String name) {
+        this.priceT = priceT;
+        this.rewardT = rewardT;
 
+        if (permission != null && !permission.equals("")) {
+            this.permission = permission;
+            if (permission.startsWith("[") && permission.endsWith("]")) {
+                if (permission.length() > 2) {
+                    String group = permission.substring(1, permission.length() - 1);
+                    ClassManager.manager.getSettings().setVaultEnabled(true);
+                    this.permission = group;
+                    perm_is_group = true;
+                }
+            }
+        }
+
+        this.reward = reward;
+        this.price = price;
+        this.name = name;
+        this.msg = ClassManager.manager.getStringManager().transform(msg, this, null, null, null);
+        this.locations = locations;
+    }
 
     public BSShop getShop() {
         return shop;
@@ -120,10 +142,7 @@ public class BSBuy {
         return location;
     }
 
-    @Deprecated
-    public void setInventoryLocation(int i) {
-        location = i;
-    }
+    public List<Integer> getInventoryLocations(){return locations;}
 
     public String getName() {
         return name;
@@ -193,10 +212,7 @@ public class BSBuy {
         if (permission == null) {
             return false;
         }
-        if (permission.equalsIgnoreCase("")) {
-            return false;
-        }
-        return true;
+        return !permission.equalsIgnoreCase("");
     }
 
     public boolean isExtraPermissionGroup(ClickType clicktype) {
@@ -274,7 +290,7 @@ public class BSBuy {
                 }
             }
 
-            boolean possibly_customizable = shop == null ? true : shop.isCustomizable();
+            boolean possibly_customizable = shop == null || shop.isCustomizable();
             if (possibly_customizable) {
                 if (p != null) { //When shop is customizable, the variables needs to be adapted to the player
                     rewardMessage = rewardT.getDisplayReward(p, this, reward, null);
@@ -282,20 +298,20 @@ public class BSBuy {
                 }
             }
 
-            if (priceMessage != null && priceMessage != "" && priceMessage.length() > 0) {
+            if (priceMessage != null && priceMessage.length() > 0) {
                 msg = msg.replace("%price%", priceMessage);
             }
-            if (rewardMessage != null && rewardMessage != "" && rewardMessage.length() > 0) {
+            if (rewardMessage != null && rewardMessage.length() > 0) {
                 msg = msg.replace("%reward%", rewardMessage);
             }
         }
 
         //Not working with these variables anymore. They are still included and set to "" in order to make previous shops still look good and stay compatible.
-        if (priceT != null && priceT.name() != "" && priceT.name().length() > 0) {
+        if (priceT != null && !Objects.equals(priceT.name(), "") && priceT.name().length() > 0) {
             msg = msg.replace(" %pricetype%", "");
             msg = msg.replace("%pricetype%", "");
         }
-        if (rewardT != null && rewardT.name() != "" && rewardT.name().length() > 0) {
+        if (rewardT != null && !Objects.equals(rewardT.name(), "") && rewardT.name().length() > 0) {
             msg = msg.replace(" %rewardtype%", "");
             msg = msg.replace("%rewardtype%", "");
         }
@@ -303,7 +319,7 @@ public class BSBuy {
         //Handle rest
         msg = msg.replace("%shopitemname%", this.name);
 
-        String name = this.name;
+        String name;
         if (shop != null && item != null) {
             String item_title = ClassManager.manager.getItemStackTranslator().readItemName(item);
             if (item_title != null) {

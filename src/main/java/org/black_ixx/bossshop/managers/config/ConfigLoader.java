@@ -19,9 +19,6 @@ public class ConfigLoader {
 
         try {
             config.load(file);
-        } catch (FileNotFoundException ex) {
-            if (debug)
-                Bukkit.getLogger().log(Level.SEVERE, "Cannot load " + file, ex);
         } catch (IOException ex) {
             if (debug)
                 Bukkit.getLogger().log(Level.SEVERE, "Cannot load " + file, ex);

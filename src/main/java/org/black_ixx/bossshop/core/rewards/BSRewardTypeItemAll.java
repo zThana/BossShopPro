@@ -52,12 +52,7 @@ public class BSRewardTypeItemAll extends BSRewardType {
         int items_amount = Math.max(1, Math.min(items_amount_possible_space, items_amount_possible_money));
 
         BSPriceTypeNumber pricetype = (BSPriceTypeNumber) buy.getPriceType(clickType);
-        if (!pricetype.hasPrice(p, buy, buy.getPrice(clickType), clickType, items_amount, messageOnFailure)) {
-            return false;
-        }
-
-
-        return true;
+        return pricetype.hasPrice(p, buy, buy.getPrice(clickType), clickType, items_amount, messageOnFailure);
     }
 
     @Override

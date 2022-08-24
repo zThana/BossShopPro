@@ -14,7 +14,13 @@
 # You can download BossShopProConfigure here: https://www.spigotmc.org/wiki/bossshoppro-tool
 #
 #
-#
+# Language:
+# The language in which the message is displayed.
+# Supported languages:
+# en_us:English (UK)
+# zh_cn:Chinese (Simplified)
+# Of course, you can also put your own language file in the Lang folder, and then change it to your language file name.
+Language: "en_us"
 #
 #
 # EnableSigns:
