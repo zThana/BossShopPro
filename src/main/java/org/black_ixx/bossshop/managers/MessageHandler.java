@@ -11,7 +11,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Objects;
@@ -150,17 +149,16 @@ public class MessageHandler {
     private void setupLocate(){
         String LangCode = plugin.getConfig().getString("Language");
         File parent = new File(plugin.getDataFolder(),"lang");
-        file = new File(parent,LangCode+".yml");
         if(!parent.exists()){
             parent.mkdir();
         }
-        if(Objects.equals(LangCode,null)||LangCode.isEmpty()||!file.exists()){
+        if(Objects.equals(LangCode,null)||LangCode.isEmpty()){
             LangCode = "en_us";
-            fileName = "en_us.yml";
-            file = new File(parent,fileName);
+            plugin.getConfig().set("Language","en_us");
             ClassManager.manager.getBugFinder().warn("The corresponding message file cannot be found and has been automatically changed back to en_us. (maybe you didn't put the message file in the 'lang' folder, or didn't have the message file)");
         }
         fileName = LangCode+".yml";
+        file = new File(parent,LangCode+".yml");
         config = YamlConfiguration.loadConfiguration(file);
     }
 }

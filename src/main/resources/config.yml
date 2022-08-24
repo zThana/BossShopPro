@@ -156,7 +156,7 @@ NumberDisplay:
 # If enabled the '%reward%' placeholder of shopitems with pricetype "ItemAll" will show the total reward the player will receive when selling all items of one kind. 
 # Else '%reward%' will show the reward the player will get for every single item he sells. This is a neat feature, however it requires checking the players inventory for items every
 # time the shop is opened. It might cause lag in case of being used many times by a single shoppage. 
-# If the player does not have any items to sell the text defined in messages.yml/"ItemAllEach" will be displayed instead of zero.
+# If the player does not have any items to sell the text defined in en_us(or other).yml/"ItemAllEach" will be displayed instead of zero.
 # 'Reward: %money%' would for example show 'Reward: 100 each' with the default "ItemAllEach" text.
 # (Rewardtype "ItemAll" works analog and uses this setting too)
 SellAllPlaceholderShowFinalReward: false

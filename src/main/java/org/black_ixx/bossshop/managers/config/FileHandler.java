@@ -7,7 +7,6 @@ import org.black_ixx.bossshop.managers.ClassManager;
 import org.bukkit.plugin.Plugin;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
@@ -47,7 +46,7 @@ public class FileHandler {
     public void exportLanguages(BossShop plugin) {
         File folder = new File(plugin.getDataFolder() + File.separator + "lang" + File.separator);
         if (!folder.isFile() & !folder.isDirectory()) {
-            copyFromJarCustoms(plugin, plugin, "lang",  "lang/en_us.yml", "lang/zh_cn.yml");
+            copyFromJarCustoms(plugin, plugin, "lang", "en_us.yml", "zh_cn.yml");
         }
     }
 
@@ -139,7 +138,7 @@ public class FileHandler {
     }
 
     public void copyFromJarCustom(Plugin resourceHolder, Plugin folderHolder, String additional, String filename, String outputfilename) {
-        File file = new File(folderHolder.getDataFolder() + File.separator + additional + outputfilename);
+        File file = new File(folderHolder.getDataFolder() + File.separator + additional + File.separator + outputfilename);
         if (!file.exists()) {
             file.getParentFile().mkdirs();
         }
