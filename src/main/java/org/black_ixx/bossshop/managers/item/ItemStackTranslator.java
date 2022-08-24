@@ -125,18 +125,12 @@ public class ItemStackTranslator {
     }
 
     public String readItemStack(ItemStack i) {
-        if (ClassManager.manager.getLanguageManager() != null) {
-            return i.getAmount() + " " + ClassManager.manager.getLanguageManager().getDisplayNameItem(i);
-        }
         String material = readMaterial(i);
         return i.getAmount() + " " + material;
     }
 
     public String readEnchantment(Enchantment e) {
-        if (ClassManager.manager.getLanguageManager() != null) {
-            return ClassManager.manager.getLanguageManager().getDisplayNameEnchantment(e);
-        }
-        return e.getName().toLowerCase().replace("_", "");
+        return e.getKey().getNamespace().toLowerCase().replace("_", "");
     }
 
 
@@ -191,10 +185,6 @@ public class ItemStackTranslator {
     }
 
     public String readMaterial(ItemStack item) {
-        if (ClassManager.manager.getLanguageManager() != null) {
-            ItemStack i = new ItemStack(item.getType());
-            return ClassManager.manager.getLanguageManager().getDisplayNameItem(i);
-        }
         String material = item.getType().name().toLowerCase().replace("_", " ");
         material = material.replaceFirst(material.substring(0, 1), material.substring(0, 1).toUpperCase());
         return material;
@@ -217,7 +207,7 @@ public class ItemStackTranslator {
                 SkullMeta sm_receiver = (SkullMeta) meta_receiver;
 
                 if (sm_source.hasOwner()) {
-                    sm_receiver.setOwner(sm_source.getOwner());
+                    sm_receiver.setOwningPlayer(sm_source.getOwningPlayer());
                 }
             }
 
