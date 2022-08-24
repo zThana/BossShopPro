@@ -48,10 +48,7 @@ public class FileHandler {
     public void exportLanguages(BossShop plugin) {
         File folder = new File(plugin.getDataFolder() + File.separator + "lang" + File.separator);
         if (!folder.isFile() & !folder.isDirectory()) {
-
-            copyFromJarCustom(plugin, plugin, "lang"
-                    , "en_us.yml"
-                    , "zh_cn.yml");
+            copyFromJarCustomsParent(plugin, plugin, "lang", "lang/" , "en_us.yml", "zh_cn.yml");
         }
     }
 
@@ -113,10 +110,18 @@ public class FileHandler {
         }
     }
 
-    public void copyFromJarCustom(Plugin resourceHolder, Plugin folderHolder, String additional, String... files) {
+    public void copyFromJarCustoms(Plugin resourceHolder, Plugin folderHolder, String additional, String... files) {
         for (String filename : files) {
             if (filename != null) {
-                copyFromJar(resourceHolder, folderHolder, additional, filename, filename);
+                copyFromJarCustom(resourceHolder, folderHolder, additional, filename, filename);
+            }
+        }
+    }
+
+    public void copyFromJarCustomsParent(Plugin resourceHolder, Plugin folderHolder, String additional, String parent, String... files) {
+        for (String filename : files) {
+            if (filename != null) {
+                copyFromJarCustom(resourceHolder, folderHolder, additional, parent, filename, filename);
             }
         }
     }
@@ -142,7 +147,27 @@ public class FileHandler {
         }
     }
 
-    public void copyFromJar(Plugin resourceHolder, Plugin folderHolder, String additional, String filename, String outputfilename) {
+    public void copyFromJarCustom(Plugin resourceHolder, Plugin folderHolder, String additional, String parent,String filename, String outputfilename) {
+        File file = new File(folderHolder.getDataFolder() + File.separator + additional + outputfilename);
+        if (!file.exists()) {
+            file.getParentFile().mkdirs();
+        }
+        InputStream in = resourceHolder.getResource(parent+filename);
+        try {
+            OutputStream out = Files.newOutputStream(file.toPath());
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len = in.read(buf)) > 0) {
+                out.write(buf, 0, len);
+            }
+            out.close();
+            in.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void copyFromJarCustom(Plugin resourceHolder, Plugin folderHolder, String additional, String filename, String outputfilename) {
         File file = new File(folderHolder.getDataFolder() + File.separator + additional + outputfilename);
         if (!file.exists()) {
             file.getParentFile().mkdirs();
