@@ -125,26 +125,6 @@ public class CommandManager implements CommandExecutor {
                     sendCommandList(sender);
                 }
 
-                if(args[0].equalsIgnoreCase("create")){
-                    if(sender.hasPermission("BossShop.create")){
-                        if(args.length==3){
-                            if(args[1].isEmpty() & args[2].isEmpty()){
-                                ClassManager.manager.getMessageHandler().sendMessage("Command.MissingParameter", sender);
-                                return false;
-                            }
-                            if(args[1].isEmpty()||args[2].isEmpty()){
-                                ClassManager.manager.getMessageHandler().sendMessage("Command.MissingParameter", sender);
-                                return false;
-                            }
-                            ClassManager.manager.getShopCreator().createShop((Player) sender,args[1],args[2]);
-                            return true;
-                        }
-                    }else{
-                        ClassManager.manager.getMessageHandler().sendMessage("Main.NoPermission", sender);
-                        return false;
-                    }
-                }
-
                 if (args.length >= 3 && args[0].equalsIgnoreCase("open")) {
 
                     String shopname = args[1].toLowerCase();
@@ -152,6 +132,10 @@ public class CommandManager implements CommandExecutor {
                     String name = args[2];
                     Player p = Bukkit.getPlayerExact(name);
                     String argument = args.length > 3 ? args[3] : null;
+
+                    if(shopname.equals("help")){
+                        return false;
+                    }
 
                     if (p == null) {
                         p = Bukkit.getPlayer(name);
@@ -222,16 +206,15 @@ public class CommandManager implements CommandExecutor {
 
     private void sendCommandList(CommandSender s) {
         MessageHandler mh = ClassManager.manager.getMessageHandler();
-        s.sendMessage(mh.get("Command.Help1"));
-        s.sendMessage(mh.get("Command.Help2"));
-        s.sendMessage(mh.get("Command.Help3"));
-        s.sendMessage(mh.get("Command.Help4"));
-        s.sendMessage(mh.get("Command.Help5"));
-        s.sendMessage(mh.get("Command.help6"));
+        mh.sendMessage("Command.Help1",s);
+        mh.sendMessage("Command.Help2",s);
+        mh.sendMessage("Command.Help3",s);
+        mh.sendMessage("Command.Help4",s);
+        mh.sendMessage("Command.Help5",s);
+        mh.sendMessage("Command.Help6",s);
         if (s instanceof Player) {
-            s.sendMessage(mh.get("Command.Help7"));
-            s.sendMessage(mh.get("Command.Help8"));
+            mh.sendMessage("Command.Help7",s);
         }
-        s.sendMessage(mh.get("Command.Help9"));
+        mh.sendMessage("Command.Help8",s);
     }
 }

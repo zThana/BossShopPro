@@ -49,7 +49,6 @@ public class ClassManager {
     private PageLayoutHandler pagelayoutHandler;
     private BungeeCordManager bungeeCordManager;
     private ShopCustomizer customizer;
-    private ShopCreator shopCreator;
     private TransactionLog transactionLog;
     private ServerPingingManager serverPingingManager;
     private AutoRefreshHandler autoRefreshHandler;
@@ -163,8 +162,6 @@ public class ClassManager {
                 addon.bossShopFinishedLoading();
             }
         }
-
-        shopCreator = new ShopCreator(plugin);
     }
 
     ///////////////////////////////
@@ -208,7 +205,6 @@ public class ClassManager {
         return itemstackTranslator;
     }
 
-    public ShopCreator getShopCreator() {return shopCreator;}
     public BuyItemHandler getBuyItemHandler() {
         return buyItemHandler;
     }

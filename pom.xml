@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.black_ixx</groupId>
 	<artifactId>BossShopPro</artifactId>
-	<version>3.0.8.1(TEST)</version>
+	<version>3.0.9</version>
 	<name>BossShopPro</name>
 	<description>Create virtual chest shops</description>
 	<build>
@@ -14,7 +14,7 @@
 				<filtering>true</filtering>
 				<directory>${basedir}/src/main/resources/</directory>
 				<includes>
-					<include>*.yml</include>
+					<include>**/*.yml</include>
 				</includes>
 			</resource>
 		</resources>

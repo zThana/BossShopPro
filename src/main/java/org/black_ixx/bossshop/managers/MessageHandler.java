@@ -118,7 +118,7 @@ public class MessageHandler {
     public void sendMessageDirect(String message, CommandSender sender) {
         if (sender != null) {
 
-            if (message == null || message.length() < 2) {
+            if (message == null || message.length() < 1) {
                 return;
             }
 
@@ -154,8 +154,8 @@ public class MessageHandler {
             plugin.getConfig().set("Language","en_us");
             ClassManager.manager.getBugFinder().warn("The corresponding message file cannot be found and fallback to en_us. (maybe you didn't put the message file in the plugin folder, or didn't have the message file)");
         }
-        fileName = LangCode+".yml";
-        file = new File(plugin.getDataFolder(),"lang"+File.separator+fileName);
+        fileName = "lang/"+LangCode+".yml";
+        file = new File(plugin.getDataFolder(),fileName);
         if(!file.exists()){
             LangCode = "en_us";
             plugin.getConfig().set("Language","en_us");
@@ -164,7 +164,7 @@ public class MessageHandler {
             if(!lang.exists()) {
                 fh.exportLanguages(plugin);
             }
-            fileName = LangCode+".yml";
+            fileName = "lang/"+LangCode+".yml";
             file = new File(plugin.getDataFolder(),"lang"+File.separator+fileName);
             ClassManager.manager.getBugFinder().warn("The corresponding message file cannot be found and fallback to en_us. (maybe you didn't put the message file in the plugin folder, or didn't have the message file)");
         }

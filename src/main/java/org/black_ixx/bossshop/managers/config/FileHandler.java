@@ -26,9 +26,7 @@ public class FileHandler {
     public void exportShops(BossShop plugin) {
         File folder = new File(plugin.getDataFolder() + File.separator + "shops" + File.separator);
         if (!folder.isFile() & !folder.isDirectory()) {
-
-            copiesFromJar(plugin, plugin, true
-                    , "shops/BungeeCordServers.yml"
+            copiesFromJar(plugin, plugin, "shops/BungeeCordServers.yml"
                     , "shops/BuyShop.yml"
                     , "shops/Menu.yml"
                     , "shops/PointShop.yml"
@@ -43,11 +41,11 @@ public class FileHandler {
     }
 
     public void exportLanguages(BossShop plugin){
-        if (!new File(plugin.getDataFolder().getAbsolutePath() + File.separator + "lang/en_us.yml").exists()) {
-            copyFromJar(plugin, plugin, false, "lang/en_us.yml","lang/en_us.yml");
+        if (!new File(plugin.getDataFolder() + File.separator + "lang/en_us.yml").exists()) {
+            plugin.saveResource("lang/en_us.yml",false);
         }
-        if (!new File(plugin.getDataFolder().getAbsolutePath() + File.separator + "lang/zh_cn.yml").exists()) {
-            copyFromJar(plugin, plugin, false, "lang/zh_cn.yml","lang/zh_cn.yml");
+        if (!new File(plugin.getDataFolder() + File.separator + "lang/zh_cn.yml").exists()) {
+            plugin.saveResource("lang/zh_cn.yml",false);
         }
     }
 
@@ -105,6 +103,15 @@ public class FileHandler {
         for (String filename : files) {
             if (filename != null) {
                 copyFromJar(resourceHolder, folderHolder, shop, filename, filename);
+            }
+        }
+    }
+
+    public void copiesFromJar(Plugin resourceHolder, Plugin folderHolder, String... files) {
+        for (String filename : files) {
+            if (filename != null) {
+                copyFromJar(resourceHolder, folderHolder, true, filename,
+                        filename.replace("lang/","").replace("shops/",""));
             }
         }
     }
