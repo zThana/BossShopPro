@@ -1,6 +1,5 @@
 package org.black_ixx.bossshop.managers.config;
 
-import org.apache.commons.io.FileUtils;
 import org.black_ixx.bossshop.BossShop;
 import org.black_ixx.bossshop.api.BSAddonConfig;
 import org.black_ixx.bossshop.api.BossShopAddon;
@@ -8,11 +7,9 @@ import org.black_ixx.bossshop.managers.ClassManager;
 import org.bukkit.plugin.Plugin;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
-import java.util.Objects;
 
 public class FileHandler {
 
@@ -23,13 +20,6 @@ public class FileHandler {
         if (!new File(plugin.getDataFolder().getAbsolutePath() + File.separator + "pagelayout.yml").exists()) {
             copyFromJar(plugin, plugin, false, "pagelayout.yml","pagelayout.yml");
         }
-
-        if (!new File(plugin.getDataFolder().getAbsolutePath() + File.separator + "lang/en_us.yml").exists()) {
-            copyFromJar(plugin, plugin, false, "en_us.yml","lang/en_us.yml");
-        }
-        if (!new File(plugin.getDataFolder().getAbsolutePath() + File.separator + "lang/zh_cn.yml").exists()) {
-            copyFromJar(plugin, plugin, false, "zh_cn.yml","lang/zh_cn.yml");
-        }
     }
 
 
@@ -38,17 +28,26 @@ public class FileHandler {
         if (!folder.isFile() & !folder.isDirectory()) {
 
             copiesFromJar(plugin, plugin, true
-                    , "BungeeCordServers.yml"
-                    , "BuyShop.yml"
-                    , "Menu.yml"
-                    , "PointShop.yml"
-                    , "GameShop.yml"
-                    , "HugeShop.yml"
-                    , "Skulls.yml"
-                    , "WeekShop.yml"
-                    , "PlayerCommands.yml"
-                    , "Commands.yml");
+                    , "shops/BungeeCordServers.yml"
+                    , "shops/BuyShop.yml"
+                    , "shops/Menu.yml"
+                    , "shops/PointShop.yml"
+                    , "shops/GameShop.yml"
+                    , "shops/HugeShop.yml"
+                    , "shops/Skulls.yml"
+                    , "shops/WeekShop.yml"
+                    , "shops/PlayerCommands.yml"
+                    , "shops/Commands.yml");
 
+        }
+    }
+
+    public void exportLanguages(BossShop plugin){
+        if (!new File(plugin.getDataFolder().getAbsolutePath() + File.separator + "lang/en_us.yml").exists()) {
+            copyFromJar(plugin, plugin, false, "lang/en_us.yml","lang/en_us.yml");
+        }
+        if (!new File(plugin.getDataFolder().getAbsolutePath() + File.separator + "lang/zh_cn.yml").exists()) {
+            copyFromJar(plugin, plugin, false, "lang/zh_cn.yml","lang/zh_cn.yml");
         }
     }
 

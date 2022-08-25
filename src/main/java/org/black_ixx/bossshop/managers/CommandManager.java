@@ -125,6 +125,26 @@ public class CommandManager implements CommandExecutor {
                     sendCommandList(sender);
                 }
 
+                if(args[0].equalsIgnoreCase("create")){
+                    if(sender.hasPermission("BossShop.create")){
+                        if(args.length==3){
+                            if(args[1].isEmpty() & args[2].isEmpty()){
+                                ClassManager.manager.getMessageHandler().sendMessage("Command.MissingParameter", sender);
+                                return false;
+                            }
+                            if(args[1].isEmpty()||args[2].isEmpty()){
+                                ClassManager.manager.getMessageHandler().sendMessage("Command.MissingParameter", sender);
+                                return false;
+                            }
+                            ClassManager.manager.getShopCreator().createShop((Player) sender,args[1],args[2]);
+                            return true;
+                        }
+                    }else{
+                        ClassManager.manager.getMessageHandler().sendMessage("Main.NoPermission", sender);
+                        return false;
+                    }
+                }
+
                 if (args.length >= 3 && args[0].equalsIgnoreCase("open")) {
 
                     String shopname = args[1].toLowerCase();
@@ -210,7 +230,8 @@ public class CommandManager implements CommandExecutor {
         s.sendMessage(mh.get("Command.help6"));
         if (s instanceof Player) {
             s.sendMessage(mh.get("Command.Help7"));
+            s.sendMessage(mh.get("Command.Help8"));
         }
-        s.sendMessage(mh.get("Command.Help8"));
+        s.sendMessage(mh.get("Command.Help9"));
     }
 }

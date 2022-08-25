@@ -4,6 +4,7 @@ import org.black_ixx.bossshop.BossShop;
 import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.core.BSShop;
 import org.black_ixx.bossshop.core.BSShopHolder;
+import org.black_ixx.bossshop.managers.config.FileHandler;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -17,7 +18,7 @@ import java.util.Objects;
 
 public class MessageHandler {
     private final BossShop plugin;
-    private String fileName = "en_us.yml";
+    private String fileName = "lang/en_us.yml";
     private File file;
     private FileConfiguration config;
 
@@ -151,10 +152,22 @@ public class MessageHandler {
         if(Objects.equals(LangCode,null)||LangCode.isEmpty()){
             LangCode = "en_us";
             plugin.getConfig().set("Language","en_us");
-            ClassManager.manager.getBugFinder().warn("The corresponding message file cannot be found and has been automatically changed back to en_us. (maybe you didn't put the message file in the plugin folder, or didn't have the message file)");
+            ClassManager.manager.getBugFinder().warn("The corresponding message file cannot be found and fallback to en_us. (maybe you didn't put the message file in the plugin folder, or didn't have the message file)");
         }
         fileName = LangCode+".yml";
-        file = new File(plugin.getDataFolder(),"lang"+File.separator+LangCode+".yml");
+        file = new File(plugin.getDataFolder(),"lang"+File.separator+fileName);
+        if(!file.exists()){
+            LangCode = "en_us";
+            plugin.getConfig().set("Language","en_us");
+            FileHandler fh = new FileHandler();
+            File lang = new File(plugin.getDataFolder(),"lang"+File.separator+"en_us.yml");
+            if(!lang.exists()) {
+                fh.exportLanguages(plugin);
+            }
+            fileName = LangCode+".yml";
+            file = new File(plugin.getDataFolder(),"lang"+File.separator+fileName);
+            ClassManager.manager.getBugFinder().warn("The corresponding message file cannot be found and fallback to en_us. (maybe you didn't put the message file in the plugin folder, or didn't have the message file)");
+        }
         config = YamlConfiguration.loadConfiguration(file);
     }
 }

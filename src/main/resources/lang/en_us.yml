@@ -22,6 +22,11 @@ Main:
   ReloadFinish: "&eDone!"
 Economy:
   NoAccount: '&cYou don''t have an economy account!'
+ShopCreate:
+  Title: "&7Creating shop %shop%"
+  SaveSuccess: "&aSave success."
+  TitleHead: "&7Creating shop"
+  FileExists: "&4Warning:the corresponding file already exists and will be overwritten."
 Command:
   Help1: "&c/BossShop - Opens main shop"
   Help2: "&c/BossShop <shop> [input] - Opens named shop"
@@ -29,8 +34,10 @@ Command:
   Help4: "&c/BossShop close [Player] - Closes inventory of the named player"
   Help5: "&c/BossShop simulate <player> <shop> <shopitem> - Simulates click"
   Help6: "&c/BossShop reload - Reloads the Plugin"
-  Help7: "&c/BossShop read - Prints out itemdata of item in main hand"
-  Help8: "&c/BossShop help - Prints this"
+  Help7: "&c/BossShop create <Shop> <ShopTitle> - Create a shop"
+  Help8: "&c/BossShop read - Prints out itemdata of item in main hand"
+  Help9: "&c/BossShop help - Prints this"
+  MissingParameter: "&cMissing required parameter"
 NotEnough:
   Money: '&cYou don''t have enough Money!'
   Item: '&cYou don''t have enough Items!'

@@ -40,3 +40,6 @@ permissions:
   BossShop.read:
     description: Allows reading and generating itemdata of hold items
     default: op
+  BossShop.create:
+    description: Allows create a shop
+    default: op
