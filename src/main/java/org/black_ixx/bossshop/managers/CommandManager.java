@@ -15,6 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
+import java.util.Objects;
 
 public class CommandManager implements CommandExecutor {
 
@@ -123,6 +124,27 @@ public class CommandManager implements CommandExecutor {
 
                 if(args[0].equalsIgnoreCase("help")){
                     sendCommandList(sender);
+                    return true;
+                }
+
+                if(args[0].equalsIgnoreCase("create")){
+                    if(sender.hasPermission("BossShop.create")){
+                        String shop;
+                        String title;
+                        if(args.length==3){
+                            shop = args[1];
+                            title = args[2];
+                            Player p = (Player) sender;
+                            ClassManager.manager.getShopCreator().startCreate(p,shop,title);
+                            return true;
+                        }else{
+                            ClassManager.manager.getMessageHandler().sendMessage("Command.MissingParameter", sender);
+                            return false;
+                        }
+                    } else {
+                        ClassManager.manager.getMessageHandler().sendMessage("Main.NoPermission", sender);
+                        return false;
+                    }
                 }
 
                 if (args.length >= 3 && args[0].equalsIgnoreCase("open")) {
@@ -132,10 +154,6 @@ public class CommandManager implements CommandExecutor {
                     String name = args[2];
                     Player p = Bukkit.getPlayerExact(name);
                     String argument = args.length > 3 ? args[3] : null;
-
-                    if(shopname.equals("help")){
-                        return false;
-                    }
 
                     if (p == null) {
                         p = Bukkit.getPlayer(name);
@@ -214,7 +232,8 @@ public class CommandManager implements CommandExecutor {
         mh.sendMessage("Command.Help6",s);
         if (s instanceof Player) {
             mh.sendMessage("Command.Help7",s);
+            mh.sendMessage("Command.Help8",s);
         }
-        mh.sendMessage("Command.Help8",s);
+        mh.sendMessage("Command.Help",s);
     }
 }

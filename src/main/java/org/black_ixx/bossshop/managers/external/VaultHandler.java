@@ -30,7 +30,7 @@ public class VaultHandler {
     private void setupEconomy() {
         RegisteredServiceProvider<Economy> economyProvider = Bukkit.getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
         if (economyProvider == null) {
-            ClassManager.manager.getBugFinder().warn("No Economy Plugin was found... You need one if you want to work with Money! Get it there: http://plugins.bukkit.org/.");
+            ClassManager.manager.getBugFinder().warn("No Economy Plugin was found... You need one if you want to work with Money! Get it there: https://spigotmc.org/.");
             economy = new NoEconomy();
             return;
         }
@@ -39,12 +39,11 @@ public class VaultHandler {
 
     private void setupPermissions() {
         RegisteredServiceProvider<Permission> rsp = Bukkit.getServer().getServicesManager().getRegistration(Permission.class);
-        perms = rsp.getProvider();
-        if (perms == null) {
-            ClassManager.manager.getBugFinder().warn("No Permissions Plugin was found... You need one if you want to work with Permissions or Permission Groups! Get it there: http://plugins.bukkit.org/");
+        if (rsp == null) {
+            ClassManager.manager.getBugFinder().warn("No Permissions Plugin was found... You need one if you want to work with Permissions or Permission Groups! Get it there: https://spigotmc.org/");
             return;
         }
-
+        perms = rsp.getProvider();
     }
 
     ///////////////////////////////////////

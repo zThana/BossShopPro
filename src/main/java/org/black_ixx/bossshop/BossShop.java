@@ -11,6 +11,7 @@ import org.black_ixx.bossshop.listeners.PlayerListener;
 import org.black_ixx.bossshop.listeners.SignListener;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.managers.CommandManager;
+import org.black_ixx.bossshop.managers.features.ShopCreator;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -70,6 +71,8 @@ public class BossShop extends JavaPlugin {
         pl = new PlayerListener(this);
         getServer().getPluginManager().registerEvents(pl, this);
 
+        ShopCreator shopCreatorEvent = new ShopCreator(this,ClassManager.manager.getMessageHandler());
+        getServer().getPluginManager().registerEvents(shopCreatorEvent, this);
 
         new BukkitRunnable() {
             @Override

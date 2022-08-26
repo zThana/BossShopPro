@@ -22,6 +22,13 @@ Main:
   ReloadFinish: "&eDone!"
 Economy:
   NoAccount: '&cYou don''t have an economy account!'
+ShopCreate:
+  Success: "&aThe file has been saved to &7/plugins/BossShopPro&a."
+  FileExists: "&cThe same file already exists. The file will be overwritten."
+  SomeoneCreating: "&4Warning: Others are using it to create menus."
+  #Do not modify these two strings at will, otherwise the file cannot be saved.
+  Title: "&8Creating shop %shop%"
+  TitleHead: "&8Creating shop"
 Command:
   Help1: "&c/BossShop - Opens main shop"
   Help2: "&c/BossShop <shop> [input] - Opens named shop"
@@ -30,7 +37,8 @@ Command:
   Help5: "&c/BossShop simulate <player> <shop> <shopitem> - Simulates click"
   Help6: "&c/BossShop reload - Reloads the Plugin"
   Help7: "&c/BossShop read - Prints out itemdata of item in main hand"
-  Help8: "&c/BossShop help - Prints this"
+  Help8: "&c/BossShop create <shop> <title> - create a shop"
+  Help: "&c/BossShop help - Prints this"
 NotEnough:
   Money: '&cYou don''t have enough Money!'
   Item: '&cYou don''t have enough Items!'
