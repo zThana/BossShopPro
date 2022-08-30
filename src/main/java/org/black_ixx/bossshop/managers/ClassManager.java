@@ -163,7 +163,6 @@ public class ClassManager {
                 addon.bossShopFinishedLoading();
             }
         }
-        creator = new ShopCreator(plugin,messagehandler);
     }
 
     ///////////////////////////////
@@ -243,13 +242,6 @@ public class ClassManager {
             customizer = new ShopCustomizer();
         }
         return customizer;
-    }
-
-    public ShopCreator getShopCreator(){
-        if(creator == null){
-            creator = new ShopCreator(plugin,messagehandler);
-        }
-        return creator;
     }
 
     public TransactionLog getTransactionLog() {

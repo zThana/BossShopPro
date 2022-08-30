@@ -3,36 +3,33 @@ package org.black_ixx.bossshop.managers;
 
 import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.core.BSShop;
+import org.black_ixx.bossshop.managers.features.ShopCreator;
 import org.black_ixx.bossshop.managers.item.ItemDataPart;
 import org.black_ixx.bossshop.misc.Misc;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-public class CommandManager implements CommandExecutor {
+public class CommandManager implements CommandExecutor, TabExecutor {
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String arg, String[] args) {
+    public boolean onCommand(CommandSender sender,Command cmd,String label,String[] args) {
 
         if (cmd.getName().equalsIgnoreCase("bossshop") || cmd.getName().equalsIgnoreCase("shop") || cmd.getName().equalsIgnoreCase("bs")) {
-
             if (args.length > 0) {
                 if (args[0].equalsIgnoreCase("reload")) {
-
                     if (sender.hasPermission("BossShop.reload")) {
-
                         sender.sendMessage(ClassManager.manager.getMessageHandler().get("Main.StartReload"));
                         ClassManager.manager.getPlugin().reloadPlugin(sender);
                         sender.sendMessage(ClassManager.manager.getMessageHandler().get("Main.ReloadFinish"));
-
                     } else {
                         ClassManager.manager.getMessageHandler().sendMessage("Main.NoPermission", sender);
                         return false;
@@ -71,19 +68,16 @@ public class CommandManager implements CommandExecutor {
                                 ClassManager.manager.getMessageHandler().sendMessage("Main.PlayerNotFound", sender, args[1]);
                                 return false;
                             }
-
                             BSShop shop = ClassManager.manager.getShops().getShop(args[2]);
                             if (shop == null) {
                                 ClassManager.manager.getMessageHandler().sendMessage("Main.ShopNotExisting", sender, null, p, null, null, null);
                                 return false;
                             }
-
                             BSBuy buy = shop.getItem(args[3]);
                             if (buy == null) {
                                 ClassManager.manager.getMessageHandler().sendMessage("Main.ShopItemNotExisting", sender, null, p, shop, null, null);
                                 return false;
                             }
-
                             buy.click(p, shop, null, null, null, ClassManager.manager.getPlugin());
                             return true;
                         }
@@ -127,28 +121,23 @@ public class CommandManager implements CommandExecutor {
                     return true;
                 }
 
-                if(args[0].equalsIgnoreCase("create")){
+                if(args[0].equalsIgnoreCase("create") & args.length==3){
                     if(sender.hasPermission("BossShop.create")){
-                        String shop;
-                        String title;
-                        if(args.length==3){
-                            shop = args[1];
-                            title = args[2];
-                            Player p = (Player) sender;
-                            ClassManager.manager.getShopCreator().startCreate(p,shop,title);
-                            return true;
-                        }else{
-                            ClassManager.manager.getMessageHandler().sendMessage("Command.MissingParameter", sender);
-                            return false;
+                        Player p = null;
+                        if(sender instanceof Player) {
+                             p = (Player) sender;
                         }
+                        ShopCreator sc = new ShopCreator(ClassManager.manager.getPlugin(), ClassManager.manager.getMessageHandler());
+                        sc.startCreate(p, args[1],args[2]);
+                        ClassManager.manager.getPlugin().getLogger().info("shop:"+args[1]);
+                        return true;
                     } else {
                         ClassManager.manager.getMessageHandler().sendMessage("Main.NoPermission", sender);
-                        return false;
                     }
+                    return false;
                 }
 
                 if (args.length >= 3 && args[0].equalsIgnoreCase("open")) {
-
                     String shopname = args[1].toLowerCase();
                     BSShop shop = ClassManager.manager.getShops().getShop(shopname);
                     String name = args[2];
@@ -235,5 +224,22 @@ public class CommandManager implements CommandExecutor {
             mh.sendMessage("Command.Help8",s);
         }
         mh.sendMessage("Command.Help",s);
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+        List<String> arglist = new ArrayList<>();
+        if(args.length == 0){
+            arglist.add("open");
+            arglist.add("help");
+            arglist.add("close");
+            if(sender instanceof Player) {
+                arglist.add("read");
+                arglist.add("create");
+            }
+            arglist.add("reload");
+            arglist.add("simulate");
+        }
+        return null;
     }
 }

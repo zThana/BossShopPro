@@ -23,12 +23,12 @@ Main:
 Economy:
   NoAccount: '&c你没有经济账户！'
 ShopCreate:
-  Success: "&a文件已保存至 &7/plugins/BossShopPro&a下。"
+  Success: "&a文件已保存至 &7/plugins/BossShopPro/shops&a下。"
   FileExists: "&c相同的文件已存在，将会覆盖文件。"
   SomeoneCreating: "&4警告：别人正在用它创建菜单。"
   #这两个字符串不要随意修改,否则无法保存文件。
-  Title: "&7正在创建商店 %shop%"
-  TitleHead: "&7正在创建商店"
+  Title: "&8正在创建商店 %shop%(按ESC保存文件)"
+  TitleHead: "&8正在创建商店"
 Command:
   Help1: "&c/BossShop - 打开主商店"
   Help2: "&c/BossShop <商店名> [输入内容] - 打开指定的商店"
@@ -39,7 +39,6 @@ Command:
   Help7: "&c/BossShop read - 输出你主手拿着的物品的物品数据"
   Help8: "&c/BossShop create <商店名> <标题> - 创建一个商店"
   Help: "&c/BossShop help - 输出这个"
-  MissingParameter: "&cMissing require parameters"
 NotEnough:
   Money: '&c你没有足够的钱！'
   Item: '&c你没有足够的物品!'

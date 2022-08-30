@@ -71,9 +71,6 @@ public class BossShop extends JavaPlugin {
         pl = new PlayerListener(this);
         getServer().getPluginManager().registerEvents(pl, this);
 
-        ShopCreator shopCreatorEvent = new ShopCreator(this,ClassManager.manager.getMessageHandler());
-        getServer().getPluginManager().registerEvents(shopCreatorEvent, this);
-
         new BukkitRunnable() {
             @Override
             public void run() {

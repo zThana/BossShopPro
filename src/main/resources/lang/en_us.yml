@@ -23,12 +23,12 @@ Main:
 Economy:
   NoAccount: '&cYou don''t have an economy account!'
 ShopCreate:
-  Success: "&aThe file has been saved to &7/plugins/BossShopPro&a."
+  Success: "&aThe file has been saved to &7/plugins/BossShopPro/shops&a."
   FileExists: "&cThe same file already exists. The file will be overwritten."
   SomeoneCreating: "&4Warning: Others are using it to create menus."
   #Do not modify these two strings at will, otherwise the file cannot be saved.
-  Title: "&8Creating shop %shop%"
-  TitleHead: "&8Creating shop"
+  Title: "Creating shop %shop%(Press esc to save file)"
+  TitleHead: "Creating shop"
 Command:
   Help1: "&c/BossShop - Opens main shop"
   Help2: "&c/BossShop <shop> [input] - Opens named shop"

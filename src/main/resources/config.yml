@@ -23,6 +23,11 @@
 Language: "en_us"
 #
 #
+# ReloadAfterCreateShop:
+# Then when you finish using the Menu Creator, the plugin will reload immediately.
+ReloadAfterCreateShop: false
+#
+#
 # EnableSigns:
 # If set EnableSigns to 'false' BossShop signs will be disabled.
 EnableSigns: true

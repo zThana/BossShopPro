@@ -8,9 +8,6 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public abstract class BossShopAddon extends JavaPlugin {
-
-
-    String USER = "%%__USER__%%";
     private BossShop bs;
     private boolean b = false;
 
@@ -76,7 +73,7 @@ public abstract class BossShopAddon extends JavaPlugin {
 
     /**
      * Called to reload the addon
-     * @param sender the execute of the command
+     * @param sender to execute of the command
      */
     public void reload(CommandSender sender) { //Can be overwritten
         bossShopReloaded(sender);
@@ -122,7 +119,7 @@ public abstract class BossShopAddon extends JavaPlugin {
 
     protected double getWorth(String s) {
         try {
-            if (s == null || s == "" || s.length() < 1) {
+            if (s == null || s.length() < 1) {
                 return 0;
             }
             double x = 0;
@@ -149,14 +146,7 @@ public abstract class BossShopAddon extends JavaPlugin {
      * @return new storage for an addon
      */
     public BSAddonStorage createStorage(Plugin plugin, String name) {
-        int type = BSAddonStorage.TYPE_LOCAL_FILE; //Maybe add an option to store data elsewhere in future
-
-        switch (type) {
-            case BSAddonStorage.TYPE_LOCAL_FILE:
-                return new BSAddonConfig(plugin, name);
-        }
-
-        return null;
+        return new BSAddonConfig(plugin, name);
     }
 
     /////// //// //// //// //// ////

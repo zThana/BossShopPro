@@ -4,8 +4,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 
 public abstract class BossShopAddonConfigurable extends BossShopAddon {
-
-
     private BSAddonConfig config;
 
 
