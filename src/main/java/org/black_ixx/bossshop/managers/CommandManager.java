@@ -236,6 +236,7 @@ public class CommandManager implements CommandExecutor, TabExecutor {
             if(sender instanceof Player) {
                 arglist.add("read");
                 arglist.add("create");
+                arglist.add("<shop>");
             }
             arglist.add("reload");
             arglist.add("simulate");
