@@ -15,11 +15,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.LeatherArmorMeta;
-import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.potion.PotionEffect;
+import org.bukkit.inventory.meta.*;
+import org.bukkit.material.SpawnEgg;
 import org.bukkit.potion.PotionType;
 
 import java.io.File;
@@ -140,7 +137,7 @@ public class ShopCreator implements Listener {
         if(meta.hasCustomModelData()){
             list.add("custommodeldata:"+meta.getCustomModelData());
         }
-        //Item meta check
+        //Item meta check start
         if(m.equals(Material.LEATHER_HELMET)||m.equals(Material.LEATHER_CHESTPLATE)||m.equals(Material.LEATHER_LEGGINGS)||m.equals(Material.LEATHER_BOOTS)){
             LeatherArmorMeta leatherArmorMeta = (LeatherArmorMeta) meta;
             Color c = leatherArmorMeta.getColor();
@@ -148,6 +145,15 @@ public class ShopCreator implements Listener {
                list.add("color:"+c.getRed()+"#"+c.getBlue()+"#"+c.getGreen());
             }
         }
+        if(m.equals(Material.POTION)||m.equals(Material.LINGERING_POTION)||m.equals(Material.SPLASH_POTION)){
+            PotionMeta pm = (PotionMeta) meta;
+            PotionType pt = pm.getBasePotionData().getType();
+            String name = pt.name();
+            boolean extended = pt.isExtendable();
+            boolean upgraded = pt.isUpgradeable();
+            list.add("potion:"+name+"#"+extended+"#"+upgraded);
+        }
+        //Item meta check end
         return list;
     }
     private String getName(){

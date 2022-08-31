@@ -129,7 +129,6 @@ public class CommandManager implements CommandExecutor, TabExecutor {
                         }
                         ShopCreator sc = new ShopCreator(ClassManager.manager.getPlugin(), ClassManager.manager.getMessageHandler());
                         sc.startCreate(p, args[1],args[2]);
-                        ClassManager.manager.getPlugin().getLogger().info("shop:"+args[1]);
                         return true;
                     } else {
                         ClassManager.manager.getMessageHandler().sendMessage("Main.NoPermission", sender);
