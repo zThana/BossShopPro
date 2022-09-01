@@ -15,8 +15,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.*;
-import org.bukkit.material.SpawnEgg;
+import org.bukkit.inventory.meta.Damageable;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
+import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionType;
 
 import java.io.File;
@@ -45,6 +47,7 @@ public class ShopCreator implements Listener {
             return;
         }
         this.title = title;
+        setName(shopName);
         String inv_title = this.mh.get("ShopCreate.Title").replace("%shop%",this.name);
         Inventory inv = Bukkit.createInventory(null,54,inv_title);
         p.openInventory(inv);
@@ -81,7 +84,7 @@ public class ShopCreator implements Listener {
             if(is==null){
                 continue;
             }
-            ConfigurationSection item = shopItems.createSection(String.valueOf(real_slot));
+            ConfigurationSection item = shopItems.createSection(String.valueOf(real_slot+1));
             item.set("MenuItem",ItemToList(is));
             item.set("RewardType","nothing");
             item.set("PriceType", "nothing");
@@ -92,10 +95,10 @@ public class ShopCreator implements Listener {
         try {shop.save(f);
         } catch (IOException e) {throw new RuntimeException(e);}
         mh.sendMessage("ShopCreate.Success",p);
-        if(plugin.getConfig().getBoolean("ReloadAfterCreateShop")){
+        if(ClassManager.manager.getSettings().isReloadAfterCreateShop()){
             ClassManager.manager.getPlugin().reloadPlugin(p);
         }
-        setName();
+        setName("");
     }
     private List<String> ItemToList(ItemStack i){
         List<String> list = new ArrayList<>();
@@ -139,19 +142,14 @@ public class ShopCreator implements Listener {
         }
         //Item meta check start
         if(m.equals(Material.LEATHER_HELMET)||m.equals(Material.LEATHER_CHESTPLATE)||m.equals(Material.LEATHER_LEGGINGS)||m.equals(Material.LEATHER_BOOTS)){
-            LeatherArmorMeta leatherArmorMeta = (LeatherArmorMeta) meta;
-            Color c = leatherArmorMeta.getColor();
+            Color c = ((LeatherArmorMeta) meta).getColor();
             if(!c.equals(Bukkit.getItemFactory().getDefaultLeatherColor())){
                list.add("color:"+c.getRed()+"#"+c.getBlue()+"#"+c.getGreen());
             }
         }
         if(m.equals(Material.POTION)||m.equals(Material.LINGERING_POTION)||m.equals(Material.SPLASH_POTION)){
-            PotionMeta pm = (PotionMeta) meta;
-            PotionType pt = pm.getBasePotionData().getType();
-            String name = pt.name();
-            boolean extended = pt.isExtendable();
-            boolean upgraded = pt.isUpgradeable();
-            list.add("potion:"+name+"#"+extended+"#"+upgraded);
+            PotionType pt = ((PotionMeta) meta).getBasePotionData().getType();
+            list.add("potion:"+pt.name()+"#"+pt.isExtendable()+"#"+pt.isUpgradeable());
         }
         //Item meta check end
         return list;
@@ -162,7 +160,7 @@ public class ShopCreator implements Listener {
     private String getTitle(){
         return title;
     }
-    private void setName(){
-        this.name = "";
+    private void setName(String name){
+        this.name = name;
     }
 }

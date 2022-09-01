@@ -51,12 +51,15 @@ public class BossShop extends JavaPlugin {
 
         if (getCommand("bs") != null) {
             getCommand("bs").setExecutor(commander);
+            getCommand("bs").setTabCompleter(commander);
         }
         if (getCommand("bossshop") != null) {
             getCommand("bossshop").setExecutor(commander);
+            getCommand("bossshop").setTabCompleter(commander);
         }
         if (getCommand("shop") != null) {
             getCommand("shop").setExecutor(commander);
+            getCommand("shop").setTabCompleter(commander);
         }
 
 
@@ -70,6 +73,7 @@ public class BossShop extends JavaPlugin {
 
         pl = new PlayerListener(this);
         getServer().getPluginManager().registerEvents(pl, this);
+
 
         new BukkitRunnable() {
             @Override
@@ -191,6 +195,4 @@ public class BossShop extends JavaPlugin {
             }
         }
     }
-
-
 }

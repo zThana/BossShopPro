@@ -12,31 +12,34 @@ import java.util.Map;
 public class Settings {
 
     public final static int
-            HIDE_ITEMS_PLAYERS_DONT_HAVE_PERMISSIONS_FOR = 0,
-            ALLOW_UNSAFE_ENCHANTMENTS = 1,
-            ALLOW_SELLING_GREATER_ENCHANTS = 2,
-            CLOSE_SHOP_AFTER_PURCHASE = 3,
-            CLICK_DELAY = 4,
-            SOUND_SHOPITEM_PURCHASE = 5, //Actions with a price that is not nothing
-            SOUND_SHOPITEM_CLICK = 6, //Actions with pricetype nothing
-            SOUND_SHOPITEM_NOPERMISSION = 7,
-            SOUND_SHOPITEM_NOTENOUGHMONEY = 8,
-            SOUND_SHOP_OPEN = 9,
-            SOUND_SHOP_CLOSE = 10,
-            SOUND_SHOP_CHANGE_PAGE = 11,
-            SOUND_SHOP_CHANGE_SHOP = 12;
+            LANGUAGE = 0,
+            RELOAD_AFTER_CREATE_SHOP = 1,
+            HIDE_ITEMS_PLAYERS_DONT_HAVE_PERMISSIONS_FOR = 2,
+            ALLOW_UNSAFE_ENCHANTMENTS = 3,
+            ALLOW_SELLING_GREATER_ENCHANTS = 4,
+            CLOSE_SHOP_AFTER_PURCHASE = 5,
+            CLICK_DELAY = 6,
+            SOUND_SHOPITEM_PURCHASE = 7, //Actions with a price that is not nothing
+            SOUND_SHOPITEM_CLICK = 8, //Actions with pricetype nothing
+            SOUND_SHOPITEM_NOPERMISSION = 9,
+            SOUND_SHOPITEM_NOTENOUGHMONEY = 10,
+            SOUND_SHOP_OPEN = 11,
+            SOUND_SHOP_CLOSE = 12,
+            SOUND_SHOP_CHANGE_PAGE = 13,
+            SOUND_SHOP_CHANGE_SHOP = 14;
+
 
     private boolean signs, money, points, vault, permissions, bungeecord, pointsdisplay, moneydisplay, serverpinging, load_subfolders, transactionslog, check_stacksize, exp_use_level,
-            shopcommands, serverpinging_fixconnector, itemall_show_final_reward, inventory_full_drop_items, purchase_async, allow_selling_damaged_items;
+            shopcommands, serverpinging_fixconnector, itemall_show_final_reward, inventory_full_drop_items, purchase_async, allow_selling_damaged_items, reload_after_create_shop;
     private boolean metrics = true;
     private int serverpinging_delay, serverpinging_waittime, serverpinging_timeout, autorefresh_delay, max_line_length, number_grouping_size, input_timeout;
-    private String mainshop, number_locale;
+    private String mainshop, number_locale, language;
     private PointsPlugin pointsplugin;
     private List<String> money_formatting, points_formatting;
 
     private boolean debug;
 
-    private Map<Integer, SettingsProperty> properties = new LinkedHashMap<>();
+    private final Map<Integer, SettingsProperty> properties = new LinkedHashMap<>();
 
 
     /**
@@ -45,6 +48,8 @@ public class Settings {
      */
     public void loadConfig(ConfigurationSection config) {
         properties.clear();
+        properties.put(LANGUAGE, new ShopProperty(config,"Language",String.class));
+        properties.put(RELOAD_AFTER_CREATE_SHOP, new ShopProperty(config,"ReloadAfterCreateShop", Boolean.class));
         properties.put(HIDE_ITEMS_PLAYERS_DONT_HAVE_PERMISSIONS_FOR, new ShopItemProperty(config, "HideItemsPlayersDoNotHavePermissionsFor", Boolean.class));
         properties.put(ALLOW_UNSAFE_ENCHANTMENTS, new ShopItemProperty(config, "AllowUnsafeEnchantments", Boolean.class));
         properties.put(ALLOW_SELLING_GREATER_ENCHANTS, new ShopItemProperty(config, "CanPlayersSellItemsWithGreaterEnchants", Boolean.class));
@@ -194,6 +199,22 @@ public class Settings {
 
     public void setVaultEnabled(boolean b) {
         vault = b;
+    }
+
+    public boolean isReloadAfterCreateShop(){
+        return reload_after_create_shop;
+    }
+
+    public void setReloadAfterCreateShop(boolean b){
+        reload_after_create_shop = b;
+    }
+
+    public void setLanguage(String lang){
+        language = lang;
+    }
+
+    public String getLanguage(){
+        return language;
     }
 
     public boolean getPermissionsEnabled() {

@@ -8,17 +8,14 @@ import org.black_ixx.bossshop.managers.item.ItemDataPart;
 import org.black_ixx.bossshop.misc.Misc;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabExecutor;
+import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommandManager implements CommandExecutor, TabExecutor {
+public class CommandManager implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(CommandSender sender,Command cmd,String label,String[] args) {
@@ -229,17 +226,31 @@ public class CommandManager implements CommandExecutor, TabExecutor {
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         List<String> arglist = new ArrayList<>();
         if(args.length == 0){
-            arglist.add("open");
-            arglist.add("help");
-            arglist.add("close");
-            if(sender instanceof Player) {
-                arglist.add("read");
-                arglist.add("create");
-                arglist.add("<shop>");
+            if(sender.hasPermission("BossShop.open.command")||sender.hasPermission("BossShop.open")) {
+                arglist.add("open");
+                if(sender instanceof Player){
+                    arglist.add("<shop>");
+                }
             }
-            arglist.add("reload");
-            arglist.add("simulate");
+            arglist.add("help");
+            if(sender.hasPermission("BossShop.close")) {
+                arglist.add("close");
+            }
+            if(sender instanceof Player) {
+                if(sender.hasPermission("BossShop.read")) {
+                    arglist.add("read");
+                }
+                if(sender.hasPermission("BossShop.create")) {
+                    arglist.add("create");
+                }
+            }
+            if(sender.hasPermission("BossShop.reload")) {
+                arglist.add("reload");
+            }
+            if(sender.hasPermission("BossShop.simulate")) {
+                arglist.add("simulate");
+            }
         }
-        return null;
+        return arglist;
     }
 }

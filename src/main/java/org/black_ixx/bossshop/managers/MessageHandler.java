@@ -147,8 +147,8 @@ public class MessageHandler {
     private String replace(String message, Player target, BSShop shop, BSShopHolder holder, BSBuy item) {
         return ClassManager.manager.getStringManager().transform(message, item, shop, holder, target);
     }
-    private void setupLocate(){
-        String LangCode = plugin.getConfig().getString("Language");
+    public void setupLocate(){
+        String LangCode = ClassManager.manager.getSettings().getLanguage();
         if(Objects.equals(LangCode,null)||LangCode.isEmpty()){
             LangCode = "en_us";
             plugin.getConfig().set("Language","en_us");
@@ -163,6 +163,9 @@ public class MessageHandler {
             File lang = new File(plugin.getDataFolder(),"lang"+File.separator+"en_us.yml");
             if(!lang.exists()) {
                 fh.exportLanguages(plugin);
+                fileName = "lang/"+LangCode+".yml";
+                file = new File(plugin.getDataFolder(),"lang"+File.separator+fileName);
+                return;
             }
             fileName = "lang/"+LangCode+".yml";
             file = new File(plugin.getDataFolder(),"lang"+File.separator+fileName);

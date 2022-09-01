@@ -22,6 +22,8 @@ public class ConfigHandler {
         }
 
         String main = config.getString("MainShop");
+        settings.setLanguage(config.getString("Language"));
+        settings.setReloadAfterCreateShop(config.getBoolean("ReloadAfterCreateShop"));
         settings.setMainShop(main.toLowerCase());
         settings.setTransactionLogEnabled(config.getBoolean("EnableTransactionLog"));
         settings.setServerPingingSpeed((config.getInt("ServerPinging.Delay")));

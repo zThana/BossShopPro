@@ -28,6 +28,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
 
+import java.io.File;
+
 public class ClassManager {
 
     public static ClassManager manager;
@@ -41,7 +43,6 @@ public class ClassManager {
     private final ItemStackCreator itemstackCreator;
     private final ItemStackTranslator itemstackTranslator;
     private final BuyItemHandler buyItemHandler;
-    private final ConfigHandler configHandler;
     private final BugFinder bugfinder;
     private final BossShop plugin;
     private final Settings settings;
@@ -49,16 +50,15 @@ public class ClassManager {
     private PageLayoutHandler pagelayoutHandler;
     private BungeeCordManager bungeeCordManager;
     private ShopCustomizer customizer;
-    private ShopCreator creator;
     private TransactionLog transactionLog;
     private ServerPingingManager serverPingingManager;
     private AutoRefreshHandler autoRefreshHandler;
-    private MultiplierHandler multiplierHandler;
-    private StorageManager storageManager;
+    private final MultiplierHandler multiplierHandler;
+    private final StorageManager storageManager;
     private ISpawnEggHandler spawnEggHandler;
     private ISpawnerHandler spawnerHandler;
-    private ItemDataStorage itemdataStorage;
-    private PlayerDataHandler playerdataHandler;
+    private final ItemDataStorage itemdataStorage;
+    private final PlayerDataHandler playerdataHandler;
     public ClassManager(BossShop plugin) {
         this.plugin = plugin;
         manager = this;
@@ -74,7 +74,6 @@ public class ClassManager {
         //////////////// <- Independent Classes
 
         playerdataHandler = new PlayerDataHandler();
-        configHandler = new ConfigHandler(plugin);
         MathTools.init(settings.getNumberLocale(), settings.getNumberGroupingSize());
         storageManager = new StorageManager(plugin);
         bugfinder = new BugFinder(plugin);
@@ -86,6 +85,11 @@ public class ClassManager {
         buyItemHandler = new BuyItemHandler();
         itemstackChecker = new ItemStackChecker();
         messagehandler = new MessageHandler(plugin);
+
+        File lang = new File(plugin.getDataFolder(),"lang"+File.separator+"en_us.yml");
+        if(!lang.exists()) {
+            messagehandler.setupLocate();
+        }
 
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             placeholderhandler = new PlaceholderAPIHandler();
