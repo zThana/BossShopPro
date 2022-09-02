@@ -38,24 +38,12 @@ public class PointsManager {
                 this.pa = new BSPointsPluginPlayerPoints();
                 break;
 
-            case POINTSAPI:
-                this.pa = new BSPointsPluginPointsAPI();
-                break;
-
             case TOKENENCHANT:
                 this.pa = new BSPointsPluginTokenEnchant();
                 break;
 
             case Jobs:
                 this.pa = new BSPointsPluginJobs();
-                break;
-
-            case MYSQL_TOKENS:
-                this.pa = new BSPointsPluginMySQL_Tokens();
-                break;
-
-            case MYSQLTOKENS:
-                this.pa = new BSPointsPluginMySQLTokens();
                 break;
 
             case GadetsMenu:
@@ -110,12 +98,8 @@ public class PointsManager {
         NONE(new String[]{"none", "nothing"}),
         PLAYERPOINTS(new String[]{"PlayerPoints", "PlayerPoint", "PP"}),
         ENJIN_MINECRAFT_PLUGIN(new String[]{"EnjinMinecraftPlugin", "Enjin", "EMP"}),
-        POINTSAPI(new String[]{"PointsAPI", "PAPI"}),
         TOKENENCHANT(new String[]{"TokenEnchant", "TE", "TokenEnchants"}),
-        TOKENMANAGER(new String[]{"TokenManager", "TM"}),
         Jobs(new String[]{"Jobs", "JobsReborn"}),
-        MYSQL_TOKENS(new String[]{"MySQL-Tokens", "MySQL-Token"}),
-        MYSQLTOKENS(new String[]{"MySQLTokens", "MySQLToken"}),
         GadetsMenu(new String[]{"GadgetsMenu"}),
         VotingPlugin(new String[]{"VotingPlugin","VP"}),
         CUSTOM(new String[0]);

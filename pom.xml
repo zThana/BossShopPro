@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.black_ixx</groupId>
 	<artifactId>BossShopPro</artifactId>
-	<version>3.1.1.2(TEST)</version>
+	<version>3.1.1(TEST)</version>
 	<name>BossShopPro</name>
 	<description>Create virtual chest shops</description>
 	<build>
@@ -139,27 +139,11 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Adds tokens support -->
-		<dependency>
-			<groupId>com.masterderpydoge.tokens</groupId>
-			<artifactId>TokenCore</artifactId>
-			<version>1.4</version>
-			<scope>provided</scope>
-		</dependency>
-
 		<!-- Adds enjin support -->
 		<dependency>
 			<groupId>com.enjin</groupId>
 			<artifactId>EnjinMinecraftPlugin</artifactId>
 			<version>3.5.7</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<!-- Adds points api support -->
-		<dependency>
-			<groupId>me.BukkitPVP</groupId>
-			<artifactId>PointsAPI</artifactId>
-			<version>1.6.8</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -171,27 +155,11 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Adds coins support -->
-		<dependency>
-			<groupId>me.justeli.coins.main</groupId>
-			<artifactId>Coins</artifactId>
-			<version>1.9.2</version>
-			<scope>provided</scope>
-		</dependency>
-
 		<!-- Adds gadgets menu support -->
 		<dependency>
 			<groupId>com.yapzhenyie.GadgetsMenu</groupId>
 			<artifactId>GadgetsMenu</artifactId>
 			<version>4.3.32</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<!-- Adds mysql tokens support -->
-		<dependency>
-			<groupId>me.bukkit.mTokens.Inkzzz</groupId>
-			<artifactId>Tokens</artifactId>
-			<version>1.2</version>
 			<scope>provided</scope>
 		</dependency>
 
