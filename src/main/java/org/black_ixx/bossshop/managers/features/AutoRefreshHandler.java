@@ -22,9 +22,9 @@ public class AutoRefreshHandler {
     }
 
 
-    public class AutoRefreshRunnable extends BukkitRunnable {
+    public static class AutoRefreshRunnable extends BukkitRunnable {
 
-        private BossShop plugin;
+        private final BossShop plugin;
 
         public AutoRefreshRunnable(BossShop plugin) {
             this.plugin = plugin;

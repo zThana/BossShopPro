@@ -15,8 +15,8 @@ import java.util.Set;
 public class BSAddonConfig implements BSAddonStorage {
 
     boolean isSaving = false;
-    private Plugin plugin;
-    private File file;
+    private final Plugin plugin;
+    private final File file;
     private YamlConfiguration config;
 
     public BSAddonConfig(Plugin plugin, String file_name) {

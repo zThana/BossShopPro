@@ -11,24 +11,24 @@ public class BSPointsPluginJobs extends BSPointsPlugin {
 
     @Override
     public double getPoints(OfflinePlayer player) {
-        return Jobs.getPlayerManager().getPointsData().getPlayerPointsInfo(player.getUniqueId()).getCurrentPoints();
+        return Jobs.getPlayerManager().getPlayerInfo(player.getUniqueId()).getJobsPlayer().getPointsData().getCurrentPoints();
     }
 
     @Override
     public double setPoints(OfflinePlayer player, double points) {
-        Jobs.getPlayerManager().getPointsData().getPlayerPointsInfo(player.getUniqueId()).setPoints(points);
+        Jobs.getPlayerManager().getPlayerInfo(player.getUniqueId()).getJobsPlayer().getPointsData().setPoints(points);
         return points;
     }
 
     @Override
     public double takePoints(OfflinePlayer player, double points) {
-        Jobs.getPlayerManager().getPointsData().getPlayerPointsInfo(player.getUniqueId()).takePoints(points);
+        Jobs.getPlayerManager().getPlayerInfo(player.getUniqueId()).getJobsPlayer().getPointsData().takePoints(points);
         return getPoints(player);
     }
 
     @Override
     public double givePoints(OfflinePlayer player, double points) {
-        Jobs.getPlayerManager().getPointsData().getPlayerPointsInfo(player.getUniqueId()).addPoints(points);
+        Jobs.getPlayerManager().getPlayerInfo(player.getUniqueId()).getJobsPlayer().getPointsData().addPoints(points);
         return getPoints(player);
     }
 

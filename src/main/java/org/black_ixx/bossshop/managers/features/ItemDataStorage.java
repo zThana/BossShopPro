@@ -19,7 +19,7 @@ public class ItemDataStorage {
     private final String fileName = "ItemDataStorage.yml";
     private final File file;
     private FileConfiguration config = null;
-    private SimpleDateFormat formatter = new SimpleDateFormat("yyyy dd-MM 'at' hh:mm:ss a (E)");
+    private final SimpleDateFormat formatter = new SimpleDateFormat("yyyy dd-MM 'at' hh:mm:ss a (E)");
 
     public ItemDataStorage(final BossShop plugin) {
         this.plugin = plugin;

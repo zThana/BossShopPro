@@ -47,7 +47,7 @@ public class PageLayoutHandler {
         reservedslots_start = section.getInt("ReservedSlotsStart");
         show_if_multiple_pages_only = section.getBoolean("ShowIfMultiplePagesOnly");
 
-        items = new ArrayList<BSBuy>();
+        items = new ArrayList<>();
         if (section.isConfigurationSection("items")) {
             for (String key : section.getConfigurationSection("items").getKeys(false)) {
                 BSBuy buy = ClassManager.manager.getBuyItemHandler().loadItem(section.getConfigurationSection("items"), null, key);

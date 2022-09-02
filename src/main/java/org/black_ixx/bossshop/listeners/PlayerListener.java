@@ -82,5 +82,4 @@ public class PlayerListener implements Listener {
             ClassManager.manager.getPlayerDataHandler().leftServer(p);
         }
     }
-
 }

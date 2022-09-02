@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.black_ixx</groupId>
 	<artifactId>BossShopPro</artifactId>
-	<version>3.1.1.1(TEST)</version>
+	<version>3.1.1.2(TEST)</version>
 	<name>BossShopPro</name>
 	<description>Create virtual chest shops</description>
 	<build>
@@ -59,6 +59,14 @@
 	</repositories>
 
 	<dependencies>
+		<!-- Adds jobs support -->
+		<dependency>
+			<groupId>com.github.Zrips</groupId>
+			<artifactId>Jobs</artifactId>
+			<version>4.17.2</version>
+			<scope>provided</scope>
+		</dependency>
+
 		<!-- Platform -->
         <dependency>
             <groupId>org.spigotmc</groupId>
@@ -128,14 +136,6 @@
 			<groupId>org.black_ixx</groupId>
 			<artifactId>PlayerPoints</artifactId>
 			<version>2.1.4</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<!-- Adds jobs support -->
-		<dependency>
-			<groupId>com.gamingmesh.jobs</groupId>
-			<artifactId>Jobs</artifactId>
-			<version>4.9.1</version>
 			<scope>provided</scope>
 		</dependency>
 

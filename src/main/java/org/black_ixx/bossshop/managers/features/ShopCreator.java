@@ -105,7 +105,7 @@ public class ShopCreator implements Listener {
         ItemMeta meta = i.getItemMeta();
         Material m = i.getType();
         list.add("type:"+m.name());
-        list.add("name:" + meta.getDisplayName());
+        list.add("name:" +meta.getDisplayName());
         list.add("amount:"+i.getAmount());
         if(meta.hasLore()) {
             StringBuilder loreBuilder = new StringBuilder();

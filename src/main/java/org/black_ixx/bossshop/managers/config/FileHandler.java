@@ -18,7 +18,7 @@ public class FileHandler {
                 , "config.yml");
 
         if (!new File(plugin.getDataFolder().getAbsolutePath() + File.separator + "pagelayout.yml").exists()) {
-            copyFromJar(plugin, plugin, false, "pagelayout.yml","pagelayout.yml");
+            copyFromJar(plugin, plugin, "pagelayout.yml","pagelayout.yml");
         }
     }
 
@@ -68,13 +68,13 @@ public class FileHandler {
     public void copyDefaultsFromJar(Plugin resourceHolder, Plugin folderHolder, String filename, String outputfilename) {
         File write = new File(folderHolder.getDataFolder() + File.separator + outputfilename);
         if (!write.exists()) {
-            copyFromJar(resourceHolder, folderHolder, false, filename, outputfilename);
+            copyFromJar(resourceHolder, folderHolder, filename, outputfilename);
             return;
         }
 
         boolean change = false;
         try {
-            copyFromJar(resourceHolder, folderHolder, false, filename, "temp");
+            copyFromJar(resourceHolder, folderHolder, filename, "temp");
             File read = new File(folderHolder.getDataFolder() + File.separator + "temp");
 
             if (read.exists()) {
@@ -99,26 +99,16 @@ public class FileHandler {
         }
     }
 
-    public void copiesFromJar(Plugin resourceHolder, Plugin folderHolder, boolean shop, String... files) {
-        for (String filename : files) {
-            if (filename != null) {
-                copyFromJar(resourceHolder, folderHolder, shop, filename, filename);
-            }
-        }
-    }
-
     public void copiesFromJar(Plugin resourceHolder, Plugin folderHolder, String... files) {
         for (String filename : files) {
             if (filename != null) {
-                copyFromJar(resourceHolder, folderHolder, true, filename,
-                        filename.replace("lang/","").replace("shops/",""));
+                copyFromJar(resourceHolder, folderHolder, filename, filename);
             }
         }
     }
 
-    public void copyFromJar(Plugin resourceHolder, Plugin folderHolder, boolean shop, String filename, String outputfilename) {
-        String additional = shop ? "shops" + File.separator : "";
-        File file = new File(folderHolder.getDataFolder() + File.separator + additional + outputfilename);
+    public void copyFromJar(Plugin resourceHolder, Plugin folderHolder, String filename, String outputfilename) {
+        File file = new File(folderHolder.getDataFolder() + File.separator + outputfilename);
         if (!file.exists()) {
             file.getParentFile().mkdirs();
         }
@@ -138,7 +128,7 @@ public class FileHandler {
     }
 
     public void copyFromJar(BossShopAddon addon, String filename) {
-        copyFromJar(addon, addon.getBossShop(), false, filename, "/addons/" + addon.getAddonName() + "/" + filename);
+        copyFromJar(addon, addon.getBossShop(), filename, "/addons/" + addon.getAddonName() + "/" + filename);
     }
 
 }

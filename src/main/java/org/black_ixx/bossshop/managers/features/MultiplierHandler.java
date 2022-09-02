@@ -18,20 +18,20 @@ import java.util.Set;
 
 public class MultiplierHandler {
 
-    private Set<BSMultiplier> multipliers = new HashSet<BSMultiplier>();
+    private final Set<BSMultiplier> multipliers = new HashSet<>();
 
     public MultiplierHandler(BossShop plugin) {
-        if (plugin.getConfig().getBoolean("MultiplierGroups.Enabled") == false) {
+        if (!plugin.getConfig().getBoolean("MultiplierGroups.Enabled")) {
             return;
         }
         List<String> lines = plugin.getConfig().getStringList("MultiplierGroups.List");
-        if (lines == null) {
+        if (lines.isEmpty()) {
             return;
         }
-        setup(plugin, lines);
+        setup(lines);
     }
 
-    public void setup(BossShop plugin, List<String> config_lines) {
+    public void setup(List<String> config_lines) {
         multipliers.clear();
         for (String s : config_lines) {
             BSMultiplier m = new BSMultiplier(s);
@@ -123,11 +123,6 @@ public class MultiplierHandler {
     }
 
     public boolean hasMultipliers() {
-        if (multipliers == null) {
-            return false;
-        }
         return !multipliers.isEmpty();
     }
-
-
 }
