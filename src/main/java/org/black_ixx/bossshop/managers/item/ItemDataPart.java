@@ -35,7 +35,7 @@ public abstract class ItemDataPart {
             UNBREAKING,
             BOOK,
             BOOKPAGE,
-            BANNER; //UNSUPPORTED BY READITEM
+            BANNER;
 
     private static List<ItemDataPart> types;
     private final String[] names = createNames();

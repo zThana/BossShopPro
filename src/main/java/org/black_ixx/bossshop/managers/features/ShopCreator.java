@@ -3,9 +3,8 @@ package org.black_ixx.bossshop.managers.features;
 import org.black_ixx.bossshop.BossShop;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.managers.MessageHandler;
-import org.bukkit.Bukkit;
-import org.bukkit.Color;
-import org.bukkit.Material;
+import org.bukkit.*;
+import org.bukkit.block.banner.Pattern;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
@@ -15,10 +14,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.LeatherArmorMeta;
-import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.inventory.meta.*;
 import org.bukkit.potion.PotionType;
 
 import java.io.File;
@@ -150,6 +146,23 @@ public class ShopCreator implements Listener {
         if(m.equals(Material.POTION)||m.equals(Material.LINGERING_POTION)||m.equals(Material.SPLASH_POTION)){
             PotionType pt = ((PotionMeta) meta).getBasePotionData().getType();
             list.add("potion:"+pt.name()+"#"+pt.isExtendable()+"#"+pt.isUpgradeable());
+        }
+        if(Tag.BANNERS.isTagged(m)){
+            BannerMeta bannerMeta = (BannerMeta) meta;
+            if(!bannerMeta.getPatterns().isEmpty()){
+                for(Pattern p:bannerMeta.getPatterns()){
+                    String patternName = p.getPattern().name();
+                    DyeColor color = p.getColor();
+                    list.add("banner:"+color.name()+"#"+patternName);
+                }
+            }
+        }
+        if(m.equals(Material.PLAYER_HEAD)||m.equals(Material.PLAYER_WALL_HEAD)){
+            SkullMeta skull = (SkullMeta) meta;
+            OfflinePlayer player = skull.getOwningPlayer();
+            if(player != null){
+                list.add("playerhead:"+player.getName());
+            }
         }
         //Item meta check end
         return list;
