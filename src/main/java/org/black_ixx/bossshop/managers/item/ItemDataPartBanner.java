@@ -3,7 +3,6 @@ package org.black_ixx.bossshop.managers.item;
 import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.bukkit.DyeColor;
-import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.block.banner.PatternType;
@@ -11,7 +10,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BannerMeta;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ItemDataPartBanner extends ItemDataPart{
@@ -22,22 +20,10 @@ public class ItemDataPartBanner extends ItemDataPart{
             return item;
         }
         BannerMeta meta = (BannerMeta) item.getItemMeta();
-        String[] bdata = argument.split("\\+");
-        DyeColor basecolor = DyeColor.valueOf(bdata[0]);
-        List<Pattern> patterns = new ArrayList<>();
-        for (int y = 1; y < bdata.length; y++) {
-            try {
-                String[] bpattern = bdata[y].split("#");
-                DyeColor patterncolor = DyeColor.valueOf(bpattern[0]);
-                PatternType patterntype = PatternType.getByIdentifier(bpattern[1]);
-                Pattern pattern = new Pattern(patterncolor, patterntype);
-                patterns.add(pattern);
-            } catch (Exception ignored) {
-            }
-        }
-        Material m = Material.getMaterial(basecolor.name() + "_BANNER");
-        item.setType(m != null ? m : Material.WHITE_BANNER);
-        meta.setPatterns(patterns);
+        String[] parts = argument.split("#", 2);
+        DyeColor color = DyeColor.valueOf(parts[0]);
+        Pattern pattern = new Pattern(color, PatternType.valueOf(parts[1]));
+        meta.addPattern(pattern);
         item.setItemMeta(meta);
         return item;
     }

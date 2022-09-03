@@ -9,6 +9,8 @@ import org.black_ixx.bossshop.settings.Settings;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 
+import java.util.Objects;
+
 public class ConfigHandler {
 
     // /////////////////////////////////////// <- Init class
@@ -20,11 +22,10 @@ public class ConfigHandler {
         if (config.getBoolean("signs.enabled") || config.getBoolean("EnableSigns")) {
             settings.setSignsEnabled(true);
         }
-
-        String main = config.getString("MainShop");
+        String main = config.getString("MainShop").toLowerCase();
         settings.setLanguage(config.getString("Language"));
         settings.setReloadAfterCreateShop(config.getBoolean("ReloadAfterCreateShop"));
-        settings.setMainShop(main == null ? "" : main.toLowerCase());
+        settings.setMainShop(main);
         settings.setTransactionLogEnabled(config.getBoolean("EnableTransactionLog"));
         settings.setServerPingingSpeed((config.getInt("ServerPinging.Delay")));
         settings.setServerPingingTimeout((config.getInt("ServerPinging.Timeout")));

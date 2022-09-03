@@ -1,8 +1,10 @@
 package org.black_ixx.bossshop.managers.misc;
 
+import com.vk2gpz.tokenenchant.api.TokenEnchantAPI;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.misc.Enchant;
 import org.black_ixx.bossshop.misc.MathTools;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -131,14 +133,11 @@ public class InputReader {
                 }
                 e = readEnchantment(p_name);
 
-				/* Enchantment seems to somehow not be detected.
 				if(e == null && Bukkit.getPluginManager().isPluginEnabled("TokenEnchant")){
 					TokenEnchantAPI te = TokenEnchantAPI.getInstance();
 					p_name = p_name.substring(0,1).toUpperCase()+p_name.substring(1).toLowerCase();
-					System.out.println("Enchantment for " + p_name+": " + te.getEnchant(p_name));
-					System.out.println("PE for " + p_name+": " + te.getPotion(p_name));
-					e = te.getEnchant(p_name);
-				}*/
+					e = te.getEnchantment(p_name).getEnchantment();
+				}
 
                 if (e == null) {
                     ClassManager.manager.getBugFinder().severe("Mistake in Config: '" + p_name + "' is not a valid enchantment name/id.");
@@ -244,7 +243,7 @@ public class InputReader {
     public static HashMap<Integer, String> readTimedCommands(Object o) {
         List<String> list = readStringList(o);
         if (list != null) {
-            HashMap<Integer, String> cmds = new HashMap<Integer, String>();
+            HashMap<Integer, String> cmds = new HashMap<>();
             for (String s : list) {
                 try {
                     String[] parts = s.split(":", 2);

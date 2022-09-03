@@ -18,8 +18,7 @@ import java.util.Objects;
 
 public class MessageHandler {
     private final BossShop plugin;
-    private String fileName = "lang/en_us.yml";
-    private File file;
+    private String fileName = "lang"+File.separator+"en_us.yml";
     private FileConfiguration config;
 
     public MessageHandler(final BossShop plugin) {
@@ -42,7 +41,6 @@ public class MessageHandler {
      */
     public void reloadConfig() {
         setupLocate();
-        config = YamlConfiguration.loadConfiguration(file);
         InputStream defConfigStream = plugin.getResource("lang/"+fileName);
         if (defConfigStream != null) {
             YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(new InputStreamReader(defConfigStream));
@@ -149,13 +147,12 @@ public class MessageHandler {
     }
     public void setupLocate(){
         String LangCode = ClassManager.manager.getSettings().getLanguage();
-        if(Objects.equals(LangCode,null)||LangCode.isEmpty()){
+        if(Objects.equals(LangCode,null)||LangCode.equals("")){
             LangCode = "en_us";
             plugin.getConfig().set("Language","en_us");
-            ClassManager.manager.getBugFinder().warn("The corresponding message file cannot be found and fallback to en_us. (maybe you didn't put the message file in the plugin folder, or didn't have the message file)");
         }
         fileName = "lang/"+LangCode+".yml";
-        file = new File(plugin.getDataFolder(),fileName);
+        File file = new File(plugin.getDataFolder(), fileName);
         if(!file.exists()){
             LangCode = "en_us";
             plugin.getConfig().set("Language","en_us");
@@ -165,11 +162,13 @@ public class MessageHandler {
                 fh.exportLanguages(plugin);
                 fileName = "lang/"+LangCode+".yml";
                 file = new File(plugin.getDataFolder(),"lang"+File.separator+fileName);
+                config = YamlConfiguration.loadConfiguration(file);
                 return;
             }
             fileName = "lang/"+LangCode+".yml";
             file = new File(plugin.getDataFolder(),"lang"+File.separator+fileName);
             ClassManager.manager.getBugFinder().warn("The corresponding message file cannot be found and fallback to en_us. (maybe you didn't put the message file in the plugin folder, or didn't have the message file)");
+
         }
         config = YamlConfiguration.loadConfiguration(file);
     }

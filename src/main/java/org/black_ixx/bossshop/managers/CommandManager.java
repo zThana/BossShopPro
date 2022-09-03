@@ -154,12 +154,10 @@ public class CommandManager implements CommandExecutor, TabCompleter {
                         return false;
                     }
 
-                    playerCommandOpenShop(sender, p, shopname, argument);
                     if (p != sender) {
                         ClassManager.manager.getMessageHandler().sendMessage("Main.OpenShopOtherPlayer", sender, null, p, shop, null, null);
                     }
-
-                    return true;
+                    return playerCommandOpenShop(sender, p, shopname, argument);
                 }
 
             }
@@ -167,44 +165,46 @@ public class CommandManager implements CommandExecutor, TabCompleter {
             if (sender instanceof Player) {
                 Player p = (Player) sender;
 
-                String shop = ClassManager.manager.getSettings().getMainShop();
+                String shop;
                 if (args.length != 0) {
                     shop = args[0].toLowerCase();
+                }else {
+                    shop = ClassManager.manager.getPlugin().getConfig().getString("MainShop").toLowerCase();
                 }
+                sender.sendMessage(shop);
                 String argument = args.length > 1 ? args[1] : null;
-                playerCommandOpenShop(sender, p, shop, argument);
-                return true;
+                return playerCommandOpenShop(sender, p, shop, argument);
             }
             sendCommandList(sender);
             return false;
         }
-
         return false;
     }
 
 
-    private void playerCommandOpenShop(CommandSender sender, Player target, String shop, String argument) {
+    private boolean playerCommandOpenShop(CommandSender sender, Player target, String shop, String argument) {
         if (sender == target) {
             if (!(sender.hasPermission("BossShop.open") || sender.hasPermission("BossShop.open.command") || sender.hasPermission("BossShop.open.command." + shop))) {
                 ClassManager.manager.getMessageHandler().sendMessage("Main.NoPermission", sender);
-                return;
+                return false;
             }
         } else {
             if (!sender.hasPermission("BossShop.open.other")) {
                 ClassManager.manager.getMessageHandler().sendMessage("Main.NoPermission", sender);
-                return;
+                return false;
             }
         }
         if (argument != null) {
             ClassManager.manager.getPlayerDataHandler().enteredInput(target, argument);
         }
         if (ClassManager.manager == null) {
-            return;
+            return false;
         }
         if (ClassManager.manager.getShops() == null) {
-            return;
+            return false;
         }
         ClassManager.manager.getShops().openShop(target, shop);
+        return true;
     }
 
     private void sendCommandList(CommandSender s) {
@@ -225,7 +225,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         List<String> arglist = new ArrayList<>();
-        if(args.length == 0){
+        if(args.length == 1){
             if(sender.hasPermission("BossShop.open.command")||sender.hasPermission("BossShop.open")) {
                 arglist.add("open");
                 if(sender instanceof Player){

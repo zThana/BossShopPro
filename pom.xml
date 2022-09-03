@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.black_ixx</groupId>
 	<artifactId>BossShopPro</artifactId>
-	<version>3.1.2.1(TEST)</version>
+	<version>3.1.3</version>
 	<name>BossShopPro</name>
 	<description>Create virtual chest shops</description>
 	<build>
@@ -34,8 +34,16 @@
 
 	<repositories>
 		<repository>
-			<id>jitpack</id>
-			<url>https://jitpack.io</url>
+			<id>spigot-repo</id>
+			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+		</repository>
+		<repository>
+		    <id>jitpack</id>
+		    <url>https://jitpack.io</url>
+	    </repository>
+		<repository>
+			<id>teamvk-repo</id>
+			<url>https://raw.githubusercontent.com/TeamVK/maven-repository/master/release/</url>
 		</repository>
 		<repository>
 			<id>repo</id>
@@ -52,10 +60,6 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
-		<repository>
-			<id>spigot-repo</id>
-			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-		</repository>
 	</repositories>
 
 	<dependencies>
@@ -64,6 +68,14 @@
 			<groupId>com.github.Zrips</groupId>
 			<artifactId>Jobs</artifactId>
 			<version>4.17.2</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Adds token enchant support -->
+		<dependency>
+			<groupId>com.vk2gpz.tokenenchant</groupId>
+			<artifactId>TokenEnchantAPI</artifactId>
+			<version>18.37.1</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -144,14 +156,6 @@
 			<groupId>com.enjin</groupId>
 			<artifactId>EnjinMinecraftPlugin</artifactId>
 			<version>3.5.7</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<!-- Adds token enchant support -->
-		<dependency>
-			<groupId>com.vk2gpz.tokenenchant</groupId>
-			<artifactId>TokenEnchantAPI</artifactId>
-			<version>15.3.2</version>
 			<scope>provided</scope>
 		</dependency>
 

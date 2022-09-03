@@ -86,11 +86,6 @@ public class ClassManager {
         itemstackChecker = new ItemStackChecker();
         messagehandler = new MessageHandler(plugin);
 
-        File lang = new File(plugin.getDataFolder(),"lang"+File.separator+"en_us.yml");
-        if(!lang.exists()) {
-            messagehandler.setupLocate();
-        }
-
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             placeholderhandler = new PlaceholderAPIHandler();
         }

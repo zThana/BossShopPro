@@ -24,10 +24,11 @@ public class BSShops {
         shops = new HashMap<>();
         shopsIds = new HashMap<>();
 
-        File folder = new File(plugin.getDataFolder().getAbsolutePath() + File.separator + "shops" + File.separator);
+        File folder = new File(plugin.getDataFolder() + File.separator + "shops" + File.separator);
         FileHandler fileHandler = new FileHandler();
         fileHandler.exportConfigs(plugin);
         fileHandler.exportShops(plugin);
+        fileHandler.exportLanguages(plugin);
 
         boolean enable_shop_commands = loadShops(folder, settings, "");
         ClassManager.manager.getSettings().setShopCommandsEnabled(enable_shop_commands);
@@ -50,7 +51,7 @@ public class BSShops {
                 }
 
                 if (f.isFile()) {
-                    if (f.getName().contains(".yml")) {
+                    if (f.getName().endsWith(".yml")) {
                         BSShop shop = loadShop(f, parent_path);
 
                         if (shop.getCommands() != null) {
@@ -164,7 +165,7 @@ public class BSShops {
     public int getShopId(String name) {
         name = name.toLowerCase();
         if (!shopsIds.containsKey(name)) {
-            //ClassManager.manager.getBugFinder().warn("Was not able to get the Id of the "+name+" Shop.");
+            ClassManager.manager.getBugFinder().warn("Was not able to get the id of the "+name+" Shop.");
             return -1; //Was return 0 before. Changed because I think then it returns no shop for sure!
         }
         return shopsIds.get(name);
