@@ -16,9 +16,8 @@ You can download the development version from actions.
 
 A few notes regarding building BSP: the current state of the code, unfortunately, requires you to manually add (the jars of) a few other plugins to the project in order to be able to successfully build BSP. As BSP includes support for many different plugins, such as Kingdoms and EpicSpawners, you need to add those to the project (at least those, which I was not able to add directly via Maven). It requires some initial effort to download those plugins and add them to the project.
 
-## Changes to the original project
-* Fixed the problem of putting minecraft color together when looking for hex color.  
-* Remove TokenManager, LilyPad, CommandPoints, Kingdoms, EpicSpawners support.  
+## Changes to the original project 
+* Remove old plugins support.  
 * Update dependency and change some prompt. 
 * Something may be added in the future.
 * The plugin usage remains unchanged.

@@ -15,7 +15,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.*;
-import org.bukkit.potion.PotionType;
+import org.bukkit.potion.PotionData;
 
 import java.io.File;
 import java.io.IOException;
@@ -144,8 +144,11 @@ public class ShopCreator implements Listener {
             }
         }
         if(m.equals(Material.POTION)||m.equals(Material.LINGERING_POTION)||m.equals(Material.SPLASH_POTION)){
-            PotionType pt = ((PotionMeta) meta).getBasePotionData().getType();
-            list.add("potion:"+pt.name()+"#"+pt.isExtendable()+"#"+pt.isUpgradeable());
+            PotionData pt = ((PotionMeta) meta).getBasePotionData();
+            list.add("potion:"+pt.getType().name()+"#"+pt.isExtended()+"#"+pt.isUpgraded());
+            if(pt.getType().getEffectType()!=null) {
+                list.add("potioneffect:" + pt.getType().getEffectType().getName() + "#1#600");
+            }
         }
         if(Tag.BANNERS.isTagged(m)){
             BannerMeta bannerMeta = (BannerMeta) meta;
