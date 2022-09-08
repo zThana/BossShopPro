@@ -16,7 +16,7 @@ public class ItemDataPartBanner extends ItemDataPart{
     @Override
     public ItemStack transform(ItemStack item, String used_name, String argument) {
         if (!Tag.BANNERS.isTagged(item.getType())) {
-            ClassManager.manager.getBugFinder().severe("Mistake in Config: '" + argument + "' is not a valid '" + used_name + "'.");
+            ClassManager.manager.getBugFinder().severe("Mistake in Config: '" + argument + "' is not a valid '" + used_name + "'. The material must be a banner. Examples: WHITE_BANNER, GREEN_BANNER, RED_BANNER.");
             return item;
         }
         BannerMeta meta = (BannerMeta) item.getItemMeta();

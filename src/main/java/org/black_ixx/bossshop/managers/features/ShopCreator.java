@@ -36,15 +36,14 @@ public class ShopCreator implements Listener {
     }
     public void startCreate(Player p,String shopName,String title){
         if(name.equals("")){
-            this.name = shopName;
+            setName(shopName);
         }
         if(!Objects.equals(name,shopName)){
             this.mh.sendMessage("ShopCreate.SomeoneCreating",p);
             return;
         }
         this.title = title;
-        setName(shopName);
-        String inv_title = this.mh.get("ShopCreate.Title").replace("%shop%",this.name);
+        String inv_title = this.mh.get("ShopCreate.Title").replace("%shop%",getName());
         Inventory inv = Bukkit.createInventory(null,54,inv_title);
         p.openInventory(inv);
     }

@@ -1,6 +1,5 @@
 package org.black_ixx.bossshop;
 
-
 import org.black_ixx.bossshop.api.BossShopAPI;
 import org.black_ixx.bossshop.api.BossShopAddon;
 import org.black_ixx.bossshop.core.BSShop;
@@ -11,7 +10,6 @@ import org.black_ixx.bossshop.listeners.PlayerListener;
 import org.black_ixx.bossshop.listeners.SignListener;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.managers.CommandManager;
-import org.black_ixx.bossshop.managers.features.ShopCreator;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -133,7 +131,7 @@ public class BossShop extends JavaPlugin {
             }
         }
 
-        sl.setSignsEnabled(false); // Wird durch ConfigHandler umgesetzt (ClassManager laedt ConfigHandler)
+        sl.setSignsEnabled(false);
 
         unloadClasses();
 

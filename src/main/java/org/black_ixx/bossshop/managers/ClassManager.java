@@ -7,7 +7,6 @@ import org.black_ixx.bossshop.core.conditions.BSConditionType;
 import org.black_ixx.bossshop.core.prices.BSPriceType;
 import org.black_ixx.bossshop.core.rewards.BSRewardType;
 import org.black_ixx.bossshop.events.BSRegisterTypesEvent;
-import org.black_ixx.bossshop.managers.config.ConfigHandler;
 import org.black_ixx.bossshop.managers.config.FileHandler;
 import org.black_ixx.bossshop.managers.external.BungeeCordManager;
 import org.black_ixx.bossshop.managers.external.PlaceholderAPIHandler;
@@ -28,13 +27,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
 
-import java.io.File;
-
 public class ClassManager {
 
     public static ClassManager manager;
-    private ItemStackChecker itemstackChecker;
-    private StringManager stringmanager;
+    private final ItemStackChecker itemstackChecker;
+    private final StringManager stringmanager;
     ///////////////////////////////
     private PointsManager pointsmanager;
     private VaultHandler vaulthandler;
