@@ -9,6 +9,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.TropicalFish;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -16,6 +17,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.*;
 import org.bukkit.potion.PotionData;
+import org.bukkit.potion.PotionEffect;
 
 import java.io.File;
 import java.io.IOException;
@@ -164,6 +166,23 @@ public class ShopCreator implements Listener {
             OfflinePlayer player = skull.getOwningPlayer();
             if(player != null){
                 list.add("playerhead:"+player.getName());
+            }
+        }
+        if(m.equals(Material.TROPICAL_FISH_BUCKET)){
+            TropicalFishBucketMeta tropicalFishBucket = (TropicalFishBucketMeta) i.getItemMeta();
+            TropicalFish.Pattern p = tropicalFishBucket.getPattern();
+            DyeColor color = tropicalFishBucket.getPatternColor();
+            list.add("tropicalfish:"+color.name()+"#"+p.name());
+        }
+        if(m.equals(Material.SUSPICIOUS_STEW)){
+            SuspiciousStewMeta suspiciousStew = (SuspiciousStewMeta) i.getItemMeta();
+            if(suspiciousStew.hasCustomEffects()){
+                for(PotionEffect pe:suspiciousStew.getCustomEffects()){
+                    String effectName = pe.getType().getName();
+                    int duration = pe.getDuration();
+                    int amplifier = pe.getAmplifier();
+                    list.add("suspiciousstew:"+effectName+"#"+duration+"#"+amplifier);
+                }
             }
         }
         //Item meta check end

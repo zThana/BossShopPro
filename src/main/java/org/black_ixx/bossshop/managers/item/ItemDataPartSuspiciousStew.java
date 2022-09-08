@@ -2,6 +2,7 @@ package org.black_ixx.bossshop.managers.item;
 
 import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.managers.ClassManager;
+import org.black_ixx.bossshop.managers.misc.InputReader;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -22,9 +23,9 @@ public class ItemDataPartSuspiciousStew extends ItemDataPart{
         PotionEffectType pet = PotionEffectType.getByName(parts[0]);
         PotionEffect pe;
         if(pet != null) {
-            pe = new PotionEffect(pet, Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
+            pe = new PotionEffect(pet, InputReader.getInt(parts[1].trim(),0), InputReader.getInt(parts[2].trim(),0));
         }else {
-            pe = new PotionEffect(PotionEffectType.POISON,Integer.parseInt(parts[1]),Integer.parseInt(parts[2]));
+            pe = new PotionEffect(PotionEffectType.POISON, InputReader.getInt(parts[1].trim(),0),InputReader.getInt(parts[2].trim(),0));
             ClassManager.manager.getBugFinder().warn("The potion effect type "+parts[0]+" is not found. Fallback to POISON.");
         }
         meta.addCustomEffect(pe,false);
