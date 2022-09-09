@@ -16,6 +16,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.*;
+import org.bukkit.material.Colorable;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffect;
 
@@ -144,11 +145,22 @@ public class ShopCreator implements Listener {
                list.add("color:"+c.getRed()+"#"+c.getBlue()+"#"+c.getGreen());
             }
         }
+        if(meta instanceof Colorable){
+            Color color = ((Colorable) meta).getColor().getColor();
+            list.add("color:"+color.getRed()+"#"+color.getBlue()+"#"+color.getGreen());
+        }
         if(m.equals(Material.POTION)||m.equals(Material.LINGERING_POTION)||m.equals(Material.SPLASH_POTION)){
-            PotionData pt = ((PotionMeta) meta).getBasePotionData();
+            PotionMeta potion = (PotionMeta) meta;
+            PotionData pt = potion.getBasePotionData();
             list.add("potion:"+pt.getType().name()+"#"+pt.isExtended()+"#"+pt.isUpgraded());
             if(pt.getType().getEffectType()!=null) {
                 list.add("potioneffect:" + pt.getType().getEffectType().getName() + "#1#600");
+            }
+            if(potion.hasCustomEffects()){
+                for(PotionEffect pe:potion.getCustomEffects()){
+                    String effectName = pe.getType().getName();
+                    list.add("potioneffect:"+effectName+"#"+pe.getAmplifier()+"#"+pe.getDuration()+"#");
+                }
             }
         }
         if(Tag.BANNERS.isTagged(m)){

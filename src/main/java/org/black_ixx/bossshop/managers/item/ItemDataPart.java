@@ -213,8 +213,6 @@ public abstract class ItemDataPart {
         }
     }
 
-
-    @Deprecated
     public abstract ItemStack transform(ItemStack item, String used_name, String argument); //Return true in case of success
 
     public abstract boolean isSimilar(ItemStack shop_item, ItemStack player_item, BSBuy buy, Player p);
@@ -230,6 +228,4 @@ public abstract class ItemDataPart {
     public boolean needsArgument() {
         return true; //Can be overriden
     }
-
-
 }
