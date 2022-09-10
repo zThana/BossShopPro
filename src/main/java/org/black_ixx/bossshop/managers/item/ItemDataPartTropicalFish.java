@@ -20,8 +20,8 @@ public class ItemDataPartTropicalFish extends ItemDataPart{
         }
         TropicalFishBucketMeta meta = (TropicalFishBucketMeta) item.getItemMeta();
         String[] parts = argument.split("#");
-        DyeColor color = DyeColor.valueOf(parts[0]);
-        TropicalFish.Pattern p = TropicalFish.Pattern.valueOf(parts[1]);
+        DyeColor color = DyeColor.valueOf(parts[0].toUpperCase());
+        TropicalFish.Pattern p = TropicalFish.Pattern.valueOf(parts[1].toUpperCase());
         meta.setPatternColor(color);
         meta.setPattern(p);
         item.setItemMeta(meta);

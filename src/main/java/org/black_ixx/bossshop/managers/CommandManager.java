@@ -171,7 +171,6 @@ public class CommandManager implements CommandExecutor, TabCompleter {
                 }else {
                     shop = ClassManager.manager.getPlugin().getConfig().getString("MainShop").toLowerCase();
                 }
-                sender.sendMessage(shop);
                 String argument = args.length > 1 ? args[1] : null;
                 return playerCommandOpenShop(sender, p, shop, argument);
             }

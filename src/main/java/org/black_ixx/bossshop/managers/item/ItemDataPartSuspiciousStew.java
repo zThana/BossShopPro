@@ -20,12 +20,13 @@ public class ItemDataPartSuspiciousStew extends ItemDataPart{
         }
         SuspiciousStewMeta meta = (SuspiciousStewMeta) item.getItemMeta();
         String[] parts = argument.split("#");
-        PotionEffectType pet = PotionEffectType.getByName(parts[0]);
+        PotionEffectType pet = PotionEffectType.getByName(parts[0].toUpperCase());
         PotionEffect pe;
+        int duration = (InputReader.getInt(parts[2].trim(),0) * 20);
         if(pet != null) {
-            pe = new PotionEffect(pet, InputReader.getInt(parts[1].trim(),0), InputReader.getInt(parts[2].trim(),0));
+            pe = new PotionEffect(pet, duration, InputReader.getInt(parts[1].trim(),0));
         }else {
-            pe = new PotionEffect(PotionEffectType.POISON, InputReader.getInt(parts[1].trim(),0),InputReader.getInt(parts[2].trim(),0));
+            pe = new PotionEffect(PotionEffectType.POISON, duration,InputReader.getInt(parts[1].trim(),0));
             ClassManager.manager.getBugFinder().warn("The potion effect type "+parts[0]+" is not found. Fallback to POISON.");
         }
         meta.addCustomEffect(pe,false);

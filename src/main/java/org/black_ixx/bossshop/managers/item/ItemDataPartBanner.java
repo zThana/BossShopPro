@@ -22,7 +22,7 @@ public class ItemDataPartBanner extends ItemDataPart{
         BannerMeta meta = (BannerMeta) item.getItemMeta();
         String[] parts = argument.split("#", 2);
         DyeColor color = DyeColor.valueOf(parts[0]);
-        Pattern pattern = new Pattern(color, PatternType.valueOf(parts[1]));
+        Pattern pattern = new Pattern(color, PatternType.valueOf(parts[1].toUpperCase()));
         meta.addPattern(pattern);
         item.setItemMeta(meta);
         return item;
