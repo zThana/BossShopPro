@@ -47,7 +47,7 @@ public class ItemDataPartSuspiciousStew extends ItemDataPart{
                 String effectName = pe.getType().getName();
                 int duration = pe.getDuration();
                 int amplifier = pe.getAmplifier();
-                output.add("suspiciousstew:"+effectName+"#"+duration+"#"+amplifier);
+                output.add("suspiciousstew:"+effectName+"#"+amplifier+"#"+duration);
             }
         }
         return output;
