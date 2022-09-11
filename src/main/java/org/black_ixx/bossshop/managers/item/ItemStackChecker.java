@@ -173,7 +173,7 @@ public class ItemStackChecker {
             return false;
         }
 
-        ItemDataPart exception_durability = isTool(player_item) && ClassManager.manager.getSettings().getAllowSellingDamagedItems() ? ItemDataPart.DURABILITY : null;
+        ItemDataPart exception_durability = isTool(player_item) && ClassManager.manager.getSettings().getAllowSellingDamagedItems() ? ItemDataPart.DAMAGE : null;
         ItemDataPart[] exceptions = new ItemDataPart[]{exception_durability};
 
         return ItemDataPart.isSimilar(shop_item, player_item, exceptions, buy, false, p);
@@ -191,7 +191,7 @@ public class ItemStackChecker {
             }
 
             ItemDataPart[] exceptions;
-            ItemDataPart exception_durability = isTool(a) && ClassManager.manager.getSettings().getAllowSellingDamagedItems() ? ItemDataPart.DURABILITY : null;
+            ItemDataPart exception_durability = isTool(a) && ClassManager.manager.getSettings().getAllowSellingDamagedItems() ? ItemDataPart.DAMAGE: null;
             if (!compare_text) {
                 exceptions = new ItemDataPart[]{exception_durability, ItemDataPart.NAME, ItemDataPart.LORE, ItemDataPart.PLAYERHEAD};
             } else {

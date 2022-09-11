@@ -18,7 +18,7 @@ public class ItemDataPartGlowing extends ItemDataPart {
             b = InputReader.getBoolean(argument,false);
         }
         if(b) {
-            item.addUnsafeEnchantment(Enchantment.MENDING, 1);
+            item.addUnsafeEnchantment(Enchantment.OXYGEN, 1);
             ItemMeta meta = item.getItemMeta();
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             item.setItemMeta(meta);

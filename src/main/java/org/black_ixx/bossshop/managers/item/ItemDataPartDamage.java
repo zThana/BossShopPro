@@ -11,7 +11,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.List;
 import java.util.Objects;
 
-public class ItemDataPartDurability extends ItemDataPart {
+public class ItemDataPartDamage extends ItemDataPart {
 
     @Override
     public ItemStack transform(ItemStack item, String used_name, String argument) {
@@ -55,7 +55,7 @@ public class ItemDataPartDurability extends ItemDataPart {
 
     @Override
     public String[] createNames() {
-        return new String[]{"damage", "durability", "subid"};
+        return new String[]{"damage", "durability"};
     }
 
 

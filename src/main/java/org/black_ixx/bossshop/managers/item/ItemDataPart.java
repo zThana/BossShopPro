@@ -19,7 +19,7 @@ public abstract class ItemDataPart {
     public static ItemDataPart
             MATERIAL,
             AMOUNT,
-            DURABILITY,
+            DAMAGE,
             NAME,
             LORE,
             ENCHANTMENT,
@@ -48,7 +48,7 @@ public abstract class ItemDataPart {
 
         MATERIAL = registerType(new ItemDataPartMaterial());
         AMOUNT = registerType(new ItemDataPartAmount());
-        DURABILITY = registerType(new ItemDataPartDurability());
+        DAMAGE = registerType(new ItemDataPartDamage());
         NAME = registerType(new ItemDataPartName());
         LORE = registerType(new ItemDataPartLore());
         ENCHANTMENT = registerType(new ItemDataPartEnchantment());

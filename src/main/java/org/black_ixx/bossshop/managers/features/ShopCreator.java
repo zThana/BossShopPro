@@ -38,7 +38,7 @@ public class ShopCreator implements Listener {
         Bukkit.getServer().getPluginManager().registerEvents(this,plugin);
     }
     public void startCreate(Player p,String shopName,String title){
-        if(name.equals("")){
+        if(getName().equals("")){
             setName(shopName);
         }
         if(!Objects.equals(name,shopName)){
@@ -65,6 +65,9 @@ public class ShopCreator implements Listener {
         }
     }
     private void SaveAsFile(Inventory inv,Player p,String shopName,String title) {
+        if(Objects.equals(shopName, "")){
+            return;
+        }
         File f = new File(plugin.getDataFolder(),"shops"+File.separator+shopName+".yml");
         if(f.exists()){
             mh.sendMessage("ShopCreate.FileExists",p);
@@ -92,11 +95,11 @@ public class ShopCreator implements Listener {
         }
         try {shop.save(f);
         } catch (IOException e) {throw new RuntimeException(e);}
+        setName("");
         mh.sendMessage("ShopCreate.Success",p);
         if(ClassManager.manager.getSettings().isReloadAfterCreateShop()){
             ClassManager.manager.getPlugin().reloadPlugin(p);
         }
-        setName("");
     }
     private List<String> ItemToList(ItemStack i){
         List<String> list = new ArrayList<>();
@@ -119,18 +122,16 @@ public class ShopCreator implements Listener {
         }
         Damageable d = (Damageable) meta;
         if(d.hasDamage()){
-            if(d.getDamage()<m.getMaxDurability()){
-                String dm = String.valueOf(m.getMaxDurability()-d.getDamage());
+            if(d.getDamage()>0){
+                String dm = String.valueOf(d.getDamage());
                 list.add("durability:"+dm);
             }
         }
-        if(meta.hasEnchants()){
-            Map<Enchantment, Integer> enchantments = i.getEnchantments();
-            for (Enchantment enchantment : enchantments.keySet()) {
-                String enchantName = enchantment.getKey().getKey();
-                int lvl = i.getEnchantmentLevel(enchantment);
-                list.add("enchantment:"+enchantName+"#"+lvl);
-            }
+        Map<Enchantment, Integer> enchantments = i.getEnchantments();
+        for(Enchantment en:enchantments.keySet()){
+            String name = en.getKey().getKey();
+            int lvl = enchantments.get(en);
+            list.add("enchantment:"+name+"#"+lvl);
         }
         if(meta.isUnbreakable()){
             list.add("unbreakable:true");
@@ -139,17 +140,17 @@ public class ShopCreator implements Listener {
             list.add("custommodeldata:"+meta.getCustomModelData());
         }
         //Item meta check start
-        if(m.equals(Material.LEATHER_HELMET)||m.equals(Material.LEATHER_CHESTPLATE)||m.equals(Material.LEATHER_LEGGINGS)||m.equals(Material.LEATHER_BOOTS)){
+        if(meta instanceof LeatherArmorMeta){
             Color c = ((LeatherArmorMeta) meta).getColor();
             if(!c.equals(Bukkit.getItemFactory().getDefaultLeatherColor())){
-               list.add("color:"+c.getRed()+"#"+c.getBlue()+"#"+c.getGreen());
+               list.add("color:"+c.getRed()+"#"+c.getGreen()+"#"+c.getBlue());
             }
         }
         if(meta instanceof Colorable){
             Color color = ((Colorable) meta).getColor().getColor();
-            list.add("color:"+color.getRed()+"#"+color.getBlue()+"#"+color.getGreen());
+            list.add("color:"+color.getRed()+"#"+color.getGreen()+"#"+color.getBlue());
         }
-        if(m.equals(Material.POTION)||m.equals(Material.LINGERING_POTION)||m.equals(Material.SPLASH_POTION)){
+        if(meta instanceof PotionMeta){
             PotionMeta potion = (PotionMeta) meta;
             PotionData pt = potion.getBasePotionData();
             list.add("potion:"+pt.getType().name()+"#"+pt.isExtended()+"#"+pt.isUpgraded());
@@ -163,7 +164,7 @@ public class ShopCreator implements Listener {
                 }
             }
         }
-        if(Tag.BANNERS.isTagged(m)){
+        if(meta instanceof BannerMeta){
             BannerMeta bannerMeta = (BannerMeta) meta;
             if(!bannerMeta.getPatterns().isEmpty()){
                 for(Pattern p:bannerMeta.getPatterns()){
@@ -173,20 +174,22 @@ public class ShopCreator implements Listener {
                 }
             }
         }
-        if(m.equals(Material.PLAYER_HEAD)||m.equals(Material.PLAYER_WALL_HEAD)){
+        if(meta instanceof SkullMeta){
             SkullMeta skull = (SkullMeta) meta;
             OfflinePlayer player = skull.getOwningPlayer();
             if(player != null){
                 list.add("playerhead:"+player.getName());
             }
         }
-        if(m.equals(Material.TROPICAL_FISH_BUCKET)){
+        if(meta instanceof TropicalFishBucketMeta){
             TropicalFishBucketMeta tropicalFishBucket = (TropicalFishBucketMeta) i.getItemMeta();
-            TropicalFish.Pattern p = tropicalFishBucket.hasVariant() ? tropicalFishBucket.getPattern() : TropicalFish.Pattern.STRIPEY;
-            DyeColor color = tropicalFishBucket.getPatternColor();
-            list.add("tropicalfish:" + color.name() + "#" + p.name());
+            if(tropicalFishBucket.hasVariant()) {
+                TropicalFish.Pattern p = tropicalFishBucket.getPattern();
+                DyeColor color = tropicalFishBucket.getPatternColor();
+                list.add("tropicalfish:" + color.name() + "#" + p.name());
+            }
         }
-        if(m.equals(Material.SUSPICIOUS_STEW)){
+        if(meta instanceof SuspiciousStewMeta){
             SuspiciousStewMeta suspiciousStew = (SuspiciousStewMeta) i.getItemMeta();
             if(suspiciousStew.hasCustomEffects()){
                 for(PotionEffect pe:suspiciousStew.getCustomEffects()){
