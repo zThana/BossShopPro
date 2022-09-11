@@ -182,9 +182,9 @@ public class ShopCreator implements Listener {
         }
         if(m.equals(Material.TROPICAL_FISH_BUCKET)){
             TropicalFishBucketMeta tropicalFishBucket = (TropicalFishBucketMeta) i.getItemMeta();
-            TropicalFish.Pattern p = tropicalFishBucket.getPattern();
+            TropicalFish.Pattern p = tropicalFishBucket.hasVariant() ? tropicalFishBucket.getPattern() : TropicalFish.Pattern.STRIPEY;
             DyeColor color = tropicalFishBucket.getPatternColor();
-            list.add("tropicalfish:"+color.name()+"#"+p.name());
+            list.add("tropicalfish:" + color.name() + "#" + p.name());
         }
         if(m.equals(Material.SUSPICIOUS_STEW)){
             SuspiciousStewMeta suspiciousStew = (SuspiciousStewMeta) i.getItemMeta();
