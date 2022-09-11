@@ -37,7 +37,8 @@ public abstract class ItemDataPart {
             BOOKPAGE,
             BANNER,
             TROPICALFISH,
-            SUSPICIOUSSTEW;
+            SUSPICIOUSSTEW,
+            GLOWING;
 
     private static List<ItemDataPart> types;
     private final String[] names = createNames();
@@ -66,6 +67,7 @@ public abstract class ItemDataPart {
         BOOKPAGE = registerType(new ItemDataPartWrittenBookPage());
         TROPICALFISH = registerType(new ItemDataPartTropicalFish());
         SUSPICIOUSSTEW = registerType(new ItemDataPartSuspiciousStew());
+        GLOWING = registerType(new ItemDataPartGlowing());
     }
 
     public static ItemDataPart registerType(ItemDataPart type) {
