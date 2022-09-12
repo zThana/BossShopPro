@@ -1,6 +1,7 @@
 package org.black_ixx.bossshop.core.rewards;
 
 import org.black_ixx.bossshop.core.BSBuy;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 
@@ -48,6 +49,6 @@ public class BSRewardTypeHeal extends BSRewardTypeNumber{
 
     @Override
     public void giveReward(Player p, BSBuy buy, Object reward, ClickType clickType, int multiplier) {
-        p.setHealth(20);
+        p.setHealth(p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
     }
 }
