@@ -31,7 +31,6 @@ public class Settings {
 
     private boolean signs, money, points, vault, permissions, bungeecord, pointsdisplay, moneydisplay, serverpinging, load_subfolders, transactionslog, check_stacksize, exp_use_level,
             shopcommands, serverpinging_fixconnector, itemall_show_final_reward, inventory_full_drop_items, purchase_async, allow_selling_damaged_items, reload_after_create_shop;
-    private boolean metrics = true;
     private int serverpinging_delay, serverpinging_waittime, serverpinging_timeout, autorefresh_delay, max_line_length, number_grouping_size, input_timeout;
     private String mainshop, number_locale, language;
     private PointsPlugin pointsplugin;
@@ -91,7 +90,7 @@ public class Settings {
      * @return property
      */
     public SettingsProperty getProperty(int id) {
-        return properties.get(id);
+       return properties.get(id);
     }
 
     /**
@@ -149,15 +148,6 @@ public class Settings {
     public void setServerPingingWaitTime(int i) {
         serverpinging_waittime = i;
     }
-
-    public boolean getMetricsEnabled() {
-        return metrics;
-    }
-
-    public void setMetricsEnabled(boolean b) {
-        metrics = b;
-    }
-
     public boolean getShopCommandsEnabled() {
         return shopcommands;
     }

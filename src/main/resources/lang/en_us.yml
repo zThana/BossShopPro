@@ -1,4 +1,5 @@
 #Here you can define all BossShopPro texts displayed to players. Leave a line empty in order to disable a message.
+#The translated text is updated irregularly. It is recommended to delete the language folder after updating the plug-in (the customized modification needs to be backed up, if you have one)
 Main:
   NoPermission: '&cYou are not allowed to do this!'
   AlreadyBought: '&cYou already purchased that!'
@@ -27,7 +28,7 @@ ShopCreate:
   FileExists: "&cThe same file already exists. The file will be overwritten."
   SomeoneCreating: "&4Warning: Others are using it to create menus."
   #Do not modify these two strings at will, otherwise the file cannot be saved.
-  Title: "Creating shop %shop%(Press esc to save file)"
+  Title: "Creating shop %shop%(Close it to save file)"
   TitleHead: "Creating shop"
 Command:
   Help1: "&c/BossShop - Opens main shop"

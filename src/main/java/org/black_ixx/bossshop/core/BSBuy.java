@@ -33,17 +33,17 @@ public class BSBuy {
 
     private boolean fix_item; // In order for an item to not be fix it must contain a player-dependent placeholder (detected by StringManager.checkStringForFeatures)
     private ItemStack item;
-    private String name;
+    private final String name;
     private BSInputType inputtype; // null by default. A value if players need to enter input before they can purchase the item.
     private String inputtext;
-    private BSRewardType rewardT;
-    private BSPriceType priceT;
-    private Object reward;
-    private Object price;
+    private final BSRewardType rewardT;
+    private final BSPriceType priceT;
+    private final Object reward;
+    private final Object price;
     private BSCondition condition;
     private String permission;
     private boolean perm_is_group = false;
-    private String msg;
+    private final String msg;
     private int location;
     private List<Integer> locations;
 
@@ -452,7 +452,6 @@ public class BSBuy {
      * @param event      Click event which caused purchase. Can be null (for example when click is simulated).
      * @param plugin     Bossshop plugin.
      */
-    @Deprecated
     public void purchaseTask(final Player p, final BSShop shop, final BSShopHolder holder, final ClickType clicktype, final BSRewardType rewardtype, final BSPriceType pricetype, final InventoryClickEvent event, final BossShop plugin) {
         if (inputtype != null) {
             inputtype.forceInput(p, shop, this, holder, clicktype, rewardtype, pricetype, event, plugin);
@@ -488,7 +487,6 @@ public class BSBuy {
      * @param plugin     Bossshop plugin.
      * @param async      Whether actions which can be executed asynchronously should be.
      */
-    @Deprecated
     public void purchase(final Player p, final BSShop shop, final BSShopHolder holder, final ClickType clicktype, final BSRewardType rewardtype, BSPriceType pricetype, final InventoryClickEvent event, final BossShop plugin, boolean async) {
         //Generate message
         String message = getMessage(clicktype);
@@ -532,7 +530,7 @@ public class BSBuy {
 
         //Update message
         if (message != null) {
-            if (o != null && o != "" && message.contains("%left%")) {
+            if (o != null && !o.equals("") && message.contains("%left%")) {
                 message = message.replace("%left%", o);
             }
             message = plugin.getClassManager().getStringManager().transform(message, this, shop, holder, p); //Transform message before taking price because then ItemAll works fine
@@ -564,12 +562,7 @@ public class BSBuy {
             if (p.getOpenInventory() == event.getView()) { //only if inventory is still open
 
                 if (async) {
-                    Bukkit.getScheduler().runTask(ClassManager.manager.getPlugin(), new Runnable() {
-                        @Override
-                        public void run() {
-                            shop.updateInventory(event.getInventory(), holder, p, plugin.getClassManager(), holder.getPage(), holder.getHighestPage(), false);
-                        }
-                    });
+                    Bukkit.getScheduler().runTask(ClassManager.manager.getPlugin(), () -> shop.updateInventory(event.getInventory(), holder, p, plugin.getClassManager(), holder.getPage(), holder.getHighestPage(), false));
                 } else {
                     shop.updateInventory(event.getInventory(), holder, p, plugin.getClassManager(), holder.getPage(), holder.getHighestPage(), false);
                 }

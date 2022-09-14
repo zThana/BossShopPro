@@ -27,10 +27,6 @@ public class BSTransformStringEvent extends BSEvent {
         this.target = target;
     }
 
-    public static HandlerList getHandlerList() {
-        return handlers;
-    }
-
     public String getText() {
         return text;
     }

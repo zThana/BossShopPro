@@ -1,4 +1,5 @@
-#在這裏，您可以定義顯示給玩家的所有BossShopPro文本。保留一行空白以禁用消息。
+#在这里，您可以定义显示给玩家的所有BossShopPro文本。保留一行空白以禁用消息。
+#翻译文本不定时更新，建议在更新插件后删除语言文件夹即可(自定义修改需备份，如果你有)
 Main:
   NoPermission: '&c你不能这么做！'
   AlreadyBought: '&c你已经购买了它！'
@@ -27,7 +28,7 @@ ShopCreate:
   FileExists: "&c相同的文件已存在，将会覆盖文件。"
   SomeoneCreating: "&4警告：别人正在用它创建菜单。"
   #这两个字符串不要随意修改,否则无法保存文件。
-  Title: "&8正在创建商店 %shop%(按ESC保存文件)"
+  Title: "&8正在创建商店 %shop%(关闭以保存文件)"
   TitleHead: "&8正在创建商店"
 Command:
   Help1: "&c/BossShop - 打开主商店"

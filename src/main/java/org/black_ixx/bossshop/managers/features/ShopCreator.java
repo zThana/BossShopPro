@@ -8,6 +8,7 @@ import org.bukkit.block.banner.Pattern;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TropicalFish;
 import org.bukkit.event.EventHandler;
@@ -22,10 +23,7 @@ import org.bukkit.potion.PotionEffect;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class ShopCreator implements Listener {
     private String name = "";
@@ -140,15 +138,26 @@ public class ShopCreator implements Listener {
             list.add("custommodeldata:"+meta.getCustomModelData());
         }
         //Item meta check start
+        if(meta instanceof Colorable){
+            Colorable colorable = (Colorable) meta;
+            Color color = colorable.getColor() != null ? colorable.getColor().getColor() : Color.fromRGB(0,0,0);
+            list.add("color:"+color.getRed()+"#"+color.getGreen()+"#"+color.getBlue());
+        }
         if(meta instanceof LeatherArmorMeta){
             Color c = ((LeatherArmorMeta) meta).getColor();
             if(!c.equals(Bukkit.getItemFactory().getDefaultLeatherColor())){
                list.add("color:"+c.getRed()+"#"+c.getGreen()+"#"+c.getBlue());
             }
         }
-        if(meta instanceof Colorable){
-            Color color = ((Colorable) meta).getColor().getColor();
-            list.add("color:"+color.getRed()+"#"+color.getGreen()+"#"+color.getBlue());
+        if(meta instanceof EnchantmentStorageMeta){
+            EnchantmentStorageMeta enchantmentStorage = (EnchantmentStorageMeta) meta;
+            if(enchantmentStorage.hasStoredEnchants()){
+                for(Enchantment enchantment:enchantmentStorage.getStoredEnchants().keySet()){
+                    String name = enchantment.getKey().getKey();
+                    int lvl = enchantments.get(enchantment);
+                    list.add("enchantment:"+name+"#"+lvl);
+                }
+            }
         }
         if(meta instanceof PotionMeta){
             PotionMeta potion = (PotionMeta) meta;
@@ -200,7 +209,19 @@ public class ShopCreator implements Listener {
                 }
             }
         }
+        if(isHighThan116()){
+            if(meta instanceof AxolotlBucketMeta){
+                AxolotlBucketMeta axolotlBucket = (AxolotlBucketMeta) i.getItemMeta();
+                Axolotl.Variant variant = axolotlBucket.getVariant();
+                list.add("axolotl:" + variant.name());
+            }
+        }
         //Item meta check end
+
+        //remove duplicates
+        HashSet<String> hashSet = new HashSet<>(list);
+        list = new ArrayList<>(hashSet);
+
         return list;
     }
     private String getName(){
@@ -211,5 +232,10 @@ public class ShopCreator implements Listener {
     }
     private void setName(String name){
         this.name = name;
+    }
+    private boolean isHighThan116(){
+        String version = Bukkit.getServer().getBukkitVersion().split("-")[0];
+        int version2 = Integer.parseInt(version.split("\\.")[1]);
+        return version2 >= 17;
     }
 }

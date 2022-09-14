@@ -128,7 +128,7 @@ public class ClassManager {
             }
         }
 
-        if (settings.getBalanceVariableEnabled() || settings.getBalancePointsVariableEnabled() || settings.getProperty(Settings.HIDE_ITEMS_PLAYERS_DONT_HAVE_PERMISSIONS_FOR).containsValueAny(true)) {
+        if (settings.getBalanceVariableEnabled() || settings.getBalancePointsVariableEnabled() || settings.getPropertyBoolean(Settings.HIDE_ITEMS_PLAYERS_DONT_HAVE_PERMISSIONS_FOR,true)) {
             customizer = new ShopCustomizer();
         }
 
