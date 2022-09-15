@@ -9,29 +9,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BSRewardType {
-
-
-    public static BSRewardType
+    public static BSRewardType Health,
+            Map,
+            TeleportWorld,
+            Teleport,
+            ShopPage,
+            Shop,
+            Points,
+            PlayerCommandOp,
+            PlayerCommand,
+            Nothing,
+            Permission,
+            Money,
+            ItemAll,
+            Item,
+            Exp,
+            Custom,
+            Enchantment,
+            Command,
+            Close,
+            BungeeCordServer,
             BungeeCordCommand;
-    public static BSRewardType BungeeCordServer;
-    public static BSRewardType Close;
-    public static BSRewardType Command;
-    public static BSRewardType Custom;
-    public static BSRewardType Enchantment;
-    public static BSRewardType Exp;
-    public static BSRewardType Item;
-    public static BSRewardType ItemAll;
-    public static BSRewardType Money;
-    public static BSRewardType Nothing;
-    public static BSRewardType Permission;
-    public static BSRewardType PlayerCommand;
-    public static BSRewardType PlayerCommandOp;
-    public static BSRewardType Points;
-    public static BSRewardType Shop;
-    public static BSRewardType ShopPage;
-    public static BSRewardType Teleport;
-    public static BSRewardType TeleportWorld;
-    public static BSRewardType Health;
 
     private static List<BSRewardType> types;
     private String[] names = createNames();
@@ -59,6 +57,7 @@ public abstract class BSRewardType {
         Teleport = registerType(new BSRewardTypeTeleport());
         TeleportWorld = registerType(new BSRewardTypeTeleportWorld());
         Health = registerType(new BSRewardTypeHeal());
+        Map = registerType(new BSRewardTypeMap());
     }
 
     public static BSRewardType registerType(BSRewardType type) {

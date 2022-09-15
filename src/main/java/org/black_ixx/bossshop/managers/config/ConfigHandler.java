@@ -32,7 +32,6 @@ public class ConfigHandler {
         settings.setServerPingingWaitTime((config.getInt("ServerPinging.WaitTimeAfterFail")));
         settings.setServerPingingFixConnector((config.getBoolean("ServerPinging.FixConnector")));
         settings.setAutoRefreshSpeed((config.getInt("AutoRefreshDelay")));
-        settings.setMetricsEnabled((!config.getBoolean("DisableMetrics")));
         settings.setPointsPlugin(findPointsPlugin(config.getString("PointsPlugin")));
         settings.setLoadSubfoldersEnabled(config.getBoolean("SearchSubfoldersForShops"));
         settings.setServerPingingEnabled(config.getBoolean("ServerPinging.Enabled"));

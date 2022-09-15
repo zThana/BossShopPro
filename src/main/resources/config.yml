@@ -29,7 +29,7 @@ ReloadAfterCreateShop: false
 #
 #
 # EnableSigns:
-# If set EnableSigns to 'false' BossShop signs will be disabled.
+# If set EnableSigns to 'false' BossShopPro signs will be disabled.
 EnableSigns: true
 #
 #
@@ -41,7 +41,7 @@ MainShop: Menu
 #
 # HideItemsPlayersDoNotHavePermissionsFor:
 # If enabled all Items your players do not have permissions for will be "hidden". That way you can create cool things like upgrade systems:
-# Put multiple Items on the same slot and hide the ones which are not available any more. For example if you work with upgrades, hide the old upgrade and show the next one.
+# Put multiple Items on the same slot and hide the ones which are not available anymore. For example if you work with upgrades, hide the old upgrade and show the next one.
 HideItemsPlayersDoNotHavePermissionsFor: false
 #
 #
@@ -175,7 +175,7 @@ ExpUseLevels: true
 # Shops are refreshed through following ways:
 # - Static shops: shops that only contain fix and static items do not need to be refreshed
 # - Shops with serverpinging: Each time the servers are checked for their playeramount and motd these shops are refreshed
-# - When a player purchases something that might affect the look of the shop the shop is updated (for example when a player purchases permissions or spends money)
+# - When a player purchases something that might affect the look of the shop is updated (for example when a player purchases permissions or spends money)
 # - Optionally all shops are updated every x seconds: If you have advanced shops you might work with conditions like hunger and health. If you do that you might want your shops
 #   to automatically update after some time in order to make sure that the shops adapt to your players circumstances in live-time.
 # Here you can define the refresh-delay in ticks (20 ticks = 1 second). If you do not want the shops to auto-refresh set the value to -1.
@@ -239,7 +239,7 @@ MultiplierGroups:
 #
 # PointsPlugin:
 # Only important if you work with Points.
-# Here you can enter whatever you want. BossShop will always detect the Points Plugin you are using and it will hook into it
+# Here you can enter whatever you want. BossShop will always detect the Points Plugin you are using, and it will hook into it
 # (If you are using one). If you use multiple Points Plugins fill in the name of the one that you want BossShop to work with.
 # 'PlayerPoints', 'CommandPoints', 'EnjinMinecraftPlugin'/'Enjin', 'PointsAPI', 'Jobs', 'TokenEnchant', 'Kingdoms', 'MySQL-Tokens', 'VotingPlugin', 'MySQLTokens'.
 PointsPlugin: auto-detect

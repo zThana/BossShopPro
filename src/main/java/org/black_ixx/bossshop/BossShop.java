@@ -59,10 +59,7 @@ public class BossShop extends JavaPlugin {
             getCommand("shop").setExecutor(commander);
             getCommand("shop").setTabCompleter(commander);
         }
-
-
         ////////////////<- Listeners
-
         il = new InventoryListener(this);
         getServer().getPluginManager().registerEvents(il, this);
 
