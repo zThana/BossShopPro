@@ -10,9 +10,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 
 public class BSPBungeeCordPluginListener implements Listener {
-
-    String USER = "%%__USER__%%";
-    private Plugin plugin;
+    private final Plugin plugin;
 
     public BSPBungeeCordPluginListener(Plugin plugin) {
         this.plugin = plugin;

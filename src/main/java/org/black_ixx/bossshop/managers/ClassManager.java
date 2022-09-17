@@ -272,4 +272,10 @@ public class ClassManager {
         return itemdataStorage;
     }
 
+    /**
+     * Why I create this method?
+     * Because the settings return some nulls.
+     * @return plugin's config
+     */
+    public FileConfiguration getPluginConfig(){return plugin.getConfig();}
 }

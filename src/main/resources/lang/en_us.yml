@@ -1,5 +1,5 @@
 #Here you can define all BossShopPro texts displayed to players. Leave a line empty in order to disable a message.
-#The translated text is updated irregularly. It is recommended to delete the language folder after updating the plug-in (the customized modification needs to be backed up, if you have one)
+#The translated text is updated irregularly. It is recommended to delete the language folder after updating the plugin (the customized modification needs to be backed up, if you have one)
 Main:
   NoPermission: '&cYou are not allowed to do this!'
   AlreadyBought: '&cYou already purchased that!'

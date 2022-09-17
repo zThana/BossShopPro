@@ -6,6 +6,7 @@ import org.black_ixx.bossshop.core.BSShop;
 import org.black_ixx.bossshop.events.BSReloadedEvent;
 import org.black_ixx.bossshop.inbuiltaddons.InbuiltAddonLoader;
 import org.black_ixx.bossshop.listeners.InventoryListener;
+import org.black_ixx.bossshop.listeners.MenuOpenListener;
 import org.black_ixx.bossshop.listeners.PlayerListener;
 import org.black_ixx.bossshop.listeners.SignListener;
 import org.black_ixx.bossshop.managers.ClassManager;
@@ -69,6 +70,7 @@ public class BossShop extends JavaPlugin {
         pl = new PlayerListener(this);
         getServer().getPluginManager().registerEvents(pl, this);
 
+        getServer().getPluginManager().registerEvents(new MenuOpenListener(), this);
 
         new BukkitRunnable() {
             @Override

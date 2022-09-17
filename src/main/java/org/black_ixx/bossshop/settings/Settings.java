@@ -2,9 +2,12 @@ package org.black_ixx.bossshop.settings;
 
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.managers.features.PointsManager.PointsPlugin;
+import org.black_ixx.bossshop.managers.misc.InputReader;
+import org.bukkit.Material;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationSection;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,29 +15,33 @@ import java.util.Map;
 public class Settings {
 
     public final static int
-            LANGUAGE = 0,
-            RELOAD_AFTER_CREATE_SHOP = 1,
-            HIDE_ITEMS_PLAYERS_DONT_HAVE_PERMISSIONS_FOR = 2,
-            ALLOW_UNSAFE_ENCHANTMENTS = 3,
-            ALLOW_SELLING_GREATER_ENCHANTS = 4,
-            CLOSE_SHOP_AFTER_PURCHASE = 5,
-            CLICK_DELAY = 6,
-            SOUND_SHOPITEM_PURCHASE = 7, //Actions with a price that is not nothing
-            SOUND_SHOPITEM_CLICK = 8, //Actions with pricetype nothing
-            SOUND_SHOPITEM_NOPERMISSION = 9,
-            SOUND_SHOPITEM_NOTENOUGHMONEY = 10,
-            SOUND_SHOP_OPEN = 11,
-            SOUND_SHOP_CLOSE = 12,
-            SOUND_SHOP_CHANGE_PAGE = 13,
-            SOUND_SHOP_CHANGE_SHOP = 14;
+            LANGUAGE = 0;
+    public final static int RELOAD_AFTER_CREATE_SHOP = 1;
+    public final static int HIDE_ITEMS_PLAYERS_DONT_HAVE_PERMISSIONS_FOR = 2;
+    public final static int ALLOW_UNSAFE_ENCHANTMENTS = 3;
+    public final static int ALLOW_SELLING_GREATER_ENCHANTS = 4;
+    public final static int CLOSE_SHOP_AFTER_PURCHASE = 5;
+    public final static int CLICK_DELAY = 6;
+    public final static int SOUND_SHOPITEM_PURCHASE = 7; //Actions with a price that is not nothing
+            public final static int SOUND_SHOPITEM_CLICK = 8; //Actions with pricetype nothing
+            public final static int SOUND_SHOPITEM_NOPERMISSION = 9;
+    public final static int SOUND_SHOPITEM_NOTENOUGHMONEY = 10;
+    public final static int SOUND_SHOP_OPEN = 11;
+    public final static int SOUND_SHOP_CLOSE = 12;
+    public final static int SOUND_SHOP_CHANGE_PAGE = 13;
+    public final static int SOUND_SHOP_CHANGE_SHOP = 14;
+    public final static int USE_F_KEY = 15;
+    public final static int OPEN_MATERIAL = 16;
 
 
     private boolean signs, money, points, vault, permissions, bungeecord, pointsdisplay, moneydisplay, serverpinging, load_subfolders, transactionslog, check_stacksize, exp_use_level,
-            shopcommands, serverpinging_fixconnector, itemall_show_final_reward, inventory_full_drop_items, purchase_async, allow_selling_damaged_items, reload_after_create_shop;
+            shopcommands, serverpinging_fixconnector, itemall_show_final_reward, inventory_full_drop_items, purchase_async, allow_selling_damaged_items, reload_after_create_shop
+            , use_F_key, openMaterial;
     private int serverpinging_delay, serverpinging_waittime, serverpinging_timeout, autorefresh_delay, max_line_length, number_grouping_size, input_timeout;
     private String mainshop, number_locale, language;
     private PointsPlugin pointsplugin;
     private List<String> money_formatting, points_formatting;
+    private List<Material> openMaterials;
 
     private boolean debug;
 
@@ -62,6 +69,8 @@ public class Settings {
         properties.put(SOUND_SHOP_CLOSE, new ShopProperty(config, "Sound.Shop.Close", String.class));
         properties.put(SOUND_SHOP_CHANGE_PAGE, new ShopProperty(config, "Sound.Shop.ChangePage", String.class));
         properties.put(SOUND_SHOP_CHANGE_SHOP, new ShopProperty(config, "Sound.Shop.ChangeShop", String.class));
+        properties.put(USE_F_KEY, new ShopProperty(config, "UseFKey", Boolean.class));
+        properties.put(OPEN_MATERIAL, new ShopProperty(config,"OpenMaterial.Enabled", Boolean.class));
     }
 
     /**
@@ -413,5 +422,18 @@ public class Settings {
     public void setInputTimeout(int i) {
         input_timeout = i;
     }
-
+    public void setUseFKey(boolean b){
+        use_F_key = b;
+    }
+    public void setOpenMaterialEnabled(boolean b){
+        openMaterial = b;
+    }
+    public void setOpenMaterial(List<String> materials){
+        List<Material> materialList = new ArrayList<>();
+        for(String material:materials){
+            Material m = InputReader.readMaterial(material);
+            materialList.add(m);
+        }
+        openMaterials = materialList;
+    }
 }

@@ -1,6 +1,7 @@
 # BossShopPro
 # by Felix Neubauer and mmmjjkx(lijinhong11)
 # Check out following page for more information: https://www.spigotmc.org/wiki/bossshoppro-configuration
+# The config file is updated irregularly. It is recommended to delete the config file after updating the plugin (the customized modification needs to be backed up, if you have one)
 #
 # BossShopPro Wiki Page:
 # https://www.spigotmc.org/wiki/bossshoppro
@@ -241,7 +242,7 @@ MultiplierGroups:
 # Only important if you work with Points.
 # Here you can enter whatever you want. BossShop will always detect the Points Plugin you are using, and it will hook into it
 # (If you are using one). If you use multiple Points Plugins fill in the name of the one that you want BossShop to work with.
-# 'PlayerPoints', 'CommandPoints', 'EnjinMinecraftPlugin'/'Enjin', 'PointsAPI', 'Jobs', 'TokenEnchant', 'Kingdoms', 'MySQL-Tokens', 'VotingPlugin', 'MySQLTokens'.
+# 'PlayerPoints', 'Jobs', 'TokenEnchant', 'VotingPlugin'.
 PointsPlugin: auto-detect
 #
 #
@@ -259,3 +260,18 @@ Sound:
     ChangeShop: 'BLOCK_CHEST_OPEN:0.2:1'
     Open: 'ENTITY_ELDER_GUARDIAN_CURSE:1:1.8'
     Close: ''
+#
+#
+# UseFKey:
+# It allows you to open the main menu by directly pressing the F key without any command.
+UseFKey:
+  Enabled: false
+  EnableShift: false
+#
+#
+# OpenMaterial:
+# It allows you to open the main menu by using specific item without any command.
+OpenMaterial:
+  Enabled: false
+  AllowMaterials:
+    - ""

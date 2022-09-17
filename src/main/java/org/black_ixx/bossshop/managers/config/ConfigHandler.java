@@ -44,6 +44,9 @@ public class ConfigHandler {
         settings.setExpUseLevel(config.getBoolean("ExpUseLevels"));
         settings.setAllowSellingDamagedItems(config.getBoolean("AllowSellingDamagedItems"));
         settings.setInputTimeout(config.getInt("InputTimeout"));
+        settings.setUseFKey(config.getBoolean("UseFKey"));
+        settings.setOpenMaterialEnabled(config.getBoolean("OpenMaterial.Enabled"));
+        settings.setOpenMaterial(config.getStringList("OpenMaterial.AllowMaterials"));
 
         if (config.getBoolean("BungeeCord")) {
             settings.setBungeeCordServerEnabled(true); //Do it that way because maybe in config it is set to false but still required and enabled by something else

@@ -4,7 +4,6 @@ import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.managers.misc.InputReader;
 import org.bukkit.Bukkit;
-import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
@@ -22,11 +21,11 @@ public class BSRewardTypeMap extends BSRewardType{
     public boolean validityCheck(String item_name, Object o) {
         if(o != null){
             String[] parts = o.toString().split("[|]");
-            if(parts.length == 6||parts.length==3){
+            if(parts.length==3){
                 return true;
             }
             ClassManager.manager.getBugFinder().severe("Was not able to create ShopItem " + item_name + "! " +
-                    "The reward object needs to be written in the format of 'isLocked(boolean)|isTrackingPosition(boolean)|isUnlimitedTracking(boolean)' or 'isLocked(boolean)|isTrackingPosition(boolean)|isUnlimitedTracking(boolean)|red|blue|green'");
+                    "The reward object needs to be written in the format of 'isLocked|isTrackingPosition|isUnlimitedTracking'");
             return false;
         }
         ClassManager.manager.getBugFinder().severe("Was not able to create ShopItem " + item_name + "! The reward must not be empty.");
@@ -45,7 +44,7 @@ public class BSRewardTypeMap extends BSRewardType{
 
     @Override
     public void giveReward(Player p, BSBuy buy, Object reward, ClickType clickType) {
-        ItemStack is = new ItemStack(Material.MAP);
+        ItemStack is = new ItemStack(Material.FILLED_MAP);
         MapView mapView = Bukkit.createMap(p.getWorld());
         String[] parts = reward.toString().split("[|]");
         MapMeta meta = (MapMeta) is.getItemMeta();
@@ -56,11 +55,6 @@ public class BSRewardTypeMap extends BSRewardType{
         mapView.setTrackingPosition(Boolean.parseBoolean(parts[1]));
         mapView.setUnlimitedTracking(Boolean.parseBoolean(parts[2]));
         meta.setMapView(mapView);
-        if(parts.length==6){
-            Color c = Color.fromRGB(InputReader.getInt(parts[3].trim(),0),
-                    InputReader.getInt(parts[4].trim(),0),InputReader.getInt(parts[5].trim(),0));
-            meta.setColor(c);
-        }
         is.setItemMeta(meta);
         p.getInventory().addItem(is);
     }
