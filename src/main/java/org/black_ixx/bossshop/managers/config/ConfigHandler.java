@@ -44,7 +44,7 @@ public class ConfigHandler {
         settings.setExpUseLevel(config.getBoolean("ExpUseLevels"));
         settings.setAllowSellingDamagedItems(config.getBoolean("AllowSellingDamagedItems"));
         settings.setInputTimeout(config.getInt("InputTimeout"));
-        settings.setUseFKey(config.getBoolean("UseFKey"));
+        settings.setUseFKey(config.getBoolean("UseFKey.Enabled"));
         settings.setOpenMaterialEnabled(config.getBoolean("OpenMaterial.Enabled"));
         settings.setOpenMaterial(config.getStringList("OpenMaterial.AllowMaterials"));
 
