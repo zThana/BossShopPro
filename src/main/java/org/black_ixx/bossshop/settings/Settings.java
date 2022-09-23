@@ -1,7 +1,10 @@
 package org.black_ixx.bossshop.settings;
 
 import org.black_ixx.bossshop.managers.ClassManager;
+import org.black_ixx.bossshop.managers.features.PointsManager;
 import org.black_ixx.bossshop.managers.features.PointsManager.PointsPlugin;
+import org.black_ixx.bossshop.pointsystem.BSPointsAPI;
+import org.bukkit.Bukkit;
 
 import java.util.List;
 
@@ -26,10 +29,9 @@ public class Settings {
     public final static String SOUND_SHOP_CHANGE_SHOP = "Sound.Shop.ChangeShop";
     public final static String HIDE_ITEMS_PLAYERS_DONT_HAVE_PERMISSIONS_FOR = "HideItemsPlayersDoNotHavePermissionsFor";
 
-    private boolean signs, money, points, vault, permissions, bungeecord, pointsdisplay, moneydisplay, serverpinging, load_subfolders, transactionslog, check_stacksize, exp_use_level,
+    private boolean signs, money, points, vault, permissions, bungeecord, pointsdisplay, serverpinging, load_subfolders, transactionslog, exp_use_level,
             shopcommands, serverpinging_fixconnector, itemall_show_final_reward, inventory_full_drop_items, purchase_async, allow_selling_damaged_items;
-    private int serverpinging_delay, serverpinging_waittime, serverpinging_timeout, autorefresh_delay, max_line_length, number_grouping_size, input_timeout;
-    private PointsPlugin pointsplugin;
+    private int serverpinging_delay, serverpinging_waittime, serverpinging_timeout, autorefresh_delay, max_line_length;
     private List<String> money_formatting, points_formatting;
 
     /**
@@ -129,7 +131,27 @@ public class Settings {
     }
 
     public PointsPlugin getPointsPlugin() {
-        return pointsplugin;
+        String config_points_plugin = getString("PointsPlugin");
+        if (config_points_plugin != null) {
+            for (PointsPlugin pp : PointsPlugin.values()) {
+                for (String nick : pp.getNicknames()) {
+                    if (nick.equalsIgnoreCase(config_points_plugin)) {
+                        return pp;
+                    }
+                }
+            }
+        }
+        if (BSPointsAPI.get(config_points_plugin) != null) {
+            PointsManager.PointsPlugin.CUSTOM.setCustom(config_points_plugin);
+            return PointsManager.PointsPlugin.CUSTOM;
+        }
+        for (PointsPlugin pp : PointsPlugin.values()) {
+            String plugin_name = pp.getPluginName();
+            if ((plugin_name != null) && (Bukkit.getPluginManager().getPlugin(plugin_name) != null)) {
+                return pp;
+            }
+        }
+        return null;
     }
 
     public boolean getTransactionLogEnabled() {
