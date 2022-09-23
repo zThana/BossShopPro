@@ -62,7 +62,7 @@ public class InventoryListener implements Listener {
                 @Override
                 public void run() {
                     if (!ClassManager.manager.getPlugin().getAPI().isValidShop(p.getOpenInventory())) {
-                        Misc.playSound(p, ClassManager.manager.getSettings().getPropertyString(Settings.SOUND_SHOP_CLOSE, this, null));
+                        Misc.playSound(p, ClassManager.manager.getSettings().getString(Settings.SOUND_SHOP_CLOSE));
                     }
                 }
             }.runTask(plugin);

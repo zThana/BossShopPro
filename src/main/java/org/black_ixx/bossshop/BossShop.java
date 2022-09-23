@@ -11,6 +11,7 @@ import org.black_ixx.bossshop.listeners.PlayerListener;
 import org.black_ixx.bossshop.listeners.SignListener;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.managers.CommandManager;
+import org.black_ixx.bossshop.settings.Settings;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -33,7 +34,7 @@ public class BossShop extends JavaPlugin {
     }
 
     public static void debug(String s) {
-        if (ClassManager.manager.getSettings().isDebugEnabled()) {
+        if (ClassManager.manager.getSettings().getBoolean(Settings.DEBUG)) {
             log(s);
         }
     }

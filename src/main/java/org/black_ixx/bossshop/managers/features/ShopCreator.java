@@ -3,6 +3,7 @@ package org.black_ixx.bossshop.managers.features;
 import org.black_ixx.bossshop.BossShop;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.managers.MessageHandler;
+import org.black_ixx.bossshop.settings.Settings;
 import org.bukkit.*;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.configuration.ConfigurationSection;
@@ -95,7 +96,7 @@ public class ShopCreator implements Listener {
         } catch (IOException e) {throw new RuntimeException(e);}
         setName("");
         mh.sendMessage("ShopCreate.Success",p);
-        if(ClassManager.manager.getSettings().isReloadAfterCreateShop()){
+        if(ClassManager.manager.getSettings().getBoolean(Settings.RELOAD_AFTER_CREATE_SHOP)){
             ClassManager.manager.getPlugin().reloadPlugin(p);
         }
     }

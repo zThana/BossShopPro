@@ -2,6 +2,7 @@ package org.black_ixx.bossshop.managers.serverpinging;
 
 import com.google.gson.Gson;
 import org.black_ixx.bossshop.managers.ClassManager;
+import org.black_ixx.bossshop.settings.Settings;
 
 import java.io.*;
 import java.net.Socket;
@@ -27,7 +28,7 @@ public class ServerConnector2 implements ServerConnector {
 
         } catch (Exception e) {
             info.setNoConnection();
-            if (ClassManager.manager.getSettings().isDebugEnabled()) {
+            if (ClassManager.manager.getSettings().getBoolean(Settings.DEBUG)) {
                 e.printStackTrace();
             }
         }

@@ -3,6 +3,7 @@ package org.black_ixx.bossshop.managers.item;
 
 import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.managers.ClassManager;
+import org.black_ixx.bossshop.settings.Settings;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -16,8 +17,8 @@ public class ItemStackChecker {
     public final static int INVENTORY_SLOT_START = 0;
     public final static int INVENTORY_SLOT_END = 35;
 
-    private List<String> tools_suffixes;
-    private List<Material> tools_complete;
+    private final List<String> tools_suffixes;
+    private final List<Material> tools_complete;
 
     public ItemStackChecker() {
         tools_suffixes = new ArrayList<>();
@@ -217,7 +218,7 @@ public class ItemStackChecker {
     }
 
     public int getMaxStackSize(ItemStack i) {
-        if (ClassManager.manager.getSettings().getCheckStackSize()) {
+        if (ClassManager.manager.getSettings().getBoolean(Settings.CHECK_STACK_SIZE)) {
             return i.getMaxStackSize();
         }
         return 64;

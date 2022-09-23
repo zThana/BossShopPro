@@ -199,7 +199,7 @@ public abstract class BSShop {
 
     public void updateInventory(Inventory i, BSShopHolder holder, Player p, ClassManager manager, int page, int highest_page, boolean auto_refresh) {
         if (holder.getPage() != page) {
-            Misc.playSound(p, ClassManager.manager.getSettings().getPropertyString(Settings.SOUND_SHOP_CHANGE_PAGE, this, null));
+            Misc.playSound(p, ClassManager.manager.getSettings().getString(Settings.SOUND_SHOP_CHANGE_PAGE));
         }
         holder.setPage(page);
         holder.setHighestPage(highest_page);
@@ -281,9 +281,9 @@ public abstract class BSShop {
 
         ClassManager.manager.getMessageHandler().sendMessage("Main.OpenShop", p, null, p, this, null, null);
         if (ClassManager.manager.getPlugin().getAPI().isValidShop(p.getOpenInventory())) {
-            Misc.playSound(p, ClassManager.manager.getSettings().getPropertyString(Settings.SOUND_SHOP_CHANGE_SHOP, this, null));
+            Misc.playSound(p, ClassManager.manager.getSettings().getString(Settings.SOUND_SHOP_CHANGE_SHOP));
         } else {
-            Misc.playSound(p, ClassManager.manager.getSettings().getPropertyString(Settings.SOUND_SHOP_OPEN, this, null));
+            Misc.playSound(p, ClassManager.manager.getSettings().getString(Settings.SOUND_SHOP_OPEN));
         }
         p.openInventory(createInventory(p, ClassManager.manager, page, highest_page, oldshopholder));
         ClassManager.manager.getPlayerDataHandler().openedShop(p, this);//TODO: only store previous shop, not current shop somehow.

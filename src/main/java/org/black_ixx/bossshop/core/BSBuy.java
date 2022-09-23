@@ -344,7 +344,7 @@ public class BSBuy {
     }
 
     public void updateShop(BSShop shop, ItemStack menuitem, ClassManager manager, boolean add_item) {
-        if (manager.getSettings().getPropertyBoolean(Settings.HIDE_ITEMS_PLAYERS_DONT_HAVE_PERMISSIONS_FOR, this)) {
+        if (manager.getPluginConfig().getBoolean("HideItemsPlayersDoNotHavePermissionsFor",true)) {
             if (!shop.isCustomizable()) {
                 if (isExtraPermissionExisting(null)) {
                     shop.setCustomizable(true);
@@ -398,7 +398,7 @@ public class BSBuy {
 
     public void click(Player p, BSShop shop, BSShopHolder holder, ClickType clicktype, InventoryClickEvent event, BossShop plugin) {
         if (!hasPermission(p, true, clicktype)) {
-            Misc.playSound(p, ClassManager.manager.getSettings().getPropertyString(Settings.SOUND_SHOPITEM_NOPERMISSION, this, null));
+            Misc.playSound(p, ClassManager.manager.getSettings().getString(Settings.SOUND_SHOPITEM_NOPERMISSION));
             return;
         }
         if (!meetsCondition(holder, p)) {
@@ -432,7 +432,7 @@ public class BSBuy {
             return;
         }
         if (!pricetype.hasPrice(p, this, getPrice(clicktype), clicktype, true)) {
-            Misc.playSound(p, ClassManager.manager.getSettings().getPropertyString(Settings.SOUND_SHOPITEM_NOTENOUGHMONEY, this, null));
+            Misc.playSound(p, ClassManager.manager.getSettings().getString(Settings.SOUND_SHOPITEM_NOTENOUGHMONEY));
             return;
         }
 
@@ -503,7 +503,7 @@ public class BSBuy {
 
 
         //Close shop if wanted
-        if (plugin.getClassManager().getSettings().getPropertyBoolean(Settings.CLOSE_SHOP_AFTER_PURCHASE, this)) {
+        if (plugin.getClassManager().getSettings().getBoolean(Settings.CLOSE_SHOP_AFTER_PURCHASE)) {
             p.closeInventory(); //NEW!!! MIGHT CAUSE BUGS!! Before it was executed async and after all other actions are executed.
         }
 
@@ -550,10 +550,10 @@ public class BSBuy {
         //Send message and play sound
         ClassManager.manager.getMessageHandler().sendMessageDirect(message, p);
         if (pricetype != BSPriceType.Nothing) {
-            Misc.playSound(p, ClassManager.manager.getSettings().getPropertyString(Settings.SOUND_SHOPITEM_PURCHASE, this, null));
+            Misc.playSound(p, ClassManager.manager.getSettings().getString(Settings.SOUND_SHOPITEM_PURCHASE));
         } else {
             if (rewardtype.isActualReward()) {
-                Misc.playSound(p, ClassManager.manager.getSettings().getPropertyString(Settings.SOUND_SHOPITEM_CLICK, this, null));
+                Misc.playSound(p, ClassManager.manager.getSettings().getString(Settings.SOUND_SHOPITEM_CLICK));
             }
         }
 

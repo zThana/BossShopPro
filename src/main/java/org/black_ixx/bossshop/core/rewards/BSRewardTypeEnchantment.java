@@ -48,7 +48,7 @@ public class BSRewardTypeEnchantment extends BSRewardType {
             return false;
         }
 
-        if (!ClassManager.manager.getSettings().getPropertyBoolean(Settings.ALLOW_UNSAFE_ENCHANTMENTS, buy)) {
+        if (!ClassManager.manager.getSettings().getBoolean(Settings.ALLOW_UNSAFE_ENCHANTMENTS)) {
             if (!(enchant.getType().canEnchantItem(item))) {
                 if (message_if_no_success) {
                     ClassManager.manager.getMessageHandler().sendMessage("Enchantment.Invalid", p);

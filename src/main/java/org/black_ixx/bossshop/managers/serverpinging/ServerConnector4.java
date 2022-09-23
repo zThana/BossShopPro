@@ -1,6 +1,7 @@
 package org.black_ixx.bossshop.managers.serverpinging;
 
 import org.black_ixx.bossshop.managers.ClassManager;
+import org.black_ixx.bossshop.settings.Settings;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -66,7 +67,7 @@ public class ServerConnector4 implements ServerConnector {
             return true;
         } catch (Exception e) {
             info.setOnline(false);
-            if (ClassManager.manager.getSettings().isDebugEnabled()) {
+            if (ClassManager.manager.getSettings().getBoolean(Settings.DEBUG)) {
                 e.printStackTrace();
             }
             return false;

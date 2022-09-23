@@ -71,7 +71,7 @@ public class ClassManager {
         //////////////// <- Independent Classes
 
         playerdataHandler = new PlayerDataHandler();
-        MathTools.init(settings.getNumberLocale(), settings.getNumberGroupingSize());
+        MathTools.init(settings.getString(Settings.NUMBER_LOCALE), settings.getInt(Settings.NUMBER_GROUPING_SIZE));
         storageManager = new StorageManager(plugin);
         bugfinder = new BugFinder(plugin);
         itemdataStorage = new ItemDataStorage(plugin);
@@ -128,7 +128,7 @@ public class ClassManager {
             }
         }
 
-        if (settings.getBalanceVariableEnabled() || settings.getBalancePointsVariableEnabled() || settings.getPropertyBoolean(Settings.HIDE_ITEMS_PLAYERS_DONT_HAVE_PERMISSIONS_FOR,true)) {
+        if (settings.getBalancePointsVariableEnabled() || getPluginConfig().getBoolean("HideItemsPlayersDoNotHavePermissionsFor",true)) {
             customizer = new ShopCustomizer();
         }
 

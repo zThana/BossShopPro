@@ -127,7 +127,7 @@ public class ItemDataPartEnchantment extends ItemDataPart {
                 return false;
             }
         }
-        if (!ClassManager.manager.getSettings().getPropertyBoolean(Settings.ALLOW_SELLING_GREATER_ENCHANTS, buy)) {
+        if (!ClassManager.manager.getSettings().getBoolean(Settings.ALLOW_SELLING_GREATER_ENCHANTS)) {
             for (Enchantment e : ep.keySet()) {
                 if (!es.containsKey(e)) {
                     return false;

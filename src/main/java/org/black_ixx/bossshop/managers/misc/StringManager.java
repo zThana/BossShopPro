@@ -161,7 +161,6 @@ public class StringManager {
         if (s.contains("%")) {
 
             if (s.contains("%balance%")) {
-                ClassManager.manager.getSettings().setBalanceVariableEnabled(true);
                 ClassManager.manager.getSettings().setVaultEnabled(true);
                 ClassManager.manager.getSettings().setMoneyEnabled(true);
                 b = true;

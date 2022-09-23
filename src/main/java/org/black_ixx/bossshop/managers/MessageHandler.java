@@ -5,6 +5,7 @@ import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.core.BSShop;
 import org.black_ixx.bossshop.core.BSShopHolder;
 import org.black_ixx.bossshop.managers.config.FileHandler;
+import org.black_ixx.bossshop.settings.Settings;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -146,7 +147,7 @@ public class MessageHandler {
         return ClassManager.manager.getStringManager().transform(message, item, shop, holder, target);
     }
     public void setupLocate(){
-        String LangCode = ClassManager.manager.getSettings().getLanguage();
+        String LangCode = ClassManager.manager.getSettings().getString(Settings.Language);
         if(Objects.equals(LangCode,null)||LangCode.equals("")){
             LangCode = "en_us";
             plugin.getConfig().set("Language","en_us");

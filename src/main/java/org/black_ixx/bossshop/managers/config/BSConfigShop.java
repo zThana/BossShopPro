@@ -90,8 +90,6 @@ public class BSConfigShop extends BSShop {
             setCommands(commands.split(":"));
         }
 
-        ClassManager.manager.getSettings().update(this);
-
         //Load Items
         loadItems();
         BSLoadShopItemsEvent event = new BSLoadShopItemsEvent(shophandler, this);

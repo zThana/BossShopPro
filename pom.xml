@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.black_ixx</groupId>
 	<artifactId>BossShopPro</artifactId>
-	<version>3.1.7</version>
+	<version>3.1.7.2(test)</version>
 	<name>BossShopPro</name>
 	<description>Create virtual chest shops</description>
 	<build>
@@ -34,13 +34,14 @@
 
 	<repositories>
 		<repository>
+	    	<id>jitpack</id>
+	    	<url>https://jitpack.io</url>
+	    </repository>
+		<repository>
 			<id>spigot-repo</id>
 			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
 		</repository>
-		<repository>
-		    <id>jitpack</id>
-		    <url>https://jitpack.io</url>
-	    </repository>
+
 		<repository>
 			<id>repo</id>
 			<url>https://repo.glaremasters.me/repository/public/</url>
@@ -63,6 +64,13 @@
 	</repositories>
 
 	<dependencies>
+		<!-- Adds itemsadder support -->
+		<dependency>
+			<groupId>com.github.LoneDev6</groupId>
+			<artifactId>api-itemsadder</artifactId>
+			<version>3.0.0</version>
+			<scope>provided</scope>
+		</dependency>
 		<!-- Adds jobs support -->
 		<dependency>
 			<groupId>com.github.Zrips</groupId>

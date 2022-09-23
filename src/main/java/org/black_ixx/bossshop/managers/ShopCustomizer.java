@@ -217,7 +217,7 @@ public class ShopCustomizer {
         }
 
         if (p != null) {
-            if (ClassManager.manager.getSettings().getPropertyBoolean(Settings.HIDE_ITEMS_PLAYERS_DONT_HAVE_PERMISSIONS_FOR, buy) & !buy.hasPermission(p, false, null)) {
+            if (ClassManager.manager.getSettings().getBoolean(Settings.HIDE_ITEMS_PLAYERS_DONT_HAVE_PERMISSIONS_FOR) & !buy.hasPermission(p, false, null)) {
                 return false;
             }
 

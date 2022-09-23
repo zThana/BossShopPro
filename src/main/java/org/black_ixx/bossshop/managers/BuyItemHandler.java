@@ -196,9 +196,6 @@ public class BuyItemHandler {
             ItemStack i = ClassManager.manager.getItemStackCreator().createItemStack(c.getStringList("MenuItem"), buy, shop, false);
             buy.setItem(i, false);
 
-
-            ClassManager.manager.getSettings().update(buy); //TODO: Not tested if inheritance works fine yet. Order of methods matters!
-
             Bukkit.getPluginManager().callEvent(new BSCreatedShopItemEvent(shop, buy, c));
             return buy;
 
