@@ -151,7 +151,6 @@ public class InputReader {
         return null;
     }
 
-
     /**
      * Get enchant by name
      * @param name name of enchant

@@ -18,7 +18,6 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
 import java.util.List;
@@ -31,7 +30,7 @@ public class BSBuy {
     private BSShop shop;
     private HashMap<Plugin, Object> special_information;
 
-    private boolean fix_item; // In order for an item to not be fix it must contain a player-dependent placeholder (detected by StringManager.checkStringForFeatures)
+    private boolean fix_item; // In order for an item to not be fixed it must contain a player-dependent placeholder (detected by StringManager.checkStringForFeatures)
     private ItemStack item;
     private final String name;
     private BSInputType inputtype; // null by default. A value if players need to enter input before they can purchase the item.
@@ -511,12 +510,7 @@ public class BSBuy {
             //Give Reward
             //Some rewardtypes may not be async!
             if (async && rewardtype.allowAsync()) {
-                new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        rewardtype.giveReward(p, BSBuy.this, getReward(clicktype), clicktype);
-                    }
-                }.runTask(plugin);
+                new Thread(() -> rewardtype.giveReward(p, BSBuy.this, getReward(clicktype), clicktype)).start();
             } else {
                 rewardtype.giveReward(p, this, getReward(clicktype), clicktype);
             }

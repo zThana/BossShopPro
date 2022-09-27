@@ -10,8 +10,7 @@ import java.util.List;
 
 public abstract class ItemDataPart {
 
-    public static int
-            PRIORITY_MOST_EARLY = 0;
+    public static int PRIORITY_MOST_EARLY = 0;
     public static int PRIORITY_EARLY = 10;
     public static int PRIORITY_NORMAL = 50;
     public static int PRIORITY_LATE = 80;
@@ -39,7 +38,8 @@ public abstract class ItemDataPart {
             TROPICALFISH,
             SUSPICIOUSSTEW,
             GLOWING,
-            AXOLOTL;
+            AXOLOTL,
+            KNOWLEDGEBOOK;
 
     private static List<ItemDataPart> types;
     private final String[] names = createNames();
@@ -70,6 +70,7 @@ public abstract class ItemDataPart {
         SUSPICIOUSSTEW = registerType(new ItemDataPartSuspiciousStew());
         GLOWING = registerType(new ItemDataPartGlowing());
         AXOLOTL = registerType(new ItemDataPartAxolotl());
+        KNOWLEDGEBOOK = registerType(new ItemDataPartKnowledgeBook());
     }
 
     public static ItemDataPart registerType(ItemDataPart type) {
@@ -96,7 +97,7 @@ public abstract class ItemDataPart {
     }
 
     public static ItemStack transformItem(ItemStack item, List<String> itemdata) {
-        itemdata.sort((s1, s2) -> {//TODO: test sorting out
+        itemdata.sort((s1, s2) -> {
             ItemDataPart type1 = detectTypeSpecial(s1);
             ItemDataPart type2 = detectTypeSpecial(s2);
             if (type1 != null && type2 != null) {

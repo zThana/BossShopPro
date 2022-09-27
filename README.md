@@ -9,17 +9,21 @@ It can not only be used to create shops but for every kind of menu. Here are jus
 * Warp menu
 
 ## About This Project
-This project is an improved version of bosshoppro.This plugin only supports versions 1.16 and above.And fixed some bugs of the original project, see "Changes to the original project".Of course, you can also open issues and submit pull requests.(if the plugin you adapt stops upgrade, the pull request will be rejected.)  
+This project is an improved version of bosshoppro.This plugin only supports versions 1.16 and above.And fixed some bugs of the original project.Of course, you can also open issues and submit pull requests.(if the plugin you adapt stops upgrade, the pull request will be rejected.)  
 You can download the development version from actions.
 
-## Building BossShopPro
+## Plans
 
-A few notes regarding building BSP: the current state of the code, unfortunately, requires you to manually add (the jars of) a few other plugins to the project in order to be able to successfully build BSP. As BSP includes support for many different plugins, such as Kingdoms and EpicSpawners, you need to add those to the project (at least those, which I was not able to add directly via Maven). It requires some initial effort to download those plugins and add them to the project.
+* [x] Multiple hex fix
+* [ ] ItemsAdder Item as Price/Reward/ItemData
+* [ ] More item data
+* [ ] More reward types/price types
+* [ ] More features
+* [ ] Hook more plugins
 
 ## Changes to the original project 
 * Remove old plugins support.  
-* Update dependency and change some prompt. 
-* Something may be added in the future.
+* Update dependency and change some prompt.
 * The plugin usage remains unchanged.
 
 ## API

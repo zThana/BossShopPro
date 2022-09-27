@@ -33,7 +33,6 @@ public class ItemDataPartPlayerhead extends ItemDataPart {
             OfflinePlayer player = Bukkit.getOfflinePlayer(argument);
             meta.setOwningPlayer(player);
         }
-
         item.setItemMeta(meta);
         return item;
     }
