@@ -11,6 +11,7 @@ import org.black_ixx.bossshop.listeners.PlayerListener;
 import org.black_ixx.bossshop.listeners.SignListener;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.managers.CommandManager;
+import org.black_ixx.bossshop.managers.config.ConfigKeyChecker;
 import org.black_ixx.bossshop.settings.Settings;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -72,6 +73,9 @@ public class BossShop extends JavaPlugin {
         getServer().getPluginManager().registerEvents(pl, this);
 
         getServer().getPluginManager().registerEvents(new MenuOpenListener(), this);
+
+        ConfigKeyChecker.checkConfig();
+        ConfigKeyChecker.checkLanguages();
 
         new BukkitRunnable() {
             @Override

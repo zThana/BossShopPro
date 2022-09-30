@@ -7,8 +7,6 @@ import java.util.Set;
 public interface BSAddonStorage {
 
 
-    int TYPE_LOCAL_FILE = 0; //More types might be added in future
-
     /**
      * Set the path for the config
      * @param path path

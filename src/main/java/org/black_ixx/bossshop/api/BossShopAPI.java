@@ -22,7 +22,7 @@ import java.util.List;
 public class BossShopAPI {
 
 
-    private BossShop plugin;
+    private final BossShop plugin;
     private List<BossShopAddon> enabled_addons;
 
 
@@ -278,13 +278,13 @@ public class BossShopAPI {
      */
     //Get shop items
     public HashMap<BSShop, List<BSBuy>> getAllShopItems() {
-        HashMap<BSShop, List<BSBuy>> all = new HashMap<BSShop, List<BSBuy>>();
+        HashMap<BSShop, List<BSBuy>> all = new HashMap<>();
         for (int i : plugin.getClassManager().getShops().getShops().keySet()) {
             BSShop shop = plugin.getClassManager().getShops().getShop(i);
             if (shop == null) {
                 continue;
             }
-            List<BSBuy> items = new ArrayList<BSBuy>();
+            List<BSBuy> items = new ArrayList<>();
             for (BSBuy buy : shop.getItems()) {
                 if (buy == null || buy.getItem() == null) {
                     continue;
@@ -299,23 +299,23 @@ public class BossShopAPI {
 
     /**
      * Get all items from config
-     * @param config_option
-     * @return
+     * @param config_option config option
+     * @return a hashmap
      */
     public HashMap<BSConfigShop, List<BSBuy>> getAllShopItems(String config_option) {
-        HashMap<BSConfigShop, List<BSBuy>> all = new HashMap<BSConfigShop, List<BSBuy>>();
+        HashMap<BSConfigShop, List<BSBuy>> all = new HashMap<>();
         for (int i : plugin.getClassManager().getShops().getShops().keySet()) {
             BSShop shop = plugin.getClassManager().getShops().getShop(i);
             if (shop == null | !(shop instanceof BSConfigShop)) {
                 continue;
             }
             BSConfigShop sho = (BSConfigShop) shop;
-            List<BSBuy> items = new ArrayList<BSBuy>();
+            List<BSBuy> items = new ArrayList<>();
             for (BSBuy buy : shop.getItems()) {
                 if (buy == null || buy.getItem() == null) {
                     continue;
                 }
-                if (buy.getConfigurationSection(sho).getBoolean(config_option) == false && buy.getConfigurationSection(sho).getInt(config_option) == 0) {
+                if (!buy.getConfigurationSection(sho).getBoolean(config_option) && buy.getConfigurationSection(sho).getInt(config_option) == 0) {
                     continue;
                 }
                 items.add(buy);
@@ -337,7 +337,7 @@ public class BossShopAPI {
             return;
         }
         if (enabled_addons == null) {
-            enabled_addons = new ArrayList<BossShopAddon>();
+            enabled_addons = new ArrayList<>();
         }
         if (enabled_addons.contains(addon)) {
             return;

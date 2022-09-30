@@ -48,7 +48,7 @@ public class BSConfigShop extends BSShop {
         this.f = f;
 
         try {
-            config = ConfigLoader.loadConfiguration(f, true);
+            config = ConfigLoader.loadConfiguration(f,true);
 
         } catch (InvalidConfigurationException e) {
             ClassManager.manager.getBugFinder().severe("Invalid Configuration! File: /shops/" + ymlName + " Cause: " + e.getMessage());
