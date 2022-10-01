@@ -16,7 +16,7 @@ public class ConfigKeyChecker {
         InputStream is = ClassManager.manager.getPlugin().getResource("config.yml");
         assert is != null;
         File f = new File(ClassManager.manager.getPlugin().getDataFolder(),"config.yml");
-        File f2; // config.yml in resources folder
+        File f2;
         try {f2 = File.createTempFile("config-cache","yml");//make cache
             FileUtils.copyInputStreamToFile(is, f2);
         } catch (IOException e) {
@@ -25,8 +25,8 @@ public class ConfigKeyChecker {
         FileConfiguration c2 = YamlConfiguration.loadConfiguration(f2);
         Set<String> key = c.getKeys(true);
         Set<String> key2 = c2.getKeys(true);
-        Set<String> willAdds = new HashSet<>(key);
-        willAdds.removeAll(key2);
+        Set<String> willAdds = new HashSet<>(key2);
+        willAdds.removeAll(key);
         for(String cfg_key:willAdds){
             Object value = c2.get(cfg_key);
             c.set(cfg_key,value);
@@ -46,8 +46,8 @@ public class ConfigKeyChecker {
         FileConfiguration c2 = YamlConfiguration.loadConfiguration(f2);
         Set<String> key = c.getKeys(true);
         Set<String> key2 = c2.getKeys(true);
-        Set<String> willAdds = new HashSet<>(key);
-        willAdds.removeAll(key2);
+        Set<String> willAdds = new HashSet<>(key2);
+        willAdds.removeAll(key);
         for(String cfg_key:willAdds){
             String value = c2.getString(cfg_key);
             c.set(cfg_key,value);
@@ -71,8 +71,8 @@ public class ConfigKeyChecker {
         FileConfiguration c2 = YamlConfiguration.loadConfiguration(f2);
         Set<String> key = c.getKeys(true);
         Set<String> key2 = c2.getKeys(true);
-        Set<String> willAdds = new HashSet<>(key);
-        willAdds.removeAll(key2);
+        Set<String> willAdds = new HashSet<>(key2);
+        willAdds.removeAll(key);
         for(String cfg_key:willAdds){
             String value = c2.getString(cfg_key);
             c.set(cfg_key,value);
