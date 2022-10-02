@@ -149,6 +149,8 @@ public class BossShop extends JavaPlugin {
 
         manager.setupDependentClasses();
 
+        ConfigKeyChecker.checkConfig();
+        ConfigKeyChecker.checkLanguages();
 
         BSReloadedEvent event = new BSReloadedEvent(this);
         Bukkit.getPluginManager().callEvent(event);

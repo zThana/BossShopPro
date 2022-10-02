@@ -2,6 +2,7 @@ package org.black_ixx.bossshop.managers.item;
 
 import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.managers.ClassManager;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -69,7 +70,7 @@ public abstract class ItemDataPart {
         TROPICALFISH = registerType(new ItemDataPartTropicalFish());
         SUSPICIOUSSTEW = registerType(new ItemDataPartSuspiciousStew());
         GLOWING = registerType(new ItemDataPartGlowing());
-        AXOLOTL = registerType(new ItemDataPartAxolotl());
+        if(isHighThan116()) AXOLOTL = registerType(new ItemDataPartAxolotl());
         KNOWLEDGEBOOK = registerType(new ItemDataPartKnowledgeBook());
     }
 
@@ -216,6 +217,12 @@ public abstract class ItemDataPart {
             ClassManager.manager.getBugFinder().severe("Unable to work with itemdata '" + used_name.toLowerCase() + ":" + argument + ". Seems like it is not supported by your server version yet.");
             return item;
         }
+    }
+
+    private static boolean isHighThan116(){
+        String version = Bukkit.getServer().getBukkitVersion().split("-")[0];
+        int version2 = Integer.parseInt(version.split("\\.")[1]);
+        return version2 >= 17;
     }
 
     public abstract ItemStack transform(ItemStack item, String used_name, String argument); //Return true in case of success

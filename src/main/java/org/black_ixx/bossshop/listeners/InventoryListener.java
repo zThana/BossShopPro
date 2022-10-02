@@ -1,6 +1,5 @@
 package org.black_ixx.bossshop.listeners;
 
-
 import org.black_ixx.bossshop.BossShop;
 import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.core.BSShop;
@@ -76,8 +75,7 @@ public class InventoryListener implements Listener {
             return;
         }
         boolean cancel = true;
-        try {
-            if (!(ClassManager.manager.getPlugin().getAPI().isValidShop(event.getClickedInventory()))) {
+        try {if (!(ClassManager.manager.getPlugin().getAPI().isValidShop(event.getClickedInventory()))) {
                 switch (event.getAction()) {
                     case DROP_ALL_SLOT:
                     case DROP_ONE_SLOT:

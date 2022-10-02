@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.black_ixx</groupId>
 	<artifactId>BossShopPro</artifactId>
-	<version>3.1.8.3(test)</version>
+	<version>3.1.9</version>
 	<name>BossShopPro</name>
 	<description>Create virtual chest shops</description>
 	<build>
@@ -188,14 +188,6 @@
 			<groupId>de.dustplanet.silkspawners.SilkSpawners</groupId>
 			<artifactId>SilkSpawners</artifactId>
 			<version>5.0.2</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<!-- Used for language utils -->
-		<dependency>
-			<groupId>com.meowj</groupId>
-			<artifactId>LangUtils</artifactId>
-			<version>1.6.1</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>

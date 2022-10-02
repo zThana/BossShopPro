@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class SpawnersHandlerSilkSpawners implements ISpawnerHandler, ISpawnEggHandler {
 
-    private SilkUtil util;
+    private final SilkUtil util;
 
 
     public SpawnersHandlerSilkSpawners() {

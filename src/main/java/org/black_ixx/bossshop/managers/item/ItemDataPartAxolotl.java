@@ -2,7 +2,6 @@ package org.black_ixx.bossshop.managers.item;
 
 import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.managers.ClassManager;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.Player;
@@ -14,10 +13,6 @@ import java.util.List;
 public class ItemDataPartAxolotl extends ItemDataPart{
     @Override
     public ItemStack transform(ItemStack item, String used_name, String argument) {
-        if(!isHighThan116()){
-            ClassManager.manager.getBugFinder().severe("Mistake in Config: '" + argument + "' is not a valid '" + used_name + "'. The axolotl item data can only use on 1.17+.");
-            return item;
-        }
         if(!item.getType().equals(Material.AXOLOTL_BUCKET)){
             ClassManager.manager.getBugFinder().severe("Mistake in Config: '" + argument + "' is not a valid '" + used_name + "'. The material must be AXOLOTL_BUCKET.");
             return item;
@@ -54,11 +49,5 @@ public class ItemDataPartAxolotl extends ItemDataPart{
     @Override
     public String[] createNames() {
         return new String[]{"axolotl"};
-    }
-
-    private boolean isHighThan116(){
-        String version = Bukkit.getServer().getBukkitVersion().split("-")[0];
-        int version2 = Integer.parseInt(version.split("\\.")[1]);
-        return version2 >= 17;
     }
 }

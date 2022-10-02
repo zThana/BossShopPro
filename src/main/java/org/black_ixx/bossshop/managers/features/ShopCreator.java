@@ -5,6 +5,7 @@ import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.managers.MessageHandler;
 import org.black_ixx.bossshop.settings.Settings;
 import org.bukkit.*;
+import org.bukkit.block.Block;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;

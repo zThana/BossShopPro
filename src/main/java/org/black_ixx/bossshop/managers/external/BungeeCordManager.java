@@ -32,7 +32,7 @@ public class BungeeCordManager implements PluginMessageListener {
         sendPluginMessage(p, plugin, "Connect", server);
     }
 
-    public boolean sendPluginMessage(Player p, BossShop plugin, String... args) {
+    public void sendPluginMessage(Player p, BossShop plugin, String... args) {
         if (p == null) {
             p = Iterables.getFirst(Bukkit.getOnlinePlayers(), null);
         }
@@ -45,10 +45,8 @@ public class BungeeCordManager implements PluginMessageListener {
                 }
             }
             p.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
-            return true;
         }
 
-        return false;
     }
 
     public void sendShopPluginMessage(Player p, String subchannel, String argumentA, String argumentB, String argumentC) {
