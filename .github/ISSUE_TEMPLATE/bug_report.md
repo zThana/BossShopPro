@@ -7,21 +7,18 @@ assignees: ''
 
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+**Describe the bug(描述这个BUG)**  
+A clear and concise description of what the bug is.(清晰的说出BUG是什么)
 
-**To Reproduce**
-Steps to reproduce the behavior:
+**To Reproduce(BUG产生的步骤)**
+Steps to reproduce the behavior(BUG是怎么产生的):
 1. Go to '...'
 2. Click on '....'
 4. See error
 
-**Screenshots(Optional)**
-If applicable, add screenshots to help explain your problem.
+**Screenshots(Optional)/截图(可选)**
 
-**Desktop (please complete the following information):**
- - OS: [e.g.:Windows 10 22H2]
--  Java: [e.g.:Java 8]
+**Java**
+Version(版本): [e.g. Java 8(例：Java8)]
 
-**Additional context**
-Add any other context about the problem here.
+**Additional context(额外内容)**
