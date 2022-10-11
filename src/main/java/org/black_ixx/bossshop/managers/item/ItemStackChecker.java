@@ -42,11 +42,6 @@ public class ItemStackChecker {
         tools_complete.add(Material.FISHING_ROD);
     }
 
-
-    public boolean inventoryContainsItem(Player p, ItemStack i, BSBuy buy) {
-        return getAmountOfSameItems(p, i, buy) >= i.getAmount();
-    }
-
     public void takeItem(ItemStack shop_item, Player p, BSBuy buy) {
         int a = 0;
         int slot = -1;
@@ -74,20 +69,24 @@ public class ItemStackChecker {
         if (a > 0) {
             ClassManager.manager.getBugFinder().warn("Player " + p.getName() + " lost " + a + " items of type " + shop_item.getType().name() + ". How would that happen?");
         }
-        return;
     }
 
     public int getAmountOfSameItems(Player p, ItemStack shop_item, BSBuy buy) {
         int a = 0;
-        int slot = -1;
+        int slot = 0;
 
-        for (ItemStack player_item : p.getInventory().getContents()) {
-            slot++;
-            if (player_item != null) {
-                if (canSell(p, player_item, shop_item, slot, buy)) {
-                    a += player_item.getAmount();
-                }
+        if(shop_item==null||shop_item.getType().equals(Material.AIR)){
+            return 0;
+        }
+
+        for (ItemStack i : p.getInventory().getContents()){
+            if (i==null||i.getType().equals(Material.AIR)){
+                continue;
             }
+            if (canSell(p, i , shop_item, slot, buy)) {
+                a += i.getAmount();
+            }
+            slot++;
         }
         return a;
     }
@@ -174,6 +173,10 @@ public class ItemStackChecker {
             return false;
         }
 
+        if (player_item == null||shop_item == null){
+            return false;
+        }
+
         ItemDataPart exception_durability = isTool(player_item) && ClassManager.manager.getSettings().getAllowSellingDamagedItems() ? ItemDataPart.DAMAGE : null;
         ItemDataPart[] exceptions = new ItemDataPart[]{exception_durability};
 
@@ -223,5 +226,4 @@ public class ItemStackChecker {
         }
         return 64;
     }
-
 }

@@ -158,9 +158,7 @@ public abstract class ItemDataPart {
                 continue;
             }
             try {
-                if (!part.isSimilar(shop_item, player_item, buy, p)) {
-                    return false;
-                }
+                return part.isSimilar(shop_item, player_item, buy, p);
             } catch (Exception | NoSuchMethodError e) { //Seems like that ItemDataPart is not supported yet
             }
         }

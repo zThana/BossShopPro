@@ -45,8 +45,6 @@ public class ItemDataPartAmount extends ItemDataPart {
 
     @Override
     public boolean isSimilar(ItemStack shop_item, ItemStack player_item, BSBuy buy, Player p) {
-        return shop_item.getAmount() == player_item.getAmount();
+        return shop_item.getAmount() >= player_item.getAmount();
     }
-
-
 }

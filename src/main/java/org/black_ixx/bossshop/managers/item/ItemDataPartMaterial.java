@@ -6,6 +6,7 @@ import org.black_ixx.bossshop.managers.misc.InputReader;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
 
 import java.util.List;
 
@@ -13,13 +14,13 @@ public class ItemDataPartMaterial extends ItemDataPart {
 
     @Override
     public ItemStack transform(ItemStack item, String used_name, String argument) {
-        short durability = 0;
+        int durability = 0;
         Material m;
 
         if (argument.contains(":")) { //Can be used for durability
             String[] parts = argument.split(":");
             if (parts.length > 1) {
-                durability = (short) InputReader.getInt(parts[1].trim(), 0);
+                durability = InputReader.getInt(parts[1].trim(), 0);
             }
             argument = parts[0].trim();
         }
@@ -33,7 +34,9 @@ public class ItemDataPartMaterial extends ItemDataPart {
         }
 
         item.setType(m);
-        item.setDurability(durability);
+        Damageable d = (Damageable) item.getItemMeta();
+        d.setDamage(durability);
+        item.setItemMeta(d);
         return item;
     }
 
@@ -62,6 +65,6 @@ public class ItemDataPartMaterial extends ItemDataPart {
 
     @Override
     public boolean isSimilar(ItemStack shop_item, ItemStack player_item, BSBuy buy, Player p) {
-        return shop_item.getType() == player_item.getType();
+        return shop_item.getType().name().equals(player_item.getType().name());
     }
 }

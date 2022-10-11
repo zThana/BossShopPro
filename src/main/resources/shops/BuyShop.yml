@@ -180,8 +180,8 @@ shop:
     Reward_right: 80
     PriceType_right: ITEM
     Price_right:
-    - type:TORCH
-    - amount:16
+    - - type:TORCH
+      - amount:16
     Message_right: '&eYou just sold %price_right%!'
     RewardType_middle: MONEY
     Reward_middle: 5

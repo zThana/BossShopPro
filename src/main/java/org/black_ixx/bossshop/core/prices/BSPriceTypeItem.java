@@ -14,11 +14,7 @@ public class BSPriceTypeItem extends BSPriceType {
 
 
     public Object createObject(Object o, boolean force_final_state) {
-        if (force_final_state) {
-            return InputReader.readItemList(o, false);
-        } else {
-            return InputReader.readStringListList(o);
-        }
+        return InputReader.readItemList(o, false);
     }
 
     public boolean validityCheck(String item_name, Object o) {
@@ -34,14 +30,15 @@ public class BSPriceTypeItem extends BSPriceType {
     }
 
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("unused")
     @Override
     public boolean hasPrice(Player p, BSBuy buy, Object price, ClickType clickType, boolean messageOnFailure) {
         List<ItemStack> items = (List<ItemStack>) price;
         for (ItemStack i : items) {
-            if (!ClassManager.manager.getItemStackChecker().inventoryContainsItem(p, i, buy)) {
+            if (!(ClassManager.manager.getItemStackChecker().getAmountOfSameItems(p,i,buy) >=i.getAmount())) {
                 if (messageOnFailure) {
                     ClassManager.manager.getMessageHandler().sendMessage("NotEnough.Item", p);
+                    return false;
                 }
                 return false;
             }
@@ -77,5 +74,4 @@ public class BSPriceTypeItem extends BSPriceType {
     public boolean mightNeedShopUpdate() {
         return true;
     }
-
 }
