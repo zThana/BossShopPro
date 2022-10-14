@@ -26,7 +26,6 @@ public class ItemDataPartMaterial extends ItemDataPart {
             argument = parts[0].trim();
         }
 
-        //ItemsAdder
         if (argument.startsWith("itemsadder/")){
             String namespaceID = argument.split("/")[1];
             CustomStack cs = CustomStack.getInstance(namespaceID);
