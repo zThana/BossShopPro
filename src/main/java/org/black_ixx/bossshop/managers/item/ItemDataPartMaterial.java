@@ -1,5 +1,6 @@
 package org.black_ixx.bossshop.managers.item;
 
+import dev.lone.itemsadder.api.CustomStack;
 import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.managers.misc.InputReader;
@@ -25,6 +26,16 @@ public class ItemDataPartMaterial extends ItemDataPart {
             argument = parts[0].trim();
         }
 
+        //ItemsAdder
+        if (argument.startsWith("itemsadder/")){
+            String namespaceID = argument.split("/")[1];
+            CustomStack cs = CustomStack.getInstance(namespaceID);
+            if (cs == null) {
+                ClassManager.manager.getBugFinder().warn("ItemsAdder item not found: " + namespaceID);
+                return item;
+            }
+            return cs.getItemStack();
+        }
 
         m = InputReader.readMaterial(argument);
 

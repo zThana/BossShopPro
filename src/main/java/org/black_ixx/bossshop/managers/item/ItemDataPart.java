@@ -212,7 +212,7 @@ public abstract class ItemDataPart {
         try {
             return transform(item, used_name.toLowerCase(), argument);
         } catch (NoClassDefFoundError | NoSuchMethodError e) { //Seems like that ItemDataPart is not supported yet
-            ClassManager.manager.getBugFinder().severe("Unable to work with itemdata '" + used_name.toLowerCase() + ":" + argument + ". Seems like it is not supported by your server version yet.");
+            ClassManager.manager.getBugFinder().severe("Unable to work with item data '" + used_name.toLowerCase() + ":" + argument + ". Seems like it is not supported by your server version yet.");
             return item;
         }
     }

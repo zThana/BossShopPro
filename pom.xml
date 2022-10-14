@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.black_ixx</groupId>
 	<artifactId>BossShopPro</artifactId>
-	<version>3.2.0</version>
+	<version>3.2.0.1(test)</version>
 	<name>BossShopPro</name>
 	<description>Create virtual chest shops</description>
 	<build>
@@ -67,19 +67,12 @@
 	</repositories>
 
 	<dependencies>
-		<!-- Adds itemsadder support
+		<!-- Adds itemsadder support-->
 		<dependency>
 			<groupId>com.github.LoneDev6</groupId>
 			<artifactId>api-itemsadder</artifactId>
 			<version>3.0.0</version>
 			<scope>provided</scope>
-		</dependency>-->
-
-		<dependency>
-			<groupId>org.bstats</groupId>
-			<artifactId>bstats-bukkit</artifactId>
-			<version>3.0.0</version>
-			<scope>compile</scope>
 		</dependency>
 
 		<!-- Adds jobs support -->

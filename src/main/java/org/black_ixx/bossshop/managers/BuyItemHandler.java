@@ -189,7 +189,7 @@ public class BuyItemHandler {
 
             stage = "MenuItem creation";
             if (c.getStringList("MenuItem").isEmpty()) {
-                ClassManager.manager.getBugFinder().severe("Error when trying to create shopitem " + name + "! MenuItem is not existing?! [Shop: " + shopname + "]");
+                ClassManager.manager.getBugFinder().severe("Error when trying to create shopitem " + name + "! MenuItem is not existing! [Shop: " + shopname + "]");
                 return null;
             }
 
