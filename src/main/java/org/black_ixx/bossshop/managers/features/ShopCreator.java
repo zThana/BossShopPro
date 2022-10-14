@@ -3,6 +3,7 @@ package org.black_ixx.bossshop.managers.features;
 import org.black_ixx.bossshop.BossShop;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.managers.MessageHandler;
+import org.black_ixx.bossshop.managers.item.ItemDataPart;
 import org.black_ixx.bossshop.settings.Settings;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -86,7 +87,7 @@ public class ShopCreator implements Listener {
                 continue;
             }
             ConfigurationSection item = shopItems.createSection(String.valueOf(real_slot+1));
-            item.set("MenuItem",ItemToList(is));
+            item.set("MenuItem", ItemDataPart.readItem(is));
             item.set("RewardType","nothing");
             item.set("PriceType", "nothing");
             item.set("ExtraPermission", "");
@@ -101,131 +102,7 @@ public class ShopCreator implements Listener {
             ClassManager.manager.getPlugin().reloadPlugin(p);
         }
     }
-    private List<String> ItemToList(ItemStack i){
-        List<String> list = new ArrayList<>();
-        ItemMeta meta = i.getItemMeta();
-        Material m = i.getType();
-        list.add("type:"+m.name());
-        list.add("name:" +meta.getDisplayName());
-        list.add("amount:"+i.getAmount());
-        if(meta.hasLore()) {
-            StringBuilder loreBuilder = new StringBuilder();
-            List<String> lores = meta.getLore();
-            for(String lore:lores){
-                if(lores.get(lores.size()-1).equals(lore)){
-                    loreBuilder.append(lore);
-                    break;
-                }
-                loreBuilder.append(lore).append("#");
-            }
-            list.add("lore:"+loreBuilder);
-        }
-        Damageable d = (Damageable) meta;
-        if(d.hasDamage()){
-            if(d.getDamage()>0){
-                String dm = String.valueOf(d.getDamage());
-                list.add("durability:"+dm);
-            }
-        }
-        Map<Enchantment, Integer> enchantments = i.getEnchantments();
-        for(Enchantment en:enchantments.keySet()){
-            String name = en.getKey().getKey();
-            int lvl = enchantments.get(en);
-            list.add("enchantment:"+name+"#"+lvl);
-        }
-        if(meta.isUnbreakable()){
-            list.add("unbreakable:true");
-        }
-        if(meta.hasCustomModelData()){
-            list.add("custommodeldata:"+meta.getCustomModelData());
-        }
-        //Item meta check start
-        if(meta instanceof Colorable){
-            Colorable colorable = (Colorable) meta;
-            Color color = colorable.getColor() != null ? colorable.getColor().getColor() : Color.fromRGB(0,0,0);
-            list.add("color:"+color.getRed()+"#"+color.getGreen()+"#"+color.getBlue());
-        }
-        if(meta instanceof LeatherArmorMeta){
-            Color c = ((LeatherArmorMeta) meta).getColor();
-            if(!c.equals(Bukkit.getItemFactory().getDefaultLeatherColor())){
-               list.add("color:"+c.getRed()+"#"+c.getGreen()+"#"+c.getBlue());
-            }
-        }
-        if(meta instanceof EnchantmentStorageMeta){
-            EnchantmentStorageMeta enchantmentStorage = (EnchantmentStorageMeta) meta;
-            if(enchantmentStorage.hasStoredEnchants()){
-                for(Enchantment enchantment:enchantmentStorage.getStoredEnchants().keySet()){
-                    String name = enchantment.getKey().getKey();
-                    int lvl = enchantments.get(enchantment);
-                    list.add("enchantment:"+name+"#"+lvl);
-                }
-            }
-        }
-        if(meta instanceof PotionMeta){
-            PotionMeta potion = (PotionMeta) meta;
-            PotionData pt = potion.getBasePotionData();
-            list.add("potion:"+pt.getType().name()+"#"+pt.isExtended()+"#"+pt.isUpgraded());
-            if(pt.getType().getEffectType()!=null) {
-                list.add("potioneffect:" + pt.getType().getEffectType().getName() + "#1#600");
-            }
-            if(potion.hasCustomEffects()){
-                for(PotionEffect pe:potion.getCustomEffects()){
-                    String effectName = pe.getType().getName();
-                    list.add("potioneffect:"+effectName+"#"+pe.getAmplifier()+"#"+pe.getDuration()+"#");
-                }
-            }
-        }
-        if(meta instanceof BannerMeta){
-            BannerMeta bannerMeta = (BannerMeta) meta;
-            if(!bannerMeta.getPatterns().isEmpty()){
-                for(Pattern p:bannerMeta.getPatterns()){
-                    String patternName = p.getPattern().name();
-                    DyeColor color = p.getColor();
-                    list.add("banner:"+color.name()+"#"+patternName);
-                }
-            }
-        }
-        if(meta instanceof SkullMeta){
-            SkullMeta skull = (SkullMeta) meta;
-            OfflinePlayer player = skull.getOwningPlayer();
-            if(player != null){
-                list.add("playerhead:"+player.getName());
-            }
-        }
-        if(meta instanceof TropicalFishBucketMeta){
-            TropicalFishBucketMeta tropicalFishBucket = (TropicalFishBucketMeta) i.getItemMeta();
-            if(tropicalFishBucket.hasVariant()) {
-                TropicalFish.Pattern p = tropicalFishBucket.getPattern();
-                DyeColor color = tropicalFishBucket.getPatternColor();
-                list.add("tropicalfish:" + color.name() + "#" + p.name());
-            }
-        }
-        if(meta instanceof SuspiciousStewMeta){
-            SuspiciousStewMeta suspiciousStew = (SuspiciousStewMeta) i.getItemMeta();
-            if(suspiciousStew.hasCustomEffects()){
-                for(PotionEffect pe:suspiciousStew.getCustomEffects()){
-                    String effectName = pe.getType().getName();
-                    int duration = pe.getDuration();
-                    int amplifier = pe.getAmplifier();
-                    list.add("suspiciousstew:"+effectName+"#"+duration+"#"+amplifier);
-                }
-            }
-        }
-        if(isHighThan116()){
-            if(meta instanceof AxolotlBucketMeta){
-                AxolotlBucketMeta axolotlBucket = (AxolotlBucketMeta) i.getItemMeta();
-                Axolotl.Variant variant = axolotlBucket.getVariant();
-                list.add("axolotl:" + variant.name());
-            }
-        }
-        //Item meta check end
 
-        //remove duplicates
-        HashSet<String> hashSet = new HashSet<>(list);
-        list = new ArrayList<>(hashSet);
-
-        return list;
-    }
     private String getName(){
         return name;
     }
@@ -234,10 +111,5 @@ public class ShopCreator implements Listener {
     }
     private void setName(String name){
         this.name = name;
-    }
-    private boolean isHighThan116(){
-        String version = Bukkit.getServer().getBukkitVersion().split("-")[0];
-        int version2 = Integer.parseInt(version.split("\\.")[1]);
-        return version2 >= 17;
     }
 }

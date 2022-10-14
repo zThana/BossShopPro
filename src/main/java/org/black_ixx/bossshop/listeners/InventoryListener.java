@@ -140,7 +140,7 @@ public class InventoryListener implements Listener {
             BSShop shop = ((BSShopHolder) event.getInventory().getHolder()).getShop();
 
             //Anti spam delay
-            if (!p.hasPermission("BossShop.bypasss")) {
+            if (!p.hasPermission("BossShop.bypass")) {
                 if (lastClicks.containsKey(p)) {
                     long lastClick = lastClicks.get(p);
 

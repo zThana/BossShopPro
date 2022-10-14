@@ -28,13 +28,18 @@ public class ItemDataPartGlowing extends ItemDataPart {
 
     @Override
     public boolean isSimilar(ItemStack shop_item, ItemStack player_item, BSBuy buy, Player p) {
-        return true;
+        ItemMeta shop = shop_item.getItemMeta();
+        ItemMeta player = player_item.getItemMeta();
+        if(shop.hasEnchant(Enchantment.OXYGEN) & shop.hasItemFlag(ItemFlag.HIDE_ENCHANTS)){
+            return player.hasEnchant(Enchantment.OXYGEN) & player.hasItemFlag(ItemFlag.HIDE_ENCHANTS);
+        }
+        return false;
     }
 
     @Override
     public List<String> read(ItemStack i, List<String> output) {
         ItemMeta meta = i.getItemMeta();
-        if(meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS)){
+        if(meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) & meta.hasEnchant(Enchantment.OXYGEN)){
             output.add("glowing:true");
         }
         return output;

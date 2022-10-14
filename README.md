@@ -15,7 +15,7 @@ You can download the development version from actions.
 ## Plans
 
 * [x] Multiple hex fix
-* [ ] ItemsAdder Item as Price/Reward/ItemData
+* [x] Support ItemsAdder items
 * [ ] More item data
 * [ ] More reward types/price types
 * [ ] More features
