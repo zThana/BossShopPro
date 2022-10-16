@@ -4,6 +4,7 @@ import dev.lone.itemsadder.api.CustomStack;
 import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.managers.misc.InputReader;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -18,7 +19,7 @@ public class ItemDataPartMaterial extends ItemDataPart {
         int durability = 0;
         Material m;
 
-        if (argument.contains(":")) { //Can be used for durability
+        if (argument.contains(":")) {
             String[] parts = argument.split(":");
             if (parts.length > 1) {
                 durability = InputReader.getInt(parts[1].trim(), 0);
@@ -27,13 +28,17 @@ public class ItemDataPartMaterial extends ItemDataPart {
         }
 
         if (argument.startsWith("itemsadder/")){
-            String namespaceID = argument.split("/")[1];
-            CustomStack cs = CustomStack.getInstance(namespaceID);
-            if (cs == null) {
-                ClassManager.manager.getBugFinder().warn("ItemsAdder item not found: " + namespaceID);
-                return item;
+            if (Bukkit.getPluginManager().isPluginEnabled("ItemsAdder")) {
+                String namespaceID = argument.split("/")[1];
+                CustomStack cs = CustomStack.getInstance(namespaceID);
+                if (cs == null) {
+                    ClassManager.manager.getBugFinder().warn("ItemsAdder item not found: " + namespaceID);
+                    return item;
+                }
+                return cs.getItemStack();
             }
-            return cs.getItemStack();
+            ClassManager.manager.getBugFinder().warn("ItemsAdder is not loaded into the server. You can get it here: https://www.spigotmc.org/resources/%E2%9C%A8itemsadder%E2%AD%90emotes-mobs-items-armors-hud-gui-emojis-blocks-wings-hats-liquids.73355/");
+            return item;
         }
 
         m = InputReader.readMaterial(argument);

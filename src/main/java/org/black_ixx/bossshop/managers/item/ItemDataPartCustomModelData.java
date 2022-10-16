@@ -25,10 +25,11 @@ public class ItemDataPartCustomModelData extends ItemDataPart {
 
     @Override
     public boolean isSimilar(ItemStack shop_item, ItemStack player_item, BSBuy buy, Player p) {
-        if(shop_item.getItemMeta()!=null&player_item.getItemMeta()!=null) {
-            if (shop_item.getItemMeta().hasCustomModelData() & player_item.getItemMeta().hasCustomModelData()) {
+        if(shop_item.getItemMeta()!=null && player_item.getItemMeta()!=null) {
+            if (shop_item.getItemMeta().hasCustomModelData() && player_item.getItemMeta().hasCustomModelData()) {
                 return shop_item.getItemMeta().getCustomModelData() == player_item.getItemMeta().getCustomModelData();
             }
+            return false;
         }
         return false;
     }
@@ -46,7 +47,7 @@ public class ItemDataPartCustomModelData extends ItemDataPart {
 
     @Override
     public int getPriority() {
-        return PRIORITY_NORMAL;
+        return PRIORITY_EARLY;
     }
 
     @Override
@@ -56,6 +57,6 @@ public class ItemDataPartCustomModelData extends ItemDataPart {
 
     @Override
     public String[] createNames() {
-        return new String[]{"CustomModelData"};
+        return new String[]{"CustomModelData","custommodeldata"};
     }
 }

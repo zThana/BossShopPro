@@ -174,7 +174,6 @@ public class CommandManager implements CommandExecutor, TabCompleter {
                 String argument = args.length > 1 ? args[1] : null;
                 return playerCommandOpenShop(sender, p, shop, argument);
             }
-            sendCommandList(sender);
             return false;
         }
         return false;
