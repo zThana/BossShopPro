@@ -124,8 +124,13 @@ public class CommandManager implements CommandExecutor, TabCompleter {
                         if(sender instanceof Player) {
                              p = (Player) sender;
                         }
-                        ShopCreator sc = new ShopCreator(ClassManager.manager.getPlugin(), ClassManager.manager.getMessageHandler());
-                        sc.startCreate(p, args[1],args[2]);
+                        Player finalP = p;
+                        new Thread(() -> {
+                            ShopCreator sc = new ShopCreator(ClassManager.manager.getPlugin(), ClassManager.manager.getMessageHandler());
+                            //replace <space> as space
+                            String shopTitle = args[2].replaceAll("<space>", "");
+                            sc.startCreate(finalP, args[1], shopTitle);
+                        }).start();
                         return true;
                     } else {
                         ClassManager.manager.getMessageHandler().sendMessage("Main.NoPermission", sender);
@@ -247,6 +252,23 @@ public class CommandManager implements CommandExecutor, TabCompleter {
             }
             if(sender.hasPermission("BossShop.simulate")) {
                 arglist.add("simulate");
+            }
+        }
+        // for list shop and players
+        if(args.length==2) {
+            switch (args[1]) {
+                case "open":
+                    if (sender.hasPermission("BossShop.open.command") || sender.hasPermission("BossShop.open")) {
+                        for (int i : ClassManager.manager.getShops().getShops().keySet()) {
+                            arglist.add(ClassManager.manager.getShops().getShop(i).getShopName());
+                        }
+                    }
+                case "close":
+                    if(sender.hasPermission("BossShop.close")) {
+                        for (Player p : Bukkit.getOnlinePlayers()){
+                            arglist.add(p.getName());
+                        }
+                    }
             }
         }
         return arglist;

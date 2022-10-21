@@ -275,3 +275,8 @@ OpenMaterial:
   Enabled: false
   AllowMaterials:
     - ""
+#
+#
+# ShopDisplayNameMaxLength:
+# Set the maximum length of the shop title.
+ShopDisplayNameMaxLength: 45

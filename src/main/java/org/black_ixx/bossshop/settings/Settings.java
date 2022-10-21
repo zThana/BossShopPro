@@ -34,6 +34,9 @@ public class Settings {
     private int serverpinging_delay, serverpinging_waittime, serverpinging_timeout, autorefresh_delay, max_line_length;
     private List<String> money_formatting, points_formatting;
 
+    public Settings() {
+    }
+
     /**
      * Get object
      *
@@ -193,9 +196,7 @@ public class Settings {
         return autorefresh_delay;
     }
 
-    public boolean getLoadSubfoldersEnabled() {
-        return load_subfolders;
-    }
+    public boolean getLoadSubfoldersEnabled() {return getBoolean("SearchSubfoldersForShops");}
 
     public List<String> getMoneyFormatting() {
         return money_formatting;
@@ -212,4 +213,6 @@ public class Settings {
     public boolean getAllowSellingDamagedItems() {
         return allow_selling_damaged_items;
     }
+
+    public int getShopDisplayNameMaxLength(){return getInt("ShopDisplayNameMaxLength");}
 }

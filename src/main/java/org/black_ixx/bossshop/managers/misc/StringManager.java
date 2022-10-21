@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 
 public class StringManager {
 
-    private static final Pattern hexPattern = Pattern.compile("(#[a-fA-F0-9]{6})");
+    private static final Pattern hexPattern = Pattern.compile("#[a-fA-F0-9]{6}");
 
     /**
      * Transform specific strings from one thing to another
@@ -34,6 +34,8 @@ public class StringManager {
         if (s == null) {
             return null;
         }
+
+        s = colorize(s);
 
         s = s.replace("[<3]", "❤");
         s = s.replace("[*]", "★");
@@ -64,7 +66,6 @@ public class StringManager {
             s = ClassManager.manager.getServerPingingManager().transform(s);
         }
 
-        s = colorize(s);
         s = MathTools.transform(s);
 
         s = s.replace("[and]", "&");
@@ -77,7 +78,7 @@ public class StringManager {
         Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
         for (Matcher matcher = pattern.matcher(string); matcher.find(); matcher = pattern.matcher(string)) {
             String color = string.substring(matcher.start(), matcher.end());
-            string = string.replace(color, net.md_5.bungee.api.ChatColor.of(color) + ""); // You're missing this replacing
+            string = string.replace(color, net.md_5.bungee.api.ChatColor.of(color)+""); // You're missing this replacing
         }
         string = ChatColor.translateAlternateColorCodes('&', string); // Translates any & codes too
         return string;

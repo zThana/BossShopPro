@@ -35,7 +35,7 @@ public abstract class BSShop {
 
     private int inventory_size = 9;
     private int manual_inventory_rows;
-    private int shop_id;
+    private final int shop_id;
 
     private int highest_page; //Might not be correct but is used in case of a fix inventory having multiple pages
 
@@ -74,7 +74,7 @@ public abstract class BSShop {
     }
 
     public void setDisplayName(String displayname) {
-        if (displayname != null) {
+        if (!displayname.equals("")) {
             this.displayname = ClassManager.manager.getStringManager().transform(displayname, null, this, null, null);
             if (ClassManager.manager.getStringManager().checkStringForFeatures(this, null, null, this.displayname)) {
                 customizable = true;
@@ -88,7 +88,9 @@ public abstract class BSShop {
     public String getValidDisplayName(Player p, BSShopHolder holder) {
         String displayname = this.displayname;
         displayname = ClassManager.manager.getStringManager().transform(displayname, null, this, holder, p);
-        return displayname.length() > 32 ? displayname.substring(0, 32) : displayname;
+        //Default is 45!
+        int length = ClassManager.manager.getSettings().getShopDisplayNameMaxLength();
+        return displayname.length() > length ? displayname.substring(0, length) : displayname;
     }
 
     public String getSignText() {
@@ -261,10 +263,6 @@ public abstract class BSShop {
         return Math.min(max_slots_per_page, Math.max(i, ROW_ITEMS * manual_inventory_rows));
     }
 
-    public void openInventory(Player p) {
-        openInventory(p, 0, true);
-    }
-
     public void openInventory(Player p, boolean remember_current_shop) {
         openInventory(p, 0, remember_current_shop);
     }
@@ -323,6 +321,4 @@ public abstract class BSShop {
     //////////////////////////// <- Abstract
 
     public abstract void reloadShop();
-
-
 }

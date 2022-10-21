@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class BSShopHolder implements InventoryHolder {
 
     private BSShopHolder previous_shopholder;
-    private BSShop shop;
+    private final BSShop shop;
     private int page, highest_page;
     private HashMap<Integer, BSBuy> items;
     public BSShopHolder(BSShop shop, HashMap<Integer, BSBuy> items) {
@@ -23,10 +23,7 @@ public class BSShopHolder implements InventoryHolder {
         this.shop = shop;
     }
 
-    @Override
-    public Inventory getInventory() {
-        return null;
-    }
+
 
     public BSBuy getShopItem(int i) {
         return items.get(i);
@@ -81,5 +78,6 @@ public class BSShopHolder implements InventoryHolder {
         this.highest_page = highest_page;
     }
 
-
+    @Override
+    public Inventory getInventory() {return null;}
 }

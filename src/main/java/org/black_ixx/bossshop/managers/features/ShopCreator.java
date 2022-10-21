@@ -5,28 +5,19 @@ import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.managers.MessageHandler;
 import org.black_ixx.bossshop.managers.item.ItemDataPart;
 import org.black_ixx.bossshop.settings.Settings;
-import org.bukkit.*;
-import org.bukkit.block.Block;
-import org.bukkit.block.banner.Pattern;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.TropicalFish;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.*;
-import org.bukkit.material.Colorable;
-import org.bukkit.potion.PotionData;
-import org.bukkit.potion.PotionEffect;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.Objects;
 
 public class ShopCreator implements Listener {
     private String name = "";
@@ -41,10 +32,6 @@ public class ShopCreator implements Listener {
     public void startCreate(Player p,String shopName,String title){
         if(getName().equals("")){
             setName(shopName);
-        }
-        if(!Objects.equals(name,shopName)){
-            this.mh.sendMessage("ShopCreate.SomeoneCreating",p);
-            return;
         }
         this.title = title;
         String inv_title = this.mh.get("ShopCreate.Title").replace("%shop%",getName());
@@ -100,6 +87,8 @@ public class ShopCreator implements Listener {
         mh.sendMessage("ShopCreate.Success",p);
         if(ClassManager.manager.getSettings().getBoolean(Settings.RELOAD_AFTER_CREATE_SHOP)){
             ClassManager.manager.getPlugin().reloadPlugin(p);
+        }else {
+            ClassManager.manager.getMessageHandler().sendMessage("ShopCreate.Success2",p);
         }
     }
 

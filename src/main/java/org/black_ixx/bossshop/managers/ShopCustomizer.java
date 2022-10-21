@@ -77,7 +77,7 @@ public class ShopCustomizer {
         //Adding all possible items in a map
         HashMap<Integer, BSBuy> everything = new LinkedHashMap<>();
 
-        PageLayoutHandler layout = ClassManager.manager.getPageLayoutHandler();
+        PageLayoutHandler layout = m.getPageLayoutHandler();
 
         //Possibility for other plugins to change the layout
         BSChoosePageLayoutEvent event = new BSChoosePageLayoutEvent(shop, shop.getShopName(), layout);
@@ -145,7 +145,7 @@ public class ShopCustomizer {
                     continue;
                 }
                 if (buy.getInventoryLocation() < 0 || buy.getInventoryLocation() >= items_per_page_one_page) {
-                    ClassManager.manager.getBugFinder().warn("Unable to add pagelayout item '" + buy.getName() + "': Inventory location needs to be between 1 and " + items_per_page_one_page + " with 'MaxRows' set to '" + layout.getMaxRows() + "'.");
+                    m.getBugFinder().warn("Unable to add pagelayout item '" + buy.getName() + "': Inventory location needs to be between 1 and " + items_per_page_one_page + " with 'MaxRows' set to '" + layout.getMaxRows() + "'.");
                     continue;
                 }
                 locs.put(buy.getInventoryLocation(), buy);

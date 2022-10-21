@@ -25,8 +25,8 @@ Economy:
   NoAccount: '&c你没有经济账户！'
 ShopCreate:
   Success: "&a文件已保存至 &7/plugins/BossShopPro/shops&a下。"
+  Success2: "&c请重载插件才能读取新生成的商店文件。"
   FileExists: "&c相同的文件已存在，将会覆盖文件。"
-  SomeoneCreating: "&4警告：别人正在用它创建菜单。"
   #这两个字符串不要随意修改,否则无法保存文件。
   Title: "&8正在创建商店 %shop%(关闭以保存文件)"
   TitleHead: "&8正在创建商店"
