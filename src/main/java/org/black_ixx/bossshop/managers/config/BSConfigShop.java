@@ -15,6 +15,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -85,6 +86,13 @@ public class BSConfigShop extends BSShop {
         setNeedPermToCreateSign(section.getBoolean("signs.NeedPermissionToCreateSign"));
         setManualInventoryRows(section.getInt("InventoryRows", -1));
 
+        InventoryType type;
+        if(section.getString("Type","").equals("")){
+            type = InventoryType.CHEST;
+        }else {
+            type = InventoryType.valueOf(section.getString("Type"));
+        }
+
         String commands = section.getString("Command");
         if (commands != null) {
             setCommands(commands.split(":"));
@@ -96,6 +104,7 @@ public class BSConfigShop extends BSShop {
         Bukkit.getPluginManager().callEvent(event);
         finishedAddingItems();
     }
+
 
     //////////////////////////////////
 

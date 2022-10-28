@@ -7,6 +7,7 @@ import org.black_ixx.bossshop.misc.Misc;
 import org.black_ixx.bossshop.settings.Settings;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
@@ -36,6 +37,7 @@ public abstract class BSShop {
     private int inventory_size = 9;
     private int manual_inventory_rows;
     private final int shop_id;
+
 
     private int highest_page; //Might not be correct but is used in case of a fix inventory having multiple pages
 
@@ -196,7 +198,6 @@ public abstract class BSShop {
 
     public Inventory createInventory(Player p, ClassManager manager, int page, int highest_page, BSShopHolder oldshopholder) {
         return manager.getShopCustomizer().createInventory(this, items, p, manager, page, highest_page, oldshopholder);
-
     }
 
     public void updateInventory(Inventory i, BSShopHolder holder, Player p, ClassManager manager, int page, int highest_page, boolean auto_refresh) {
@@ -211,6 +212,18 @@ public abstract class BSShop {
             return;
         }
         Inventory inventory = manager.getShopCustomizer().createInventory(this, items, p, manager, i, page);
+        if (inventory != i) {
+            p.openInventory(inventory);
+        }
+    }
+
+    public void updateInventory(Inventory i, BSShopHolder holder, Player p, ClassManager manager, boolean auto_refresh) {
+        if (ClassManager.manager.getStringManager().checkStringForFeatures(this, null, null, getDisplayName()) & !getValidDisplayName(p, holder).equals(p.getOpenInventory().getTitle()) & !auto_refresh) { //Title is customizable as well but shall only be updated through main thread to prevent errors
+            Inventory created = manager.getShopCustomizer().createInventory(this, items, p, manager, 0, 0, holder.getPreviousShopHolder());
+            p.openInventory(created);
+            return;
+        }
+        Inventory inventory = manager.getShopCustomizer().createInventory(this, items, p, manager, i,0);
         if (inventory != i) {
             p.openInventory(inventory);
         }

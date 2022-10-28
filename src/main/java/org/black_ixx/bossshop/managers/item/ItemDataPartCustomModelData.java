@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ItemDataPartCustomModelData extends ItemDataPart {
     @Override
@@ -25,11 +26,8 @@ public class ItemDataPartCustomModelData extends ItemDataPart {
 
     @Override
     public boolean isSimilar(ItemStack shop_item, ItemStack player_item, BSBuy buy, Player p) {
-        if(shop_item.getItemMeta()!=null && player_item.getItemMeta()!=null) {
-            if (shop_item.getItemMeta().hasCustomModelData() && player_item.getItemMeta().hasCustomModelData()) {
-                return shop_item.getItemMeta().getCustomModelData() == player_item.getItemMeta().getCustomModelData();
-            }
-            return false;
+        if(!Objects.isNull(shop_item.getItemMeta())&&!Objects.isNull(player_item.getItemMeta())) {
+            return Objects.equals(shop_item.getItemMeta().getCustomModelData(), player_item.getItemMeta().getCustomModelData());
         }
         return false;
     }

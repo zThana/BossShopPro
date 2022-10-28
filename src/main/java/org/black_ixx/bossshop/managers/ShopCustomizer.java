@@ -3,6 +3,7 @@ package org.black_ixx.bossshop.managers;
 import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.core.BSShop;
 import org.black_ixx.bossshop.core.BSShopHolder;
+import org.black_ixx.bossshop.core.BSShopOtherHolder;
 import org.black_ixx.bossshop.events.BSChoosePageLayoutEvent;
 import org.black_ixx.bossshop.events.BSDisplayItemEvent;
 import org.black_ixx.bossshop.managers.features.PageLayoutHandler;
@@ -10,6 +11,7 @@ import org.black_ixx.bossshop.settings.Settings;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -62,6 +64,59 @@ public class ShopCustomizer {
     }
 
     /**
+     * Create a new inventory(??)
+     *
+     */
+    public Inventory createInventory(BSShop shop, Set<BSBuy> items, Player p, ClassManager m, InventoryType type, BSShopOtherHolder holder){
+        Inventory inventory = Bukkit.createInventory(holder, type);
+        HashMap<Integer,BSBuy> everything = new LinkedHashMap<>();
+        //1. Add items to (empty) everything HashMap to determine the locations
+        for (BSBuy buy : items) {
+            if (buy != null) {
+
+                if (!showItem(shop, holder, buy, p, inventory, everything)) {
+                    continue;
+                }
+
+                int slot = getSlot(everything, buy);
+                everything.put(slot, buy);
+            }
+
+        }
+
+        //2. Adding all actual items only
+        HashMap<Integer, BSBuy> locs = new LinkedHashMap<>();
+
+        for (int slot : everything.keySet()) {
+            if (slot < 0 || slot > inventory.getSize()) {
+                continue;
+            }
+
+            BSBuy buy = everything.get(slot);
+            int real_slot = slot - 1;
+            locs.put(real_slot, buy);
+            addItem(inventory, buy.getItem(), real_slot, shop.isDisplaying(), p, buy, shop, holder);
+        }
+
+        holder.setItems(locs);
+
+        for (BSBuy buy : holder.getItems().values()) {
+            if (!showItem(shop, holder, buy, p, inventory, locs)) {
+                continue;
+            }
+            if (buy.getInventoryLocation() < 0 || buy.getInventoryLocation() >= inventory.getSize()) {
+                m.getBugFinder().warn("Unable to add pagelayout item '" + buy.getName() + "': Inventory location needs to be between 1 and " + inventory.getSize() + "'.");
+                continue;
+            }
+            locs.put(buy.getInventoryLocation(), buy);
+
+            buy.updateShop(shop, buy.getItem(), m, false);
+            addItem(inventory, buy.getItem(), buy.getInventoryLocation(), shop.isDisplaying(), p, buy, shop, holder);
+        }
+        return inventory;
+    }
+
+    /**
      * Create a new inventory
      * @param shop the shop to open as
      * @param items the items in the shop
@@ -111,7 +166,7 @@ public class ShopCustomizer {
         }
 
 
-        boolean full = false; //full other second page anyways
+        boolean full = false; //full other second page anyway
 
         //3. Determine whether pagelayout is needed
         if (page == 0 && highest_slot < items_per_page_one_page && layout.showIfMultiplePagesOnly()) {

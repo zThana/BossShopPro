@@ -15,7 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommandManager implements CommandExecutor, TabCompleter {
+public class CommandManager implements TabExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender,Command cmd,String label,String[] args) {
@@ -127,8 +127,8 @@ public class CommandManager implements CommandExecutor, TabCompleter {
                         Player finalP = p;
                         new Thread(() -> {
                             ShopCreator sc = new ShopCreator(ClassManager.manager.getPlugin(), ClassManager.manager.getMessageHandler());
-                            //replace <space> as space
-                            String shopTitle = args[2].replaceAll("<space>", "");
+                            //replace <!space> as space
+                            String shopTitle = args[2].replaceAll("<!space>", "");
                             sc.startCreate(finalP, args[1], shopTitle);
                         }).start();
                         return true;
