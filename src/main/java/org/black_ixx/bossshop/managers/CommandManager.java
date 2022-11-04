@@ -120,17 +120,16 @@ public class CommandManager implements TabExecutor {
 
                 if(args[0].equalsIgnoreCase("create") & args.length==3){
                     if(sender.hasPermission("BossShop.create")){
-                        Player p = null;
+                        Player p;
                         if(sender instanceof Player) {
                              p = (Player) sender;
+                        }else {
+                            return false;
                         }
-                        Player finalP = p;
-                        new Thread(() -> {
-                            ShopCreator sc = new ShopCreator(ClassManager.manager.getPlugin(), ClassManager.manager.getMessageHandler());
-                            //replace <!space> as space
-                            String shopTitle = args[2].replaceAll("<!space>", "");
-                            sc.startCreate(finalP, args[1], shopTitle);
-                        }).start();
+                        ShopCreator sc = new ShopCreator(ClassManager.manager.getPlugin(), ClassManager.manager.getMessageHandler());
+                        //replace <!space> as space
+                        String shopTitle = args[2].replaceAll("<!space>", "");
+                        sc.startCreate(p, args[1], shopTitle);
                         return true;
                     } else {
                         ClassManager.manager.getMessageHandler().sendMessage("Main.NoPermission", sender);
