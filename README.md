@@ -1,4 +1,5 @@
 # BossShopPro
+***STOP UPDATE, PLEASE SEE THE SPIGOT PAGE FOR MORE INFO!!***   
 ![i1](https://img.shields.io/badge/minecraft-1.16+-blue.svg) ![i2](https://img.shields.io/badge/java-8+-blue.svg) ![i3](https://img.shields.io/github/v/release/lijinhong11/BossShopPro) ![i4](https://img.shields.io/github/downloads/lijinhong11/BossShopPro/total) ![i5](https://img.shields.io/github/license/lijinhong11/BossShopPro) [![i6](https://img.shields.io/github/issues/lijinhong11/BossShopPro)](https://github.com/LinsPMStudio/BossShopPro/issues) ![i7](https://img.shields.io/github/issues-pr/lijinhong11/BossShopPro) [![i7](https://img.shields.io/discord/1018696630008033341)](https://discord.gg/aRacBcKwB6)  
 BossShopPro is one of the most player-friendly and multifunctional GUI plugins ever! Say goodbye to all the annoying command- or signshops!
 It can not only be used to create shops but for every kind of menu. Here are just a few examples:
