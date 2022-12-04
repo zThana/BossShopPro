@@ -4,7 +4,7 @@ api-version: 1.13
 description: The BOSS Shop Plugin *PRO VERSION*
 author: Black_ixx,mmmjjkx
 main: org.black_ixx.bossshop.BossShop
-softdepend: [PlayerShops GUI, ItemShops, ThirdCurrency, LimitedUses, TrickyShops, Vault, PlayerPoints, TokenEnchant, EnjinMinecraftPlugin, Jobs, SilkSpawners, PlaceholderAPI, ItemsAdder]
+softdepend: [PlayerShops GUI, ItemShops, ThirdCurrency, LimitedUses, TrickyShops, Vault, PlayerPoints, TokenEnchant, Jobs, SilkSpawners, PlaceholderAPI, ItemsAdder]
 commands:
   bs:
    description: BossShop command
